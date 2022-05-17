@@ -13,6 +13,7 @@ import StoreManagement.GUI.Login;
 public class Main {
     public static void main(String[] args) {
         Login login = new Login();
+        //Start with Login Frame
         login.setVisible(true);
     }
 }
