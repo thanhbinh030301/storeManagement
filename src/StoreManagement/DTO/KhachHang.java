@@ -5,8 +5,7 @@ package StoreManagement.DTO;
 
 public class KhachHang {
     private String maKH;
-    private String ho;
-    private String ten;
+    private String hoTen;
     private String gioiTinh;
     private float tongChiTieu;
     private int khuyenMai;
@@ -14,10 +13,9 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String maKH, String ho, String ten, String gioiTinh, float tongChiTieu, int khuyenMai) {
+    public KhachHang(String maKH, String hoTen, String gioiTinh, float tongChiTieu, int khuyenMai) {
         this.maKH = maKH;
-        this.ho = ho;
-        this.ten = ten;
+        this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.tongChiTieu = tongChiTieu;
     }
@@ -30,20 +28,12 @@ public class KhachHang {
         this.maKH = maKH;
     }
 
-    public String getHo() {
-        return ho;
+    public String getHoTen() {
+        return hoTen;
     }
 
-    public void setHo(String ho) {
-        this.ho = ho;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setHoTen(String ho) {
+        this.hoTen = hoTen;
     }
 
     public String getGioiTinh() {
