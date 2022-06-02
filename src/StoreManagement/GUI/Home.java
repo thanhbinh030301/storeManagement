@@ -26,15 +26,15 @@ public class Home extends JFrame {
         this.setVisible(true);
     }
 
-    JPanel pnMenuLeft, pnCard, pnBanHang, pnNhapHang, pnSanPham, pnNhanVien, pnKhachHang, pnThongKe;
+    JPanel pnMenuLeft, pnCard, pnBanHang, pnSanPham, pnNhanVien, pnKhachHang, pnThongKe, pnHoaDon;
     PnBanHang banHangPanel;
-    PnNhapHang nhapHangPanel;
     PnSanPham sanPhamPanel;
     PnNhanVien nhanVienPanel;
     PnKhachHang khachHangPanel;
     PnThongKe thongKePanel;
+    PnHoaDon hoaDonPanel;
 
-    JLabel lblBanHang, lblNhapHang, lblSanPham, lblNhanVien, lblKhachHang, lblThongKe;
+    JLabel lblBanHang, lblNhapHang, lblSanPham, lblNhanVien, lblKhachHang, lblThongKe, lblHoaDon;
     final Color clLeftItem = new Color(63, 74, 89);
     final Color clLeftItemHover = new Color(225, 100, 100);
     final Color clLeftItemSelected = new Color(225, 100, 99);
@@ -85,9 +85,11 @@ public class Home extends JFrame {
         lblNhanVien = new JLabel(new ImageIcon("image/ManagerUI/lblNhanVien.png"));
         lblKhachHang = new JLabel(new ImageIcon("image/ManagerUI/lblKhachHang.png"));
         lblThongKe = new JLabel(new ImageIcon("image/ManagerUI/lblThongKe.png"));
+        lblHoaDon = new JLabel(new ImageIcon("image/ManagerUI/lblHoaDon.png"));
 
         listMenuLeft = new ArrayList<>();
         listMenuLeft.add(lblBanHang);
+        listMenuLeft.add(lblHoaDon);
         listMenuLeft.add(lblSanPham);
         listMenuLeft.add(lblNhanVien);
         listMenuLeft.add(lblKhachHang);
@@ -105,6 +107,7 @@ public class Home extends JFrame {
 
         lblBanHang.setBackground(clLeftItemSelected);
         lblBanHang.setVisible(true);
+        lblHoaDon.setVisible(true);
 
         pnMain.add(pnMenuLeft, BorderLayout.WEST);
 
@@ -116,14 +119,14 @@ public class Home extends JFrame {
         pnCard = new JPanel(cardMenuLeftGroup);
 
         pnBanHang = new JPanel();
-        pnNhapHang = new JPanel();
         pnSanPham = new JPanel();
         pnNhanVien = new JPanel();
         pnKhachHang = new JPanel();
         pnThongKe = new JPanel();
+        pnHoaDon = new JPanel();
 
         pnCard.add(pnBanHang, "1");
-        pnCard.add(pnNhapHang, "2");
+        pnCard.add(pnHoaDon, "2");
         pnCard.add(pnSanPham, "3");
         pnCard.add(pnNhanVien, "4");
         pnCard.add(pnKhachHang, "5");
@@ -133,17 +136,13 @@ public class Home extends JFrame {
         banHangPanel = new PnBanHang();
         pnBanHang.setLayout(new BorderLayout());
         pnBanHang.add(banHangPanel, BorderLayout.CENTER);
-
+        //Panel hoa don
+        hoaDonPanel = new PnHoaDon();
+        pnHoaDon.setLayout(new BorderLayout());
+        pnHoaDon.add(hoaDonPanel, BorderLayout.CENTER);
 
         //======XỬ LÝ PHÂN QUYỀN=======
 //        PhanQuyen quyen = PhanQuyenBUS.quyenTK;
-
-        if (true) {
-            nhapHangPanel = new PnNhapHang();
-            pnNhapHang.setLayout(new BorderLayout());
-            pnNhapHang.add(nhapHangPanel, BorderLayout.CENTER);
-            lblNhapHang.setVisible(true);
-        }
 
         if (true) {
             sanPhamPanel = new PnSanPham();
@@ -210,9 +209,9 @@ public class Home extends JFrame {
                     String cardName = "";
                     if (lbl == lblBanHang) {
                         cardName = "1";
-                    }  else if (lbl == lblNhapHang) {
+                    }else if (lbl == lblHoaDon) {
                         cardName = "2";
-                    } else if (lbl == lblSanPham) {
+                    }else if (lbl == lblSanPham) {
                         cardName = "3";
                     } else if (lbl == lblNhanVien) {
                         cardName = "4";
