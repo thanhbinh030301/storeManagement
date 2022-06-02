@@ -1,22 +1,31 @@
+
 package StoreManagement.DTO;
 
-public class SanPham {
+
+public class CTHD {
+    private String maHD;
     private String maSP;
-    private String tenSP;
     private int soLuong;
-    private String donViTinh;
     private float donGia;
+    private float thanhTien;
 
-    public SanPham() {
-
+    public CTHD() {
     }
 
-    public SanPham(String maSP, String tenSP, int soLuong, String donViTinh, float donGia) {
+    public CTHD(String maHD, String maSP, int soLuong, float donGia, float thanhTien) {
+        this.maHD = maHD;
         this.maSP = maSP;
-        this.tenSP = tenSP;
         this.soLuong = soLuong;
-        this.donViTinh = donViTinh;
         this.donGia = donGia;
+        this.thanhTien = thanhTien;
+    }
+
+    public String getMaHD() {
+        return maHD;
+    }
+
+    public void setMaHD(String maHD) {
+        this.maHD = maHD;
     }
 
     public String getMaSP() {
@@ -27,13 +36,6 @@ public class SanPham {
         this.maSP = maSP;
     }
 
-    public String getTenSP() {
-        return tenSP;
-    }
-
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
-    }
     public int getSoLuong() {
         return soLuong;
     }
@@ -42,19 +44,19 @@ public class SanPham {
         this.soLuong = soLuong;
     }
 
-    public String getDonViTinh() {
-        return donViTinh;
-    }
-
-    public void setDonViTinh(String donViTinh) {
-        this.donViTinh = donViTinh;
-    }
-
     public float getDonGia() {
         return donGia;
     }
 
     public void setDonGia(float donGia) {
         this.donGia = donGia;
+    }
+
+    public float getThanhTien() {
+        return thanhTien;
+    }
+
+    public void setThanhTien(float thanhTien) {
+        this.thanhTien = thanhTien;
     }
 }
