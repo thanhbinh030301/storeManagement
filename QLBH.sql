@@ -1,254 +1,169 @@
-﻿CREATE DATABASE QLBH
-USE QLBH
--- KHACHANG
+﻿CREATE DATABASE QLBH;
+USE QLBH;
+
 CREATE TABLE KHACHHANG(
-	MAKH	char(4) not null,	
+	MAKH	char(4) not null ,	
 	HOTEN	varchar(40),
 	DCHI	varchar(50),
 	SODT	varchar(20),
-	NGSINH	smalldatetime,
-	NGDK	smalldatetime,
-	DOANHSO	money,
-	constraint pk_kh primary key(MAKH)
-)
----------------------------------------------
--- NHANVIEN
+	NGSINH	date,
+	NGDK	date,
+	DOANHSO	decimal(15,2),
+	primary key(MAKH)
+);
+
 CREATE TABLE NHANVIEN(
 	MANV	char(4) not null,	
 	HOTEN	varchar(40),
 	SODT	varchar(20),
-	NGVL	smalldatetime	
-	constraint pk_nv primary key(MANV)
-)
----------------------------------------------
--- SANPHAM
+	NGVL	date,	
+	primary key(MANV)
+);
+
 CREATE TABLE SANPHAM(
-	MASP	char(4) not null,
-	TENSP	varchar(40),
+	MASP	int not null AUTO_INCREMENT,
+	TENSP	varchar(60),
 	DVT	varchar(20),
-	NUOCSX	varchar(40),
-	GIA	money,
+	GIA	decimal(15,2)  DEFAULT 0,
 	SOLUONG INT,
-	constraint pk_sp primary key(MASP)	
-)
----------------------------------------------
--- HOADON
+	primary key(MASP)	
+);
+
 CREATE TABLE HOADON(
-	SOHD	int not null,
-	NGHD 	smalldatetime,
+	SOHD	int not null AUTO_INCREMENT,
+	NGHD 	date,
 	MAKH 	char(4),
 	MANV 	char(4),
-	TRIGIA	money,
-	constraint pk_hd primary key(SOHD)
-)
----------------------------------------------
--- CTHD
+	TRIGIA	decimal(15,2)  DEFAULT 0,
+	primary key(SOHD)
+);
+
+
    CREATE TABLE CTHD(
 	SOHD	int,
-	MASP	char(4),
+	MASP	int,
 	SL	int,
-	constraint pk_cthd primary key(SOHD,MASP)
-)
+	primary key(SOHD,MASP)
+);
 
 -- Khoa ngoai cho bang HOADON
-ALTER TABLE HOADON ADD CONSTRAINT fk01_HD FOREIGN KEY(MAKH) REFERENCES KHACHHANG(MAKH)
-ALTER TABLE HOADON ADD CONSTRAINT fk02_HD FOREIGN KEY(MANV) REFERENCES NHANVIEN(MANV)
+ALTER TABLE HOADON ADD FOREIGN KEY(MAKH) REFERENCES KHACHHANG(MAKH);
+ALTER TABLE HOADON ADD FOREIGN KEY(MANV) REFERENCES NHANVIEN(MANV);
 -- Khoa ngoai cho bang CTHD
-ALTER TABLE CTHD ADD CONSTRAINT fk01_CTHD FOREIGN KEY(SOHD) REFERENCES HOADON(SOHD)
-ALTER TABLE CTHD ADD CONSTRAINT fk02_CTHD FOREIGN KEY(MASP) REFERENCES SANPHAM(MASP)
-
-set dateformat dmy
-
-insert into SANPHAM values('BC01','But chi','cay','Singapore',3000,100)
-insert into SANPHAM values('BC02','But chi','cay','Singapore',5000,100)
-insert into SANPHAM values('BC03','But chi','cay','Viet Nam',3500,100)
-insert into SANPHAM values('BC04','But chi','hop','Viet Nam',30000,100)
-insert into SANPHAM values('BB01','But bi','cay','Viet Nam',5000,100)
-insert into SANPHAM values('BB02','But bi','cay','Trung Quoc',7000,100)
-insert into SANPHAM values('BB03','But bi','hop','Thai Lan',100000,100)
-insert into SANPHAM values('TV01','Tap 100 giay mong','quyen','Trung Quoc',2500,100)
-insert into SANPHAM values('TV02','Tap 200 giay mong','quyen','Trung Quoc',4500,100)
-insert into SANPHAM values('TV03','Tap 100 giay tot','quyen','Viet Nam',3000,100)
-insert into SANPHAM values('TV04','Tap 200 giay tot','quyen','Viet Nam',5500,100)
-insert into SANPHAM values('TV05','Tap 100 trang','chuc','Viet Nam',23000,100)
-insert into SANPHAM values('TV06','Tap 200 trang','chuc','Viet Nam',53000,100)
-insert into SANPHAM values('TV07','Tap 100 trang','chuc','Trung Quoc',34000,100)
-insert into SANPHAM values('ST01','So tay 500 trang','quyen','Trung Quoc',40000,100)
-insert into SANPHAM values('ST02','So tay loai 1','quyen','Viet Nam',55000,100)
-insert into SANPHAM values('ST03','So tay loai 2','quyen','Viet Nam',51000,100)
-insert into SANPHAM values('ST04','So tay','quyen','Thai Lan',55000,100)
-insert into SANPHAM values('ST05','So tay mong','quyen','Thai Lan',20000,100)
-insert into SANPHAM values('ST06','Phan viet bang','hop','Viet Nam',5000,100)
-insert into SANPHAM values('ST07','Phan khong bui','hop','Viet Nam',7000,100)
-insert into SANPHAM values('ST08','Bong bang','cai','Viet Nam',1000,100)
-insert into SANPHAM values('ST09','But long','cay','Viet Nam',5000,100)
-insert into SANPHAM values('ST10','But long','cay','Trung Quoc',7000,100)
-
---The khach hang
-
-insert into KHACHHANG values('KH01','Nguyen Van A','731 Tran Hung Dao, Q5, TpHCM','8823451','22/10/1999','22/07/2020',13060000)
-insert into KHACHHANG values('KH02','Tran Ngoc Han','23/5 Nguyen Trai, Q5, TpHCM','908256478','03/04/1998','30/07/2021',280000)
-insert into KHACHHANG values('KH03','Tran Ngoc Linh','45 Nguyen Canh Chan, Q1, TpHCM','938776266','12/06/2001','08/05/2020',3860000)
-insert into KHACHHANG values('KH04','Tran Minh Long','50/34 Le Dai Hanh, Q10, TpHCM','917325476','09/03/2001','10/02/2022',250000)
-insert into KHACHHANG values('KH05','Le Nhat Minh','34 Truong Dinh, Q3, TpHCM','8246108','10/03/2000','28/10/2021',21000)
-insert into KHACHHANG values('KH06','Le Hoai Thuong','227 Nguyen Van Cu, Q5, TpHCM','8631738','31/12/1999','24/11/2021',915000)
-insert into KHACHHANG values('KH07','Nguyen Van Tam','32/3 Tran Binh Trong, Q5, TpHCM','916783565','06/04/2002','12/01/2022',12500)
-insert into KHACHHANG values('KH08','Phan Thi Thanh','45/2 An Duong Vuong, Q5, TpHCM','938435756','10/01/2001','13/12/2021',365000)
-insert into KHACHHANG values('KH09','Le Ha Vinh','873 Le Hong Phong, Q5, TpHCM','8654763','03/09/2003','14/01/2022',70000)
-insert into KHACHHANG values('KH10','Ha Duy Lap','34/34B Nguyen Trai, Q1, TpHCM','8768904','02/05/1999','16/01/2022',67500)
+ALTER TABLE CTHD ADD FOREIGN KEY(SOHD) REFERENCES HOADON(SOHD);
+ALTER TABLE CTHD ADD FOREIGN KEY(MASP) REFERENCES SANPHAM(MASP);
 
 
-insert into NHANVIEN values('NV01','Nguyen Nhu Nhut','927345678','13/04/2006')
-insert into NHANVIEN values('NV02','Le Thi Phi Yen','987567390','21/04/2006')
-insert into NHANVIEN values('NV03','Nguyen Van B','997047382','27/04/2006')
-insert into NHANVIEN values('NV04','Ngo Thanh Tuan','913758498','24/06/2006')
-insert into NHANVIEN values('NV05','Nguyen Thi Truc Thanh','918590387','20/07/2006')
+insert into SANPHAM values(1,'Mì Hảo Hảo','goi',4000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(2,'Mì Handy Hảo Hảo','ly',9000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(3,'Hủ tiếu Nam Vang Như Ý','goi',5000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(4,'Phở gà Vifon Hoàng Gia','goi',20000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(5,'Cháo thịt gà Vifon','goi',5000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(6,'Bánh Gạo Tobokki','goi',28000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(7,'Dầu đậu nành nguyên chất Simply can 2 lít','chai',135000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(8,'Dầu đậu nành nguyên chất Simply can 1 lít','chai',70000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(9,'Đường Biên Hòa','Kg',27000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(10,'Hạt nêm Knorr gói 1,2kg','goi',93000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(11,'Bột ngọt Vedan','goi',60000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(12,'Muối i ốt Vifon','goi',6000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(13,'Muối Tây Ninh','Hu',15000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(14,'Nước chấm Nam Ngư Đệ Nhị chai 900ml','chai',25000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(15,'Nước mắm cao đạm Liên Thành nhãn vàng chai 300ml','chai',40000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(16,'Nước tương đậm đặc Maggi chai 700ml','chai',30000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(17,'Nước tương Tam Thái Tử Nhất ca chai 500ml','chai',19000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(18,'Tương ớt Chinsu chai 250g','chai',14000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(19,'Xốt mayonnaise Ottogi chai 130g','chai',20000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(20,'Lốc 4 hộp sữa tươi ít đường Vinamilk Green Farm 180ml','loc',33000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(21,'Lốc 4 hộp sữa tươi ít đường TH true MILK 110ml','loc',23000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(22,'Lốc 4 hộp sữa tươi ít đường TH true MILK 110ml','loc',26000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(23,'Bia Gubernija Royal Baltic 6.4% lon 500ml','chai',49000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(24,'Bia Budweiser chai 330ml','chai',22000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(25,'Bia Budweiser chai 330ml','chai',6000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(26,'Nước ngọt Sprite chanh chai 1.5 lít','chai',20000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(27,'Nước tăng lực Redbull 250ml','lon',12000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(28,'Nước tăng lực Sting hương dâu 320ml','lon',10000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(29,'Nước tinh khiết Aquafina 500ml','chai',5000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(30,'Snack pho mát miếng Oishi gói 39g','goi',6000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(31,'Snack khoai tây mực tẩm cay thái Lays Wavy','gói',19000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(32,'Khăn ướt cồn Let-green','goi',36000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(33,'Khăn giấy rút Let-green','gói',40000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(34,'Tắm gội X-men 2 trong 1 630g sạch sâu','chai',166000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(35,'Tắm gội Clear Men sạch nhanh 618g','chai',180000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(36,'Dầu gội Sunsilk mềm mượt diệu kỳ 165ml','chai',43000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(37,'Sữa tắm Olay dưỡng ẩm hạnh nhân 650ml','chai',182000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(38,'Sữa tắm dưỡng thể Dove sáng mịn 527ml','chai',158000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(39,'Sữa rửa mặt men Bioré sạch sâu 100g','chai',65000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(40,'Bông tẩy trang đa dụng Niva','hop',35000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(41,'Kem đánh răng Colgate Natural trà xanh 180g','hộp',52000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(42,'Bộ 2 bàn chải Oral-Clean Diamond lông siêu mềm','cai',33000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(43,'Nước súc miệng Colgate Plax Fresh Tea 500ml','chai',105000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(44,'Băng vệ sinh Kotex Pro siêu mỏng có cánh 20 miếng','goi',42000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(45,'Băng vệ sinh Diana Sensi Cool','goi',23000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(46,'Bột giặt Ariel hương nắng mai túi 720g','túi',38000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(47,'Nước giặt OMO Matic hoa hồng Ecuador túi 1.9 lít','túi',115000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(48,'Nước xả Downy hương hoa oải hương túi 2.2 lít','tui',172000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(49,'Nước rửa chén Sunlight Chanh 100 chai 386ml','chai',15000,500);
+insert into SANPHAM (MASP,TENSP, DVT, GIA, SOLUONG) values(50,'Nước rửa chén Sunlight thiên nhiên túi 725ml','tui',25000,500);
 
 
-insert into HOADON values(1001,'12/01/2022','KH01','NV01',320000)
-insert into HOADON values(1002,'12/01/2022','KH01','NV02',840000)
-insert into HOADON values(1003,'12/01/2022','KH02','NV01',100000)
-insert into HOADON values(1004,'12/01/2022','KH02','NV01',180000)
-insert into HOADON values(1005,'12/01/2022','KH01','NV02',3800000)
-insert into HOADON values(1006,'12/01/2022','KH01','NV03',2430000)
-insert into HOADON values(1007,'12/01/2022','KH03','NV03',510000)
-insert into HOADON values(1008,'12/01/2022','KH01','NV03',440000)
-insert into HOADON values(1009,'12/01/2022','KH03','NV04',200000)
-insert into HOADON values(1010,'12/01/2022','KH01','NV01',5200000)
-insert into HOADON values(1011,'12/01/2022','KH04','NV03',250000)
-insert into HOADON values(1012,'12/01/2022','KH05','NV03',21000)
-insert into HOADON values(1013,'12/01/2022','KH06','NV01',5000)
-insert into HOADON values(1014,'12/01/2022','KH03','NV02',3150000)
-insert into HOADON values(1015,'12/01/2022','KH06','NV01',910000)
-insert into HOADON values(1016,'12/01/2022','KH07','NV02',12500)
-insert into HOADON values(1017,'12/01/2022','KH08','NV03',35000)
-insert into HOADON values(1018,'13/01/2007','KH08','NV03',330000)
-insert into HOADON values(1019,'12/01/2022','KH01','NV03',30000)
-insert into HOADON values(1020,'12/01/2022','KH09','NV04',70000)
-insert into HOADON values(1021,'12/01/2022','KH10','NV03',67500)
-insert into HOADON values(1022,'12/01/2022',Null,'NV03',7000)
-insert into HOADON values(1023,'12/01/2022',Null,'NV01',330000)
+-- delete from SANPHAM where MASP >5;
 
 
-insert into CTHD values(1001,'TV02',10)
-insert into CTHD values(1001,'ST01',5)
-insert into CTHD values(1001,'BC01',5)
-insert into CTHD values(1001,'BC02',10)
-insert into CTHD values(1001,'ST08',10)
-insert into CTHD values(1002,'BC04',20)
-insert into CTHD values(1002,'BB01',20)
-insert into CTHD values(1002,'BB02',20)
-insert into CTHD values(1003,'BB03',10)
-insert into CTHD values(1004,'TV01',20)
-insert into CTHD values(1004,'TV02',10)
-insert into CTHD values(1004,'TV03',10)
-insert into CTHD values(1004,'TV04',10)
-insert into CTHD values(1005,'TV05',50)
-insert into CTHD values(1005,'TV06',50)
-insert into CTHD values(1006,'TV07',20)
-insert into CTHD values(1006,'ST01',30)
-insert into CTHD values(1006,'ST02',10)
-insert into CTHD values(1007,'ST03',10)
-insert into CTHD values(1008,'ST04',8)
-insert into CTHD values(1009,'ST05',10)
-insert into CTHD values(1010,'TV07',50)
-insert into CTHD values(1010,'ST07',50)
-insert into CTHD values(1010,'ST08',100)
-insert into CTHD values(1010,'ST04',50)
-insert into CTHD values(1010,'TV03',100)
-insert into CTHD values(1011,'ST06',50)
-insert into CTHD values(1012,'ST07',3)
-insert into CTHD values(1013,'ST08',5)
-insert into CTHD values(1014,'BC02',80)
-insert into CTHD values(1014,'BB02',100)
-insert into CTHD values(1014,'BC04',60)
-insert into CTHD values(1014,'BB01',50)
-insert into CTHD values(1015,'BB02',30)
-insert into CTHD values(1015,'BB03',7)
-insert into CTHD values(1016,'TV01',5)
-insert into CTHD values(1017,'TV02',1)
-insert into CTHD values(1017,'TV03',1)
-insert into CTHD values(1017,'TV04',5)
-insert into CTHD values(1018,'ST04',6)
-insert into CTHD values(1019,'ST05',1)
-insert into CTHD values(1019,'ST06',2)
-insert into CTHD values(1020,'ST07',10)
-insert into CTHD values(1021,'ST08',5)
-insert into CTHD values(1021,'TV01',7)
-insert into CTHD values(1021,'TV02',10)
-insert into CTHD values(1022,'ST07',1)
-insert into CTHD values(1023,'ST04',6)
+-- select * from SANPHAM;
+
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH01','Nguyen Van A','731 Tran Hung Dao, Q5, TpHCM','8823451','1999/10/22','2020/1/21');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH02','Tran Ngoc Han','23/5 Nguyen Trai, Q5, TpHCM','908256478','1998/03/04','2021/07/30');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH03','Tran Ngoc Linh','45 Nguyen Canh Chan, Q1, TpHCM','938776266','2001/06/12','2020/05/08');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH04','Tran Minh Long','50/34 Le Dai Hanh, Q10, TpHCM','917325476','2001/09/03','2022/04/12');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH05','Le Nhat Minh','34 Truong Dinh, Q3, TpHCM','8246108','2000/03/10','2021/10/28');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH06','Le Hoai Thuong','227 Nguyen Van Cu, Q5, TpHCM','8631738','1999/11/07','2021/02/14');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH07','Nguyen Van Tam','32/3 Tran Binh Trong, Q5, TpHCM','916783565','2002/04/06','2022/01/11');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH08','Phan Thi Thanh','45/2 An Duong Vuong, Q5, TpHCM','938435756','2001/01/10','2021/02/15');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH09','Le Ha Vinh','873 Le Hong Phong, Q5, TpHCM','8654763','2003/09/03','2022/01/14');
+insert into KHACHHANG (MAKH, HOTEN, DCHI, SODT, NGSINH, NGDK)
+values('KH10','Ha Duy Lap','34/34B Nguyen Trai, Q1, TpHCM','8768904','1999/02/05','2022/01/06');
+
+select * from KHACHHANG;
+
+insert into NHANVIEN values('NV01','Nguyen Nhu Nhut','927345678','202/01/14');
+insert into NHANVIEN values('NV02','Le Thi Phi Yen','987567390','2022/01/14');
+insert into NHANVIEN values('NV03','Nguyen Van B','997047382','2022/01/14');
+insert into NHANVIEN values('NV04','Ngo Thanh Tuan','913758498','2022/01/14');
+insert into NHANVIEN values('NV05','Nguyen Thi Truc Thanh','918590387','2022/01/14');
+
+
+insert into HOADON (NGHD,MAKH,MANV) values(CURDATE(),'KH01','NV02');
+
+insert into CTHD (SOHD, MASP, SL) values(1,1,2);
+insert into CTHD (SOHD, MASP, SL) values(1,2,2);
+select * from hoadon;
+select * from cthd;
+
+
+
 
 
 
 -- tổng giá trị hóa đơn
 select   SUM( GIA * SL)   FROM 
 SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-WHERE CTHD.SOHD = 1001
+WHERE CTHD.SOHD = 1
 
 -- chi tiết hóa đơn
 
-select  CTHD.MASP, TENSP, GIA, SL, TONG =( GIA * SL)   FROM 
+select  CTHD.MASP, TENSP, GIA, SL, ( GIA * SL) as TONG  FROM 
 SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-WHERE CTHD.SOHD = 1001
-
---Trigger tinh gia tri hoa don
+WHERE CTHD.SOHD = 1
 
 
-CREATE TRIGGER tr_them_cthd 
-ON CTHD
-AFTER INSERT
-AS 
-BEGIN
-	DECLARE @TRIGIA  AS MONEY;
-	DECLARE @SOHD INT
-	SELECT @SOHD=SOHD
-	FROM  INSERTED
 
-	select @TRIGIA = SUM( GIA * SL)   FROM 
-	SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-	WHERE CTHD.SOHD = @SOHD
-
-	UPDATE HOADON SET TRIGIA = @TRIGIA WHERE SOHD = @SOHD
-END
-
-CREATE TRIGGER tr_xoa_cthd 
-ON CTHD
-AFTER DELETE
-AS 
-BEGIN
-	DECLARE @TRIGIA  AS MONEY;
-	DECLARE @SOHD INT
-	SELECT @SOHD=SOHD
-	FROM  DELETED
-
-	select @TRIGIA = SUM( GIA * SL)   FROM 
-	SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-	WHERE CTHD.SOHD = @SOHD
-
-	UPDATE HOADON SET TRIGIA = @TRIGIA WHERE SOHD = @SOHD
-END
-
-CREATE TRIGGER tr_sua_cthd 
-ON CTHD
-AFTER update
-AS 
-BEGIN
-	DECLARE @TRIGIA  AS MONEY;
-	DECLARE @SOHD INT
-	SELECT @SOHD=SOHD
-	FROM  DELETED
-
-	select @TRIGIA = SUM( GIA * SL)   FROM 
-	SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-	WHERE CTHD.SOHD = @SOHD
-
-	UPDATE HOADON SET TRIGIA = @TRIGIA WHERE SOHD = @SOHD
-END
-
---In ra danh sách các sản phẩm (MASP,TENSP) có mã sản phẩm bắt đầu là “B” và kết thúc là “01”.
-
-SELECT MASP, TENSP
-FROM SANPHAM
-WHERE MASP LIKE'B%01'
 
