@@ -8,12 +8,12 @@ public class KhachHang {
     private String hoTen;
     private String gioiTinh;
     private float tongChiTieu;
-    private int khuyenMai;
+    private float tichDiem;
 
     public KhachHang() {
     }
 
-    public KhachHang(String maKH, String hoTen, String gioiTinh, float tongChiTieu, int khuyenMai) {
+    public KhachHang(String maKH, String hoTen, String gioiTinh, float tongChiTieu, float tichDiem) {
         this.maKH = maKH;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
@@ -52,12 +52,12 @@ public class KhachHang {
         this.tongChiTieu = tongChiTieu;
     }
     
-    public int getKhuyenMai() {
-        return khuyenMai;
+    public float getTichDiem() {
+        return tichDiem;
     }
 
-    public void setKhuyenMai(int khuyenMai) {
-        this.khuyenMai = khuyenMai;
+    public void setTichDiem(float tichDiem) {
+        this.tichDiem = tichDiem;
     }
 
 
