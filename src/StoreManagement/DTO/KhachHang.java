@@ -32,7 +32,7 @@ public class KhachHang {
         return hoTen;
     }
 
-    public void setHoTen(String ho) {
+    public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
     }
 

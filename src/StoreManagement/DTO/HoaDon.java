@@ -5,16 +5,16 @@ package StoreManagement.DTO;
 import java.util.Date;
 
 public class HoaDon {
-    private float maHD;
-    private float maKH;
-    private float maNV;
+    private String maHD;
+    private String maKH;
+    private String maNV;
     private Date ngayLap;
-    private int tongTien;
+    private float tongTien;
 
     public HoaDon() {
     }
 
-    public HoaDon(float maHD, float maKH, float maNV, Date ngayLap, int tongTien) {
+    public HoaDon(String maHD, String maKH, String maNV, Date ngayLap, float tongTien) {
         this.maHD = maHD;
         this.maKH = maKH;
         this.maNV = maNV;
@@ -22,27 +22,27 @@ public class HoaDon {
         this.tongTien = tongTien;
     }
 
-    public float getMaHD() {
+    public String getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(float maHD) {
+    public void setMaHD(String maHD) {
         this.maHD = maHD;
     }
 
-    public float getMaKH() {
+    public String getMaKH() {
         return maKH;
     }
 
-    public void setMaKH(float maKH) {
+    public void setMaKH(String maKH) {
         this.maKH = maKH;
     }
 
-    public float getMaNV() {
+    public String getMaNV() {
         return maNV;
     }
 
-    public void setMaNV(float maNV) {
+    public void setMaNV(String maNV) {
         this.maNV = maNV;
     }
 
@@ -54,11 +54,11 @@ public class HoaDon {
         this.ngayLap = ngayLap;
     }
 
-    public int getTongTien() {
+    public float getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(int tongTien) {
+    public void setTongTien(float tongTien) {
         this.tongTien = tongTien;
     }
 

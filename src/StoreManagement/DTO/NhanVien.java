@@ -1,19 +1,22 @@
 
 package StoreManagement.DTO;
 
+
 public class NhanVien {
 
     private String maNV;
     private String ten;
     private String gioiTinh;    
+    String soDT;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String ten, String gioiTinh) {
+    public NhanVien(String maNV, String ten, String gioiTinh, String soDT) {
         this.maNV = maNV;
         this.ten = ten;
         this.gioiTinh = gioiTinh;
+        this.soDT = soDT;
     }
 
     public String getMaNV() {
@@ -38,6 +41,12 @@ public class NhanVien {
 
     public void setGioiTinh(String gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+    public String getSoDT(){
+        return soDT;
+    }
+    public String setSoDT() {
+        return soDT;
     }
 
 }
