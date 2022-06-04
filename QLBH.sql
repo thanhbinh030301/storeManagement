@@ -6,6 +6,7 @@ CREATE TABLE KHACHHANG(
 	MAKH	char(4) not null DEFAULT '0' ,	
 	HOTEN	varchar(40),
 	GIOITINH	varchar(3),
+    SODT 		varchar(10),
 	TONGCHITIEU	decimal(15,2)  DEFAULT 0, 
 	TICHDIEM float DEFAULT 0,
 	primary key(MAKH)
@@ -21,14 +22,14 @@ FOR EACH ROW
 BEGIN
   INSERT INTO  KHACHHANG_SEQ VALUES (NULL);
   SET NEW.MAKH = CONCAT('KH', LPAD(LAST_INSERT_ID(), 2, '0'));
-END$$
-
+END$$;
+DELIMITER ;
 
 CREATE TABLE NHANVIEN(
 	MANV	char(4) not null DEFAULT '0',	
 	HOTEN	varchar(40),
+    GIOITINH VARCHAR(3),
 	SODT	varchar(20),
-	NGVL	date,	
 	primary key(MANV)
 );
 CREATE TABLE NHANVIEN_SEQ
@@ -48,7 +49,7 @@ DELIMITER ;
 -- TAO BANG TAI KHAON
 CREATE TABLE TAIKHOAN(
 	MATK	char(4) not null,	
-	TENTK	char(20),
+	TENDANGNHAP	char(20),
 	MATKHAU	char(10),
 	CAPBAC int,	
     MANV char(4),
@@ -75,8 +76,8 @@ DELIMITER ;
 CREATE TABLE SANPHAM(
 	MASP	char(5) not null DEFAULT '0',
 	TENSP	varchar(60),
-	DVT	varchar(20),
-	GIA	decimal(15,2)  DEFAULT 0,
+	DONVITINH	varchar(20),
+	DONGIA	decimal(15,2)  DEFAULT 0,
 	SOLUONG INT,
 	primary key(MASP)	
 );
@@ -96,20 +97,34 @@ DELIMITER ;
 
 
 CREATE TABLE HOADON(
-	SOHD	int not null AUTO_INCREMENT,
-	NGHD 	date,
+	MAHD	char(5) not null DEFAULT '0',
+	NGAYLAP 	date,
 	MAKH 	char(4),
 	MANV 	char(4),
-	TRIGIA	decimal(15,2)  DEFAULT 0,
-	primary key(SOHD)
+	TONGTIEN	decimal(15,2)  DEFAULT 0,
+	primary key(MAHD)
 );
-
+CREATE TABLE HOADON_SEQ
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+DELIMITER $$
+CREATE TRIGGER tg_hoadon_insert
+BEFORE INSERT ON HOADON
+FOR EACH ROW
+BEGIN
+  INSERT INTO  HOADON_SEQ VALUES (NULL);
+  SET NEW.MAHD = CONCAT('HD', LPAD(LAST_INSERT_ID(), 3, '0'));
+END$$
+DELIMITER ;
 
    CREATE TABLE CTHD(
-	SOHD	int,
+	MAHD	char(5),
 	MASP	char(5),
-	SL	int,
-	primary key(SOHD,MASP)
+	SOLUONG	int,
+    DONGIA decimal(15,2)  DEFAULT 0,
+    THANHTIEN decimal(15,2)  DEFAULT 0,
+	primary key(MAHD,MASP)
 );
 
 -- Khoa ngoai cho bang HOADON
@@ -117,60 +132,104 @@ ALTER TABLE HOADON ADD FOREIGN KEY(MAKH) REFERENCES KHACHHANG(MAKH);
 ALTER TABLE HOADON ADD FOREIGN KEY(MANV) REFERENCES NHANVIEN(MANV);
 ALTER TABLE TAIKHOAN ADD FOREIGN KEY(MANV) REFERENCES NHANVIEN(MANV);
 -- Khoa ngoai cho bang CTHD
-ALTER TABLE CTHD ADD FOREIGN KEY(SOHD) REFERENCES HOADON(SOHD);
+ALTER TABLE CTHD ADD FOREIGN KEY(MAHD) REFERENCES HOADON(MAHD);
 ALTER TABLE CTHD ADD FOREIGN KEY(MASP) REFERENCES SANPHAM(MASP);
 
+-- Trigger bang cthd
+DELIMITER $$
+CREATE TRIGGER tg_cthd_insert_before
+before INSERT ON cthd
+FOR EACH ROW
+BEGIN
+    
+    SELECT SANPHAM.DONGIA INTO @DONGIA 
+    FROM CTHD JOIN SANPHAM ON CTHD.MASP = SANPHAM.MASP
+    WHERE SANPHAM.MASP = NEW.MASP;
+    SET NEW.DONGIA = @DONGIA;
+    SET NEW.THANHTIEN = NEW.DONGIA * NEW.SOLUONG;
+    
+END$$
+DELIMITER ;
 
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Mì Hảo Hảo','goi',4000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Mì Handy Hảo Hảo','ly',9000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Hủ tiếu Nam Vang Như Ý','goi',5000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Phở gà Vifon Hoàng Gia','goi',20000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Cháo thịt gà Vifon','goi',5000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bánh Gạo Tobokki','goi',28000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Dầu đậu nành nguyên chất Simply can 2 lít','chai',135000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Dầu đậu nành nguyên chất Simply can 1 lít','chai',70000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Đường Biên Hòa','Kg',27000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Hạt nêm Knorr gói 1,2kg','goi',93000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bột ngọt Vedan','goi',60000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Muối i ốt Vifon','goi',6000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Muối Tây Ninh','Hu',15000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước chấm Nam Ngư Đệ Nhị chai 900ml','chai',25000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước mắm cao đạm Liên Thành nhãn vàng chai 300ml','chai',40000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước tương đậm đặc Maggi chai 700ml','chai',30000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước tương Tam Thái Tử Nhất ca chai 500ml','chai',19000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Tương ớt Chinsu chai 250g','chai',14000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Xốt mayonnaise Ottogi chai 130g','chai',20000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Lốc 4 hộp sữa tươi ít đường Vinamilk Green Farm 180ml','loc',33000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Lốc 4 hộp sữa tươi ít đường TH true MILK 110ml','loc',23000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Lốc 4 hộp sữa tươi ít đường TH true MILK 110ml','loc',26000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bia Gubernija Royal Baltic 6.4% lon 500ml','chai',49000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bia Budweiser chai 330ml','chai',22000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bia Budweiser chai 330ml','chai',6000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước ngọt Sprite chanh chai 1.5 lít','chai',20000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước tăng lực Redbull 250ml','lon',12000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước tăng lực Sting hương dâu 320ml','lon',10000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước tinh khiết Aquafina 500ml','chai',5000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Snack pho mát miếng Oishi gói 39g','goi',6000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Snack khoai tây mực tẩm cay thái Lays Wavy','gói',19000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Khăn ướt cồn Let-green','goi',36000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Khăn giấy rút Let-green','gói',40000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Tắm gội X-men 2 trong 1 630g sạch sâu','chai',166000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Tắm gội Clear Men sạch nhanh 618g','chai',180000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Dầu gội Sunsilk mềm mượt diệu kỳ 165ml','chai',43000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Sữa tắm Olay dưỡng ẩm hạnh nhân 650ml','chai',182000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Sữa tắm dưỡng thể Dove sáng mịn 527ml','chai',158000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Sữa rửa mặt men Bioré sạch sâu 100g','chai',65000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bông tẩy trang đa dụng Niva','hop',35000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Kem đánh răng Colgate Natural trà xanh 180g','hộp',52000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bộ 2 bàn chải Oral-Clean Diamond lông siêu mềm','cai',33000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước súc miệng Colgate Plax Fresh Tea 500ml','chai',105000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Băng vệ sinh Kotex Pro siêu mỏng có cánh 20 miếng','goi',42000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Băng vệ sinh Diana Sensi Cool','goi',23000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Bột giặt Ariel hương nắng mai túi 720g','túi',38000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước giặt OMO Matic hoa hồng Ecuador túi 1.9 lít','túi',115000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước xả Downy hương hoa oải hương túi 2.2 lít','tui',172000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước rửa chén Sunlight Chanh 100 chai 386ml','chai',15000,500);
-insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước rửa chén Sunlight thiên nhiên túi 725ml','tui',25000,500);
+DELIMITER $$
+CREATE TRIGGER tg_cthd_insert
+after INSERT ON cthd
+FOR EACH ROW
+BEGIN
+	select   SUM( SANPHAM.DONGIA * CTHD.SOLUONG) INTO @TONG   FROM 
+	SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
+	WHERE CTHD.MAHD = NEW.MAHD;
+	update hoadon set TONGTIEN = @TONG
+    WHERE HOADON.MAHD = NEW.MAHD;
+    
+END$$
+DELIMITER ;
+
+-- Them trigger hoa don
+
+DELIMITER $$
+CREATE TRIGGER tg_hoadon_update
+after update ON hoadon
+FOR EACH ROW
+BEGIN
+	SELECT SUM(TONGTIEN) INTO @TONGCHITIEU FROM HOADON where MAKH =new.MAKH ORDER BY MAKH;
+	update khachhang set TONGCHITIEU = @TONGCHITIEU, TICHDIEM = @TONGCHITIEU*0.1
+    WHERE KHACHHANG.MAKH = NEW.MAKH;
+END$$
+DELIMITER ;
+-- Them du lieu
+
+
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Mì Hảo Hảo','goi',4000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Mì Handy Hảo Hảo','ly',9000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Hủ tiếu Nam Vang Như Ý','goi',5000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Phở gà Vifon Hoàng Gia','goi',20000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Cháo thịt gà Vifon','goi',5000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bánh Gạo Tobokki','goi',28000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Dầu đậu nành nguyên chất Simply can 2 lít','chai',135000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Dầu đậu nành nguyên chất Simply can 1 lít','chai',70000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Đường Biên Hòa','Kg',27000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Hạt nêm Knorr gói 1,2kg','goi',93000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bột ngọt Vedan','goi',60000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Muối i ốt Vifon','goi',6000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Muối Tây Ninh','Hu',15000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước chấm Nam Ngư Đệ Nhị chai 900ml','chai',25000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước mắm cao đạm Liên Thành nhãn vàng chai 300ml','chai',40000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước tương đậm đặc Maggi chai 700ml','chai',30000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước tương Tam Thái Tử Nhất ca chai 500ml','chai',19000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Tương ớt Chinsu chai 250g','chai',14000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Xốt mayonnaise Ottogi chai 130g','chai',20000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Lốc 4 hộp sữa tươi ít đường Vinamilk Green Farm 180ml','loc',33000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Lốc 4 hộp sữa tươi ít đường TH true MILK 110ml','loc',23000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Lốc 4 hộp sữa tươi ít đường TH true MILK 110ml','loc',26000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bia Gubernija Royal Baltic 6.4% lon 500ml','chai',49000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bia Budweiser chai 330ml','chai',22000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bia Budweiser chai 330ml','chai',6000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước ngọt Sprite chanh chai 1.5 lít','chai',20000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước tăng lực Redbull 250ml','lon',12000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước tăng lực Sting hương dâu 320ml','lon',10000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước tinh khiết Aquafina 500ml','chai',5000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Snack pho mát miếng Oishi gói 39g','goi',6000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Snack khoai tây mực tẩm cay thái Lays Wavy','gói',19000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Khăn ướt cồn Let-green','goi',36000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Khăn giấy rút Let-green','gói',40000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Tắm gội X-men 2 trong 1 630g sạch sâu','chai',166000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Tắm gội Clear Men sạch nhanh 618g','chai',180000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Dầu gội Sunsilk mềm mượt diệu kỳ 165ml','chai',43000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Sữa tắm Olay dưỡng ẩm hạnh nhân 650ml','chai',182000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Sữa tắm dưỡng thể Dove sáng mịn 527ml','chai',158000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Sữa rửa mặt men Bioré sạch sâu 100g','chai',65000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bông tẩy trang đa dụng Niva','hop',35000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Kem đánh răng Colgate Natural trà xanh 180g','hộp',52000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bộ 2 bàn chải Oral-Clean Diamond lông siêu mềm','cai',33000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước súc miệng Colgate Plax Fresh Tea 500ml','chai',105000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Băng vệ sinh Kotex Pro siêu mỏng có cánh 20 miếng','goi',42000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Băng vệ sinh Diana Sensi Cool','goi',23000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Bột giặt Ariel hương nắng mai túi 720g','túi',38000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước giặt OMO Matic hoa hồng Ecuador túi 1.9 lít','túi',115000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước xả Downy hương hoa oải hương túi 2.2 lít','tui',172000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước rửa chén Sunlight Chanh 100 chai 386ml','chai',15000,500);
+insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước rửa chén Sunlight thiên nhiên túi 725ml','tui',25000,500);
 
 
 -- delete from SANPHAM where MASP >5;
@@ -178,65 +237,46 @@ insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước rửa chén Sunli
 
 -- select * from SANPHAM;
 
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Nguyen Van Thanh', 'Nam');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Tran Ngoc Han','Nu');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Tran Ngoc Linh','Nu');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Tran Minh Long','Nam');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Le Nhat Minh','Nam');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Le Hoai Thuong','Nu');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Nguyen Van Tam','Nam');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Phan Thi Thanh','Nu');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Le Ha Vinh','Nam');
-insert into KHACHHANG (HOTEN, GIOITINH)
-values('Ha Duy Lap','Nam');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyen Van Thanh', 'Nam','0952116854');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Ngoc Han','Nu','0554662358');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Ngoc Linh','Nu','0781054669');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Minh Long','Nam','0500474447');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Le Nhat Minh','Nam','0546854225');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Le Hoai Thuong','Nu','0457456589');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyen Van Tam','Nam','0456158256');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Phan Thi Thanh','Nu','0568004056');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Le Ha Vinh','Nam','0451258156');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Ha Duy Lap','Nam','0458147145');
 
 select * from NHANVIEN;
 
-insert into NHANVIEN (HOTEN,SODT,NGVL) values('Nguyen Nhu Nhut','927345678','202/01/14');
-insert into NHANVIEN (HOTEN,SODT,NGVL) values('Le Thi Phi Yen','987567390','2022/01/14');
-insert into NHANVIEN (HOTEN,SODT,NGVL) values('Nguyen Van Bao','997047382','2022/01/14');
-insert into NHANVIEN (HOTEN,SODT,NGVL) values('Ngo Thanh Tuan','913758498','2022/01/14');
-insert into NHANVIEN (HOTEN,SODT,NGVL) values('Nguyen Thi Truc Thanh','918590387','2022/01/14');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyen Nhu Nhut','927345678','Nu');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Le Thi Phi Yen','987567390','Nu');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyen Van Bao','997047382','Nam');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Ngo Thanh Tuan','913758498','Nam');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyen Thi Truc Thanh','918590387','Nu');
 
-insert into TAIKHOAN (TENTK,MATKHAU,CAPBAC,MANV) values( 'admin', 'admin', 2, 'NV01');
-insert into TAIKHOAN (TENTK,MATKHAU,CAPBAC,MANV) values( 'phiyen', '12345', 1, 'NV02');
-insert into TAIKHOAN (TENTK,MATKHAU,CAPBAC,MANV) values( 'vanbao', '12345', 1, 'NV03');
-insert into TAIKHOAN (TENTK,MATKHAU,CAPBAC,MANV) values( 'thanhtuan', '12345', 1, 'NV04');
-insert into TAIKHOAN (TENTK,MATKHAU,CAPBAC,MANV) values( 'tructhanh', '12345', 1, 'NV05');
+insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'admin', 'admin', 2, 'NV01');
+insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'phiyen', '12345', 1, 'NV02');
+insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'vanbao', '12345', 1, 'NV03');
+insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'thanhtuan', '12345', 1, 'NV04');
+insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'tructhanh', '12345', 1, 'NV05');
 
 
-insert into HOADON (NGHD,MAKH,MANV) values(CURDATE(),'KH01','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV02');
 
-insert into CTHD (SOHD, MASP, SL) values(1,'SP001',2);
-insert into CTHD (SOHD, MASP, SL) values(1,'SP002',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP001',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP002',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP004',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP005',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP006',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP007',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP008',2);
 select * from khachhang;
 select * from cthd;
-
-
-
-
-
-
--- tổng giá trị hóa đơn
-select   SUM( GIA * SL)   FROM 
-SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-WHERE CTHD.SOHD = 1;
-
--- chi tiết hóa đơn
-
-select  CTHD.MASP, TENSP, GIA, SL, ( GIA * SL) as TONG  FROM 
-SANPHAM INNER JOIN  CTHD  ON SANPHAM.MASP = CTHD.MASP 
-WHERE CTHD.SOHD = 1
-
+select * from hoadon;
 
 
 
