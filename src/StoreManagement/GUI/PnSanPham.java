@@ -4,19 +4,43 @@
  */
 package StoreManagement.GUI;
 
+import StoreManagement.BUS.SanPhamBUS;
+import StoreManagement.DTO.SanPham;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author thanh
  */
 public class PnSanPham extends javax.swing.JPanel {
+    
+    private SanPhamBUS spBUS = new SanPhamBUS();
+    DefaultTableModel dtmSanPham;
 
-    /**
-     * Creates new form PnKhachHang1
-     */
     public PnSanPham() {
         initComponents();
+        dtmSanPham = (DefaultTableModel) tblSanPhamQL.getModel();
+        loadDataTblSP();
     }
+    private void loadDataTblSP(){
+        dtmSanPham.setRowCount(0);
+        
+        ArrayList<SanPham> dssp = null;
+        dssp = spBUS.getListSanPham();
+        
+        for (SanPham sp : dssp) {
+            Vector vec = new Vector();
+            vec.add(sp.getMaSP());
+            vec.add(sp.getTenSP());
+            vec.add(sp.getDonGia());
+            vec.add(sp.getSoLuong());
+            vec.add(sp.getDonViTinh());
 
+            dtmSanPham.addRow(vec);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,16 +57,16 @@ public class PnSanPham extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtMaSP = new javax.swing.JTextField();
         txtTenSP = new javax.swing.JTextField();
-        txtGiaSP = new javax.swing.JTextField();
+        txtTimSP = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblKhachHang = new MyCustom.MyTable();
+        tblSanPhamQL = new MyCustom.MyTable();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         txtSoLuongSP = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnTimKH = new javax.swing.JButton();
         txtDvtSP = new javax.swing.JTextField();
-        txtGiaSP1 = new javax.swing.JTextField();
+        txtGiaSP = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnXuat = new javax.swing.JButton();
         btnXoa2 = new javax.swing.JButton();
@@ -62,13 +86,14 @@ public class PnSanPham extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel5.setText("Đơn vị tính");
 
+        txtMaSP.setEditable(false);
         txtMaSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         txtTenSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
-        txtGiaSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtTimSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
-        tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
+        tblSanPhamQL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -79,12 +104,24 @@ public class PnSanPham extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(tblKhachHang);
+        tblSanPhamQL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamQLMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblSanPhamQL);
 
         btnThem.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnThem.setText("Thêm");
@@ -115,10 +152,10 @@ public class PnSanPham extends javax.swing.JPanel {
             }
         });
 
-        txtGiaSP1.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        txtGiaSP1.addActionListener(new java.awt.event.ActionListener() {
+        txtGiaSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtGiaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGiaSP1ActionPerformed(evt);
+                txtGiaSPActionPerformed(evt);
             }
         });
 
@@ -174,8 +211,8 @@ public class PnSanPham extends javax.swing.JPanel {
                                     .addComponent(txtTenSP)
                                     .addComponent(txtSoLuongSP)
                                     .addComponent(txtDvtSP)
-                                    .addComponent(txtGiaSP1)
-                                    .addComponent(txtGiaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtGiaSP)
+                                    .addComponent(txtTimSP, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
                                 .addComponent(btnTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -213,7 +250,7 @@ public class PnSanPham extends javax.swing.JPanel {
                     .addComponent(txtDvtSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGiaSP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGiaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -223,7 +260,7 @@ public class PnSanPham extends javax.swing.JPanel {
                     .addComponent(btnXoa2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGiaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(btnTimKH))
                 .addGap(18, 18, 18)
@@ -240,13 +277,31 @@ public class PnSanPham extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTimKHActionPerformed
 
-    private void txtGiaSP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSP1ActionPerformed
+    private void txtGiaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtGiaSP1ActionPerformed
+    }//GEN-LAST:event_txtGiaSPActionPerformed
 
     private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXuatActionPerformed
+
+    private void tblSanPhamQLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamQLMouseClicked
+        // TODO add your handling code here:
+         int row = tblSanPhamQL.getSelectedRow();
+         if (row > -1) {
+            String ma = tblSanPhamQL.getValueAt(row, 0).toString();
+            String ten = tblSanPhamQL.getValueAt(row, 1).toString();
+            Float donGia = Float.parseFloat(tblSanPhamQL.getValueAt(row, 2).toString());
+            Integer soLuong = Integer.parseInt(tblSanPhamQL.getValueAt(row, 3).toString());
+            String dvt = tblSanPhamQL.getValueAt(row, 4).toString();
+
+            txtMaSP.setText(ma);
+            txtTenSP.setText(ten);
+            txtSoLuongSP.setText(soLuong.toString());
+            txtGiaSP.setText(donGia.toString());
+            txtDvtSP.setText(dvt);
+        }
+    }//GEN-LAST:event_tblSanPhamQLMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -263,12 +318,12 @@ public class PnSanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private MyCustom.MyTable tblKhachHang;
+    private MyCustom.MyTable tblSanPhamQL;
     private javax.swing.JTextField txtDvtSP;
     private javax.swing.JTextField txtGiaSP;
-    private javax.swing.JTextField txtGiaSP1;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtSoLuongSP;
     private javax.swing.JTextField txtTenSP;
+    private javax.swing.JTextField txtTimSP;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ import StoreManagement.BUS.SanPhamBUS;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import StoreManagement.DTO.SanPham;
+import java.text.DecimalFormat;
 import java.util.Vector;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -20,8 +21,8 @@ import javax.swing.SpinnerNumberModel;
 public class PnBanHang extends javax.swing.JPanel {
     
     private SanPhamBUS spBUS = new SanPhamBUS();
+    private XuatHoaDon hoaDon = new XuatHoaDon();
     DefaultTableModel dtmSanPham, dtmGioHang;
-
 
     public PnBanHang() {
         initComponents();
@@ -46,14 +47,6 @@ public class PnBanHang extends javax.swing.JPanel {
             vec.add(sp.getSoLuong());
             dtmSanPham.addRow(vec);
         }
-    }
-    private int searchSPbyName(String name){
-        for (int i = 0; i < tblSanPham.getRowCount(); i++) {
-            if(tblSanPham.getValueAt(i, 1).toString().equals(name)){
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -85,6 +78,8 @@ public class PnBanHang extends javax.swing.JPanel {
         btnTimKiem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnXuatHd = new javax.swing.JButton();
+        btnResetSP = new javax.swing.JButton();
+        btnResetGH = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1030, 844));
 
@@ -142,13 +137,13 @@ public class PnBanHang extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel6.setText("Đơn giá");
 
+        txtMaSp.setEditable(false);
         txtMaSp.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         txtTenSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
         txtDonGia.setEditable(false);
         txtDonGia.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        txtDonGia.setEnabled(false);
 
         spnSL.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         spnSL.setEnabled(false);
@@ -206,12 +201,31 @@ public class PnBanHang extends javax.swing.JPanel {
 
         btnXoa.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnXuatHd.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnXuatHd.setText("Xuất hóa đơn");
         btnXuatHd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXuatHdActionPerformed(evt);
+            }
+        });
+
+        btnResetSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh-icon.png"))); // NOI18N
+        btnResetSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetSPActionPerformed(evt);
+            }
+        });
+
+        btnResetGH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh-icon.png"))); // NOI18N
+        btnResetGH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetGHActionPerformed(evt);
             }
         });
 
@@ -222,17 +236,20 @@ public class PnBanHang extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(scrTblGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                            .addComponent(scrTblSanPham)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnResetSP))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(253, 253, 253)
-                        .addComponent(jLabel7)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scrTblGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-                    .addComponent(scrTblSanPham))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnResetGH)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -297,38 +314,73 @@ public class PnBanHang extends javax.swing.JPanel {
                             .addComponent(btnThem)
                             .addComponent(btnTimKiem)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1)
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(btnResetSP))
                         .addGap(18, 18, 18)
                         .addComponent(scrTblSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(scrTblGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(13, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnXuatHd)
                             .addComponent(btnXoa))
-                        .addGap(195, 195, 195))))
+                        .addGap(195, 195, 195))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnResetGH)
+                        .addGap(13, 13, 13)
+                        .addComponent(scrTblGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(13, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        String ten = txtTenSP.getText();
-        if(searchSPbyName(ten)!=-1){
-            tblSanPham.setRowSelectionInterval(searchSPbyName(ten), searchSPbyName(ten));
-        }else{
-            JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm nào", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        String name = txtTenSP.getText().toLowerCase();
+        dtmSanPham.setRowCount(0);
+        ArrayList<SanPham> dssp = null;
+        dssp = spBUS.getSPbyName(name);
+
+        for (SanPham sp : dssp) {
+            Vector vec = new Vector();
+            vec.add(sp.getMaSP());
+            vec.add(sp.getTenSP());
+            vec.add(sp.getDonViTinh());
+            vec.add(sp.getDonGia());
+            vec.add(sp.getSoLuong());
+            dtmSanPham.addRow(vec);
         }
+        
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnXuatHdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHdActionPerformed
         // TODO add your handling code here:
+         ArrayList<Vector> dsGioHang = new ArrayList<>();
+        int row = tblGioHang.getRowCount();
+        if (row == 0) {
+            JOptionPane.showMessageDialog(null, "Giỏ hàng chưa có sàn phẩm nào!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        };
+        float tongTien = 0;
+        for (int i = 0; i < row; i++) {
+            Vector vec = new Vector();
+            vec.add(tblGioHang.getValueAt(i, 0));
+            vec.add(tblGioHang.getValueAt(i, 1));
+            vec.add(tblGioHang.getValueAt(i, 2));
+            vec.add(tblGioHang.getValueAt(i, 3));
+            vec.add(tblGioHang.getValueAt(i, 4));
+            tongTien += Float.parseFloat(tblGioHang.getValueAt(i, 4).toString());
+            dsGioHang.add(vec);
+        }
+        Home home = new Home();
+        XuatHoaDon hoaDon = new XuatHoaDon(dsGioHang, tongTien, home.nv );
+        hoaDon.setVisible(true); 
+        if (hoaDon.checkBanHang) {
+            dtmGioHang.setRowCount(0);
+        }
     }//GEN-LAST:event_btnXuatHdActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -337,10 +389,11 @@ public class PnBanHang extends javax.swing.JPanel {
         
         String ma = txtMaSp.getText();
         String ten = txtTenSP.getText();
-        if(ma.equals("")||ten.equals("")){
+        if(ma.trim().equals("")||ten.trim().equals("")||row==-1){
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn sản phẩm nào", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return;
         }
+       
         Float donGia = Float.parseFloat(txtDonGia.getText());
         int soLuong = (Integer) spnSL.getValue();
         int soLuongConLai = (Integer) tblSanPham.getValueAt(row, 4);
@@ -349,28 +402,36 @@ public class PnBanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Sản phẩm đã hết hàng", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+        txtMaSp.setText("");
+        txtTenSP.setText("");
+        txtDonGia.setText("");
+        spnSL.setValue(1);
         
         for (int i = 0; i < tblGioHang.getRowCount(); i++) {
             String maTbl = tblGioHang.getValueAt(i, 0).toString();
             if (maTbl.equals(ma)) {
                 int soLuongAdd = Integer.parseInt(tblGioHang.getValueAt(i, 2).toString());
                 soLuongAdd += soLuong;
- 
                 tblGioHang.setValueAt(soLuongAdd, i, 2);
-                tblGioHang.setValueAt(soLuong * donGia, i, 4);
+                tblGioHang.setValueAt((Float)(soLuongAdd * donGia), i, 4);
+                
+                //cap nhap so luong san pham
+                spBUS.updateQuantitySP(ma, soLuong);
+                spBUS.getListSanPham();
+                loadDataTblSP();
                 return;
             }
         }
-        Float thanhTien = (float) soLuong * donGia;
         Vector vec = new Vector();
         vec.add(ma);
         vec.add(ten);
         vec.add(soLuong);
         vec.add(donGia);
-        vec.add(thanhTien);
+        vec.add((Float) (soLuong * donGia));
+        spBUS.updateQuantitySP(ma, soLuong);
+        spBUS.getListSanPham();
+        loadDataTblSP();
         dtmGioHang.addRow(vec);
-
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
@@ -379,7 +440,7 @@ public class PnBanHang extends javax.swing.JPanel {
          if (row > -1) {
             String ma = tblSanPham.getValueAt(row, 0) + "";
             String ten = tblSanPham.getValueAt(row, 1) + "";
-            Integer donGia = Integer.parseInt(tblSanPham.getValueAt(row, 3).toString());
+            Float donGia = Float.parseFloat(tblSanPham.getValueAt(row, 3).toString());
             int soLuong = Integer.parseInt(tblSanPham.getValueAt(row, 4).toString());
             if (soLuong < 1) {
                 JOptionPane.showMessageDialog(null, "Sản phẩm đã hết hàng","Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -394,8 +455,39 @@ public class PnBanHang extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        int row = tblGioHang.getSelectedRow();
+        if (row > -1) {
+            String ma = tblGioHang.getValueAt(row, 0).toString();
+            int soLuong = Integer.parseInt(tblGioHang.getValueAt(row, 2).toString());
+            spBUS.updateQuantitySP(ma, -soLuong);
+            loadDataTblSP();
+            dtmGioHang.removeRow(row);
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnResetSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetSPActionPerformed
+        // TODO add your handling code here:
+        loadDataTblSP();
+    }//GEN-LAST:event_btnResetSPActionPerformed
+
+    private void btnResetGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetGHActionPerformed
+        // TODO add your handling code here:
+        for (int row = dtmGioHang.getRowCount() -1; row >= 0; row--) {
+            String ma = tblGioHang.getValueAt(row, 0).toString();
+            int soLuong = Integer.parseInt(tblGioHang.getValueAt(row, 2).toString());
+            spBUS.updateQuantitySP(ma, -soLuong);
+            dtmGioHang.removeRow(row);
+        }
+        loadDataTblSP();
+
+    }//GEN-LAST:event_btnResetGHActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnResetGH;
+    private javax.swing.JButton btnResetSP;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;

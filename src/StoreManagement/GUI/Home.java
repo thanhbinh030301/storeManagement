@@ -4,10 +4,12 @@ package StoreManagement.GUI;
 //import StoreManagement.DTO.PhanQuyen;
 
 
+import StoreManagement.BUS.NhanVienBUS;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import StoreManagement.DTO.NhanVien;
 
 public class Home extends JFrame {
 
@@ -40,6 +42,9 @@ public class Home extends JFrame {
     final Color clLeftItemSelected = new Color(225, 100, 99);
     ArrayList<JLabel> listMenuLeft;
     CardLayout cardMenuLeftGroup = new CardLayout();
+    Login login = new Login();
+    public static NhanVien nv = null;
+
 
     private void addControls() {
         int width = this.getWidth();
@@ -63,9 +68,14 @@ public class Home extends JFrame {
         JLabel lblAvatar = new JLabel(new ImageIcon("image/ManagerUI/avatar.png"), JLabel.CENTER);
         lblAvatar.setPreferredSize(new Dimension(250, 210));
         
-        JLabel lblMaNhanVien = new JLabel("Id: 01");
-        JLabel lblTenNhanVien = new JLabel("Tên: Lê Van A");
-        Font font = new Font("Arial", Font.BOLD, 28);
+        //hien thi nhan vien
+        NhanVienBUS nvBUS = new NhanVienBUS();
+        String maNV = login.tkLogin.getMaNhanVien();
+        nv = nvBUS.getNhanVien(maNV);
+        
+        JLabel lblMaNhanVien = new JLabel("ID: " + nv.getMaNV());
+        JLabel lblTenNhanVien = new JLabel("Tên: " + nv.getTen());
+        Font font = new Font("Arial", Font.BOLD, 20);
         lblMaNhanVien.setFont(font);
         lblTenNhanVien.setFont(font);
         lblMaNhanVien.setForeground(clLeftItemSelected);
@@ -144,28 +154,28 @@ public class Home extends JFrame {
         //======XỬ LÝ PHÂN QUYỀN=======
 //        PhanQuyen quyen = PhanQuyenBUS.quyenTK;
 
-        if (true) {
+        if (Login.tkLogin.getCapBac()==2) {
             sanPhamPanel = new PnSanPham();
             pnSanPham.setLayout(new BorderLayout());
             pnSanPham.add(sanPhamPanel, BorderLayout.CENTER);
             lblSanPham.setVisible(true);
         }
 
-        if (true) {
+        if (Login.tkLogin.getCapBac()==2) {
             nhanVienPanel = new PnNhanVien();
             pnNhanVien.setLayout(new BorderLayout());
             pnNhanVien.add(nhanVienPanel, BorderLayout.CENTER);
             lblNhanVien.setVisible(true);
         }
 
-        if (true) {
+        if (Login.tkLogin.getCapBac()==2) {
             khachHangPanel = new PnKhachHang();
             pnKhachHang.setLayout(new BorderLayout());
             pnKhachHang.add(khachHangPanel, BorderLayout.CENTER);
             lblKhachHang.setVisible(true);
         }
 
-        if (true) {
+        if (Login.tkLogin.getCapBac()==2) {
             thongKePanel = new PnThongKe();
             pnThongKe.setLayout(new BorderLayout());
             pnThongKe.add(thongKePanel, BorderLayout.CENTER);

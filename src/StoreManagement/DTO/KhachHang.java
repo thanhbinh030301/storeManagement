@@ -9,15 +9,18 @@ public class KhachHang {
     private String gioiTinh;
     private float tongChiTieu;
     private float tichDiem;
+    private String soDT;
 
     public KhachHang() {
     }
 
-    public KhachHang(String maKH, String hoTen, String gioiTinh, float tongChiTieu, float tichDiem) {
+    public KhachHang(String maKH, String hoTen, String gioiTinh, String soDT, float tongChiTieu, float tichDiem) {
         this.maKH = maKH;
         this.hoTen = hoTen;
+        this.tichDiem = tichDiem;
         this.gioiTinh = gioiTinh;
         this.tongChiTieu = tongChiTieu;
+        this.soDT = soDT;
     }
 
     public String getMaKH() {
@@ -58,6 +61,12 @@ public class KhachHang {
 
     public void setTichDiem(float tichDiem) {
         this.tichDiem = tichDiem;
+    }
+    public String getSoDT() {
+        return soDT;
+    }
+    public void setSoDT(String soDT){
+        this.soDT=soDT;
     }
 
 
