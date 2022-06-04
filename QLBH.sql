@@ -5,11 +5,9 @@ USE storemanagementdb;
 CREATE TABLE KHACHHANG(
 	MAKH	char(4) not null DEFAULT '0' ,	
 	HOTEN	varchar(40),
-	DCHI	varchar(50),
-	SODT	varchar(20),
-	NGSINH	date,
-	NGDK	date,
-	DOANHSO	decimal(15,2),
+	GIOITINH	varchar(3),
+	TONGCHITIEU	decimal(15,2)  DEFAULT 0, 
+	TICHDIEM float DEFAULT 0,
 	primary key(MAKH)
 );
 CREATE TABLE KHACHHANG_SEQ
@@ -26,8 +24,6 @@ BEGIN
 END$$
 
 
-
--- TAO BANG NHAN VIEN
 CREATE TABLE NHANVIEN(
 	MANV	char(4) not null DEFAULT '0',	
 	HOTEN	varchar(40),
@@ -182,26 +178,26 @@ insert into SANPHAM (TENSP, DVT, GIA, SOLUONG) values('Nước rửa chén Sunli
 
 -- select * from SANPHAM;
 
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Nguyen Van A','731 Tran Hung Dao, Q5, TpHCM','8823451','1999/10/22','2020/1/21');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Tran Ngoc Han','23/5 Nguyen Trai, Q5, TpHCM','908256478','1998/03/04','2021/07/30');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Tran Ngoc Linh','45 Nguyen Canh Chan, Q1, TpHCM','938776266','2001/06/12','2020/05/08');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Tran Minh Long','50/34 Le Dai Hanh, Q10, TpHCM','917325476','2001/09/03','2022/04/12');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Le Nhat Minh','34 Truong Dinh, Q3, TpHCM','8246108','2000/03/10','2021/10/28');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Le Hoai Thuong','227 Nguyen Van Cu, Q5, TpHCM','8631738','1999/11/07','2021/02/14');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Nguyen Van Tam','32/3 Tran Binh Trong, Q5, TpHCM','916783565','2002/04/06','2022/01/11');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Phan Thi Thanh','45/2 An Duong Vuong, Q5, TpHCM','938435756','2001/01/10','2021/02/15');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Le Ha Vinh','873 Le Hong Phong, Q5, TpHCM','8654763','2003/09/03','2022/01/14');
-insert into KHACHHANG ( HOTEN, DCHI, SODT, NGSINH, NGDK)
-values('Ha Duy Lap','34/34B Nguyen Trai, Q1, TpHCM','8768904','1999/02/05','2022/01/06');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Nguyen Van Thanh', 'Nam');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Tran Ngoc Han','Nu');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Tran Ngoc Linh','Nu');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Tran Minh Long','Nam');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Le Nhat Minh','Nam');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Le Hoai Thuong','Nu');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Nguyen Van Tam','Nam');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Phan Thi Thanh','Nu');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Le Ha Vinh','Nam');
+insert into KHACHHANG (HOTEN, GIOITINH)
+values('Ha Duy Lap','Nam');
 
 select * from NHANVIEN;
 
@@ -220,9 +216,9 @@ insert into TAIKHOAN (TENTK,MATKHAU,CAPBAC,MANV) values( 'tructhanh', '12345', 1
 
 insert into HOADON (NGHD,MAKH,MANV) values(CURDATE(),'KH01','NV02');
 
-insert into CTHD (SOHD, MASP, SL) values(1,1,2);
-insert into CTHD (SOHD, MASP, SL) values(1,2,2);
-select * from hoadon;
+insert into CTHD (SOHD, MASP, SL) values(1,'SP001',2);
+insert into CTHD (SOHD, MASP, SL) values(1,'SP002',2);
+select * from khachhang;
 select * from cthd;
 
 
