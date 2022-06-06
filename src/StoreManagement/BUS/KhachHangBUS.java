@@ -33,4 +33,42 @@ public class KhachHangBUS {
         }
         return khDAO.addKH(hoTen, soDT, gioiTinh);
     }
+    public KhachHang getKH(String maKH){
+        return khDAO.getKH(maKH);
+    }
+    public boolean updateKH(String ma, String ten, String gioiTinh, String soDT) {
+        if (ten.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Họ tên không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (gioiTinh.equals("Chọn giới tính")) {
+            JOptionPane.showMessageDialog(null, "Hãy chọn giới tính", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (soDT.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        KhachHang kh = new KhachHang();
+        kh.setHoTen(ten);
+        kh.setGioiTinh(gioiTinh);
+        kh.setSoDT(soDT);
+        boolean flag = khDAO.updateKhachHang(ma, kh);
+        if (flag) {
+            JOptionPane.showMessageDialog(null, "Sửa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Sửa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        return flag;
+    }
+    public ArrayList<KhachHang> getListKHbyName(String name) {
+        ArrayList<KhachHang> dskh = new ArrayList<>();
+        for (KhachHang kh : lstKH) {
+            String tenKH = kh.getHoTen().toLowerCase();
+            if (tenKH.contains(name.toLowerCase())) {
+                dskh.add(kh);
+            }
+        }
+        return dskh;
+    }
 }

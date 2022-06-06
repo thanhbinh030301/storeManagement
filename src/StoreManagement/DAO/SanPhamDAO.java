@@ -8,6 +8,7 @@ import StoreManagement.DTO.SanPham;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 import java.util.ArrayList;
@@ -80,19 +81,45 @@ public class SanPhamDAO {
         return false;
     }
 
-    public boolean themSanPham(SanPham sp) {
+    public boolean addSanPham(String name, String dvt, float price, int soLuong) {
         try {
             String sql = "INSERT INTO SanPham(TenSP, DonViTinh, DonGia, SoLuong) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?)";
             PreparedStatement pre =MyConnect.getJDBCConection().prepareStatement(sql);
-            pre.setString(1, sp.getTenSP());
-            pre.setString(2, sp.getDonViTinh());
-            pre.setFloat(3, sp.getDonGia());
-            pre.setInt(4, sp.getSoLuong());
+            pre.setString(1, name);
+            pre.setString(2, dvt);
+            pre.setFloat(3, price);
+            pre.setInt(4, soLuong);
 
             pre.execute();
             return true;
         } catch (SQLException e) {
+        }
+        return false;
+    }
+    public boolean deleteSanPham(String maSP) {
+        try {
+            String sql = "DELETE FROM SanPham WHERE MaSP= '" + maSP + "'";
+            Statement st = MyConnect.getJDBCConection().createStatement();
+            st.execute(sql);
+            return true;
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+    public boolean updateSanPham(SanPham sp) {
+        try {
+            String sql = "UPDATE SanPham SET TENSP = ?, DONVITINH=?, DONGIA=? WHERE MaSP=?";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, sp.getTenSP());
+            pre.setString(2, sp.getDonViTinh());
+            pre.setFloat(3, sp.getDonGia());
+            pre.setInt(4, sp.getSoLuong());
+            pre.setString(5, sp.getMaSP());
+            pre.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }

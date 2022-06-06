@@ -58,4 +58,45 @@ public class NhanVienDAO {
 
         return nv;
     }
+    public boolean updateNhanVien(NhanVien nv) {
+        try {
+            String sql = "UPDATE nhanvien SET HOTEN = ?, GioiTinh=?, SODT=? WHERE MaNV=?";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, nv.getTen());
+            pre.setString(2, nv.getGioiTinh());
+            pre.setString(3, nv.getSoDT());
+            pre.setString(4, nv.getMaNV());
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
+
+    public boolean deleteNhanVien(String maNV) {
+        try {
+            String sql = "DELETE FROM nhanvien WHERE MaNV=?";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, maNV);
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
+
+    public boolean addNhanVien(String hoTen, String gioiTinh, String soDT) {
+        try {
+            String sql = "INSERT INTO NhanVien(HoTen, GioiTinh, SoDT) " +
+                    "VALUES(?, ?, ?)";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, hoTen);
+            pre.setString(2, gioiTinh);
+            pre.setString(3, soDT);
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
 }

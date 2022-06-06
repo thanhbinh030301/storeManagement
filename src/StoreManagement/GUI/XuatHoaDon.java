@@ -7,7 +7,6 @@ package StoreManagement.GUI;
 import StoreManagement.DTO.NhanVien;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.print.PrinterException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,12 +14,16 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
+import StoreManagement.BUS.CTHDBUS;
+import StoreManagement.BUS.HoaDonBUS;
+
+
 
 public class XuatHoaDon extends JDialog {
 
-
+    private HoaDonBUS hoaDonBUS = new HoaDonBUS();
+    private CTHDBUS cthdBUS = new CTHDBUS();
 
     public XuatHoaDon() {
         checkBanHang = false;
@@ -35,9 +38,9 @@ public class XuatHoaDon extends JDialog {
     private ArrayList<Vector> dsGioHang;
     private float tongTien;
     private float tichDiem;
+    private float thanhTien;
     private String nameNV;
     ListKH lstKH = new ListKH();
-
     public static boolean checkBanHang = false;
 
 
@@ -56,6 +59,12 @@ public class XuatHoaDon extends JDialog {
     }
 
     private void xuLyHienThiHoaDon() {
+        if(tongTien-tichDiem < 0){
+            this.thanhTien = 0;
+            this.tichDiem = tongTien;
+        }else{
+            this.thanhTien = this.tongTien - this.tichDiem;
+        }
         txtHoaDon.setContentType("text/html");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -118,7 +127,7 @@ public class XuatHoaDon extends JDialog {
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Thành tiền</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(tongTien-tichDiem) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(thanhTien) + "</td>";
         hd += "</tr>";
         hd += "</table>";
         hd += "</div>";
@@ -136,6 +145,7 @@ public class XuatHoaDon extends JDialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnThanhToan = new javax.swing.JButton();
+        btnPrint = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtHoaDon = new javax.swing.JEditorPane();
         txtTenKhach = new javax.swing.JTextField();
@@ -151,7 +161,7 @@ public class XuatHoaDon extends JDialog {
         jLabel5.setText("jLabel5");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 153, 51));
+        jLabel1.setForeground(new java.awt.Color(255, 100, 100));
         jLabel1.setText("Chi tiết hoá đơn");
         jPanel1.add(jLabel1);
 
@@ -164,6 +174,17 @@ public class XuatHoaDon extends JDialog {
             }
         });
         jPanel2.add(btnThanhToan);
+
+        btnPrint.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnPrint.setText("In hóa đơn");
+        btnPrint.setEnabled(false);
+        btnPrint.setPreferredSize(new java.awt.Dimension(128, 45));
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnPrint);
 
         txtHoaDon.setEditable(false);
         jScrollPane1.setViewportView(txtHoaDon);
@@ -276,18 +297,39 @@ public class XuatHoaDon extends JDialog {
         }
     }//GEN-LAST:event_chkTichDiemActionPerformed
 
-
-    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        // TODO add your handling code here:
         if (txtTenKhach.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Chọn khách hàng","Thông báo", JOptionPane.ERROR_MESSAGE);
             return;
         }
         xuLyHienThiHoaDon();
-    }
+
+        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), thanhTien, tichDiem);
+        for (Vector vec : dsGioHang) {
+            String maSP = vec.get(0).toString();
+            int soLuong = Integer.parseInt(vec.get(2).toString());
+            cthdBUS.addCTHD(maSP, soLuong);
+        }
+        PnHoaDon.loadDataTblHD();
+        PnKhachHang.loadDataTblKH();
+        checkBanHang = true;
+        btnPrint.setEnabled(true);
+        btnThanhToan.setEnabled(false);
+        chkTichDiem.setEnabled(false);
+
+    }//GEN-LAST:event_btnThanhToanActionPerformed
+
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnPrintActionPerformed
+
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnSelectKH;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JCheckBox chkTichDiem;

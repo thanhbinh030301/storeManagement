@@ -117,7 +117,7 @@ public class Login extends javax.swing.JFrame {
         if(tkLogin!=null){
             Home homeGui = new Home();
             this.dispose();
-            homeGui.showWindow();
+            homeGui.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng","Thông báo", JOptionPane.ERROR_MESSAGE);
         }

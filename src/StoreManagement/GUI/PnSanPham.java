@@ -16,15 +16,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PnSanPham extends javax.swing.JPanel {
     
-    private SanPhamBUS spBUS = new SanPhamBUS();
-    DefaultTableModel dtmSanPham;
+    static SanPhamBUS spBUS = new SanPhamBUS();
+    static DefaultTableModel dtmSanPham;
 
     public PnSanPham() {
         initComponents();
+        this.setBounds(0, 0, 1030, 844);
         dtmSanPham = (DefaultTableModel) tblSanPhamQL.getModel();
-        loadDataTblSP();
+        loadDataTblSPQL();
     }
-    private void loadDataTblSP(){
+    static void loadDataTblSPQL(){
         dtmSanPham.setRowCount(0);
         
         ArrayList<SanPham> dssp = null;
@@ -60,8 +61,8 @@ public class PnSanPham extends javax.swing.JPanel {
         txtTimSP = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPhamQL = new MyCustom.MyTable();
-        btnThem = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         txtSoLuongSP = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnTimKH = new javax.swing.JButton();
@@ -69,7 +70,8 @@ public class PnSanPham extends javax.swing.JPanel {
         txtGiaSP = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnXuat = new javax.swing.JButton();
-        btnXoa2 = new javax.swing.JButton();
+        btnNhap = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         jLabel1.setText("Quản lý sản phẩm");
@@ -123,13 +125,24 @@ public class PnSanPham extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSanPhamQL);
 
-        btnThem.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnThem.setText("Thêm");
-        btnThem.setToolTipText("");
+        btnUpdate.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnUpdate.setText("Lưu");
+        btnUpdate.setToolTipText("");
+        btnUpdate.setEnabled(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        btnXoa.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.setToolTipText("");
+        btnDelete.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnDelete.setText("Xóa");
+        btnDelete.setToolTipText("");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         txtSoLuongSP.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
@@ -171,9 +184,18 @@ public class PnSanPham extends javax.swing.JPanel {
             }
         });
 
-        btnXoa2.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnXoa2.setText("Nhập");
-        btnXoa2.setToolTipText("");
+        btnNhap.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnNhap.setText("Nhập");
+        btnNhap.setToolTipText("");
+
+        btnAdd.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnAdd.setText("Thêm");
+        btnAdd.setToolTipText("");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -216,14 +238,16 @@ public class PnSanPham extends javax.swing.JPanel {
                                 .addGap(30, 30, 30)
                                 .addComponent(btnTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(384, 384, 384)
-                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(270, 270, 270)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
                                 .addComponent(btnXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
-                                .addComponent(btnXoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 153, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -254,10 +278,11 @@ public class PnSanPham extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem)
-                    .addComponent(btnXoa)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete)
                     .addComponent(btnXuat)
-                    .addComponent(btnXoa2))
+                    .addComponent(btnNhap)
+                    .addComponent(btnAdd))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,6 +300,21 @@ public class PnSanPham extends javax.swing.JPanel {
 
     private void btnTimKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKHActionPerformed
         // TODO add your handling code here:
+        String name = txtTimSP.getText().toLowerCase();
+        dtmSanPham.setRowCount(0);
+        ArrayList<SanPham> dssp = null;
+        dssp = spBUS.getListSPbyName(name);
+
+        for (SanPham sp : dssp) {
+            Vector vec = new Vector();
+            vec.add(sp.getMaSP());
+            vec.add(sp.getTenSP());
+            vec.add(sp.getDonGia());
+            vec.add(sp.getSoLuong());
+            vec.add(sp.getDonViTinh());
+
+            dtmSanPham.addRow(vec);
+        }
     }//GEN-LAST:event_btnTimKHActionPerformed
 
     private void txtGiaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSPActionPerformed
@@ -300,15 +340,42 @@ public class PnSanPham extends javax.swing.JPanel {
             txtSoLuongSP.setText(soLuong.toString());
             txtGiaSP.setText(donGia.toString());
             txtDvtSP.setText(dvt);
+            btnUpdate.setEnabled(true);
+
         }
     }//GEN-LAST:event_tblSanPhamQLMouseClicked
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        spBUS.updateSanPham(txtMaSP.getText(), txtTenSP.getText(), txtDvtSP.getText(), txtGiaSP.getText(),txtSoLuongSP.getText());
+        loadDataTblSPQL();
+        PnBanHang.loadDataTblSP();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        DlgAddSP addSp = new DlgAddSP();
+        addSp.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int row = tblSanPhamQL.getSelectedRow();
+        if (row > -1) {
+            String maSP = tblSanPhamQL.getValueAt(row, 0).toString();
+            spBUS.deleteSanPham(maSP);
+            loadDataTblSPQL();
+            PnBanHang.loadDataTblSP();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnNhap;
     private javax.swing.JButton btnTimKH;
-    private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btnXoa2;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXuat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

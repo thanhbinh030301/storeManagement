@@ -1,10 +1,10 @@
 package StoreManagement.GUI;
 
-import StoreManagement.BUS.KhachHangBUS;
+import StoreManagement.BUS.NhanVienBUS;
 
-public class DlgAddKH extends javax.swing.JDialog {
+public class DlgAddNV extends javax.swing.JDialog {
 
-    public DlgAddKH() {
+    public DlgAddNV() {
         this.setTitle("Thêm khách hàng");
         initComponents();
         this.setModal(true);
@@ -112,9 +112,9 @@ public class DlgAddKH extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        KhachHangBUS khachHangBUS = new KhachHangBUS();
-        if(khachHangBUS.addKH(txtName.getText(), txtSDT.getText(), cmbGioiTinh.getSelectedItem().toString())){
-            PnKhachHang.loadDataTblKH();
+        NhanVienBUS nvBUS = new NhanVienBUS();
+        if(nvBUS.addNV(txtName.getText(), cmbGioiTinh.getSelectedItem().toString(), txtSDT.getText())){
+            PnNhanVien.loadDataTblNV();
             this.dispose();
         }    
     }//GEN-LAST:event_btnAddActionPerformed

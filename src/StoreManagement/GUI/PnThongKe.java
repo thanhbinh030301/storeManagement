@@ -1,252 +1,316 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
 package StoreManagement.GUI;
 
+import StoreManagement.BUS.CTHDBUS;
+import StoreManagement.BUS.HoaDonBUS;
+import StoreManagement.DTO.SanPham;
+import java.util.ArrayList;
 
+/**
+ *
+ * @author thanh
+ */
+public class PnThongKe extends javax.swing.JPanel {
 
-import javax.swing.*;
-
-import java.awt.*;
-
-//import static Main.Main.changLNF;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Calendar;
-
-public class PnThongKe extends JPanel {
-
+    CTHDBUS cthdBUS = new CTHDBUS();
+    HoaDonBUS hdBUS = new HoaDonBUS();
+    int year = 2022;
+    ArrayList<SanPham> lstTopSp = cthdBUS.getTopSP();
+    
     public PnThongKe() {
-        addControls();
-    }
-
-    final Color colorPanel = new Color(56, 56, 56);
-    JLabel lblThongKeThucDon, lblThongKeKhachHang, lblThongKeNhanVien, lblThongKeDoanhThu;
-    JLabel lblDoanhThuQuy1, lblDoanhThuQuy2, lblDoanhThuQuy3, lblDoanhThuQuy4, lblTongDoanhThu;
-    JButton btnView, btnBack;
-    JComboBox<Integer> cmbNam;
-    CardLayout cardLayoutThongKe = new CardLayout();
-    JPanel pnMain;
-    JLabel lblMon1, lblMon2, lblMon3, lblMon4, lblMon5, lblSoLuong1, lblSoLuong2, lblSoLuong3, lblSoLuong4, lblSoLuong5;
-    JPanel pnThongKeChiTiet, pnChart;
-    JButton btn_filter;
-
-    private void addControls() {
-        this.setLayout(new BorderLayout());
-        this.setBackground(colorPanel);
-        int w = 1030;
-        int h = 844;
-
-        //========================================
-        pnMain = new JPanel();
-        pnMain.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        pnMain.setLayout(cardLayoutThongKe);
-
-        JPanel pnThongKeTong = new JPanel(null);
-        pnThongKeTong.setBackground(colorPanel);
-        JLabel lblTileThongKeTong, lblBackgroundThucDon, lblBackgroundKhachHang, lblBackgroundNhanVien, lblBackgroundDoanhThu;
-
-        lblTileThongKeTong = new JLabel("THỐNG KÊ TỔNG QUÁT", JLabel.CENTER);
-        lblTileThongKeTong.setFont(new Font("Tahoma", Font.BOLD, 28));
-        btnView = new JButton(new ImageIcon("image/icons8_view_40px.png"));
-        lblBackgroundThucDon = new JLabel(new ImageIcon("image/ManagerUI/thongKeMon.png"));
-        lblBackgroundKhachHang = new JLabel(new ImageIcon("image/ManagerUI/thongKeKhachHang.png"));
-        lblBackgroundNhanVien = new JLabel(new ImageIcon("image/ManagerUI/thongKeNhanVien.png"));
-        lblBackgroundDoanhThu = new JLabel(new ImageIcon("image/ManagerUI/thongKeDoanhThu.png"));
-
-        lblTileThongKeTong.setBounds(0, 15, w, 50);
-        btnView.setBounds(10, 10, 45, 45);
-        lblBackgroundThucDon.setBounds(98, 85, 369, 201);
-        lblBackgroundKhachHang.setBounds(563, 85, 369, 201);
-        lblBackgroundNhanVien.setBounds(98, 340, 369, 201);
-        lblBackgroundDoanhThu.setBounds(563, 340, 369, 201);
-
-        btnView.setToolTipText("Xem chi tiết");
-        btnView.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-        lblThongKeThucDon = new JLabel("55", JLabel.CENTER);
-        lblThongKeKhachHang = new JLabel("46", JLabel.CENTER);
-        lblThongKeNhanVien = new JLabel("23", JLabel.CENTER);
-        lblThongKeDoanhThu = new JLabel("1.286.379.000", JLabel.CENTER);
-
-        Font font = new Font("Tahoma", Font.BOLD, 48);
-        lblThongKeThucDon.setFont(font);
-        lblThongKeKhachHang.setFont(font);
-        lblThongKeNhanVien.setFont(font);
-        lblThongKeDoanhThu.setFont(font);
-
-        lblTileThongKeTong.setForeground(Color.white);
-        lblThongKeThucDon.setForeground(Color.white);
-        lblThongKeKhachHang.setForeground(Color.white);
-        lblThongKeNhanVien.setForeground(Color.white);
-        lblThongKeDoanhThu.setForeground(Color.white);
-
-        lblThongKeThucDon.setBounds(98, 100, 232, 87);
-        lblThongKeKhachHang.setBounds(563, 100, 232, 87);
-        lblThongKeNhanVien.setBounds(98, 350, 232, 87);
-        lblThongKeDoanhThu.setBounds(563, 350, 369, 87);
-
-        pnThongKeTong.add(lblTileThongKeTong);
-        pnThongKeTong.add(btnView);
-        pnThongKeTong.add(lblThongKeThucDon);
-        pnThongKeTong.add(lblThongKeKhachHang);
-        pnThongKeTong.add(lblThongKeNhanVien);
-        pnThongKeTong.add(lblThongKeDoanhThu);
-        pnThongKeTong.add(lblBackgroundThucDon);
-        pnThongKeTong.add(lblBackgroundKhachHang);
-        pnThongKeTong.add(lblBackgroundNhanVien);
-        pnThongKeTong.add(lblBackgroundDoanhThu);
-
-        lblDoanhThuQuy1 = new JLabel("2.000.000", JLabel.CENTER);
-        lblDoanhThuQuy2 = new JLabel("3.000.000", JLabel.CENTER);
-        lblDoanhThuQuy3 = new JLabel("9.000.000", JLabel.CENTER);
-        lblDoanhThuQuy4 = new JLabel("12.000.000", JLabel.CENTER);
-        lblTongDoanhThu = new JLabel("26.000.000", JLabel.CENTER);
-
-        Font font1 = new Font("Tahoma", Font.BOLD, 22);
-        lblDoanhThuQuy1.setFont(font1);
-        lblDoanhThuQuy2.setFont(font1);
-        lblDoanhThuQuy3.setFont(font1);
-        lblDoanhThuQuy4.setFont(font1);
-        font1 = new Font("Tahoma", Font.BOLD, 28);
-        lblTongDoanhThu.setFont(font1);
-
-        lblDoanhThuQuy1.setForeground(Color.WHITE);
-        lblDoanhThuQuy2.setForeground(Color.WHITE);
-        lblDoanhThuQuy3.setForeground(Color.WHITE);
-        lblDoanhThuQuy4.setForeground(Color.WHITE);
-        lblTongDoanhThu.setForeground(Color.WHITE);
-
-        int x = 265;
-        int y = 673;
-        lblDoanhThuQuy1.setBounds(x, y, 167, 63);
-        lblDoanhThuQuy2.setBounds(x += 167, y, 167, 63);
-        lblDoanhThuQuy3.setBounds(x += 167, y, 167, 63);
-        lblDoanhThuQuy4.setBounds(x += 167, y, 167, 63);
-        lblTongDoanhThu.setBounds(265, 735, 667, 63);
-
-        pnThongKeTong.add(lblTongDoanhThu);
-        pnThongKeTong.add(lblDoanhThuQuy1);
-        pnThongKeTong.add(lblDoanhThuQuy2);
-        pnThongKeTong.add(lblDoanhThuQuy3);
-        pnThongKeTong.add(lblDoanhThuQuy4);
-
-        cmbNam = new JComboBox<>();
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = year; i >= year - 10; i--)
-            cmbNam.addItem(i);
-        cmbNam.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        cmbNam.setBounds(w / 2 - 100 / 2, 560, 120, 35);
-        pnThongKeTong.add(cmbNam);
+        initComponents();
+        lblSp1.setText(lstTopSp.get(0).getTenSP());
+        lblSp2.setText(lstTopSp.get(1).getTenSP());
+        lblSp3.setText(lstTopSp.get(2).getTenSP());
+        lblSp4.setText(lstTopSp.get(3).getTenSP());
+        lblSp5.setText(lstTopSp.get(4).getTenSP());
         
-        btn_filter = new JButton("Chi tiết");
-        btn_filter.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        btn_filter.setBounds((w / 2 - 100 / 2) + 140, 560, 100, 35);
-
-
-        JLabel lblBackgroundBang = new JLabel(new ImageIcon("image/ManagerUI/bangThongKe.png"));
-        lblBackgroundBang.setBounds(98, 610, 834, 189);
-        pnThongKeTong.add(lblBackgroundBang);
-
-        pnMain.add(pnThongKeTong, "1");
-
-        // ==============================================
-        //              THỐNG KÊ CHI TIẾT
-        // ==============================================
-        pnThongKeChiTiet = new JPanel(null);
-
-        btnBack = new JButton(new ImageIcon("image/icons8_undo_40px.png"));
-        btnBack.setToolTipText("Quay lại");
-        btnBack.setBounds(10, 10, 45, 45);
-        pnThongKeChiTiet.add(btnBack);
-
-        JLabel lblBackGroundBangChiTiet = new JLabel(new ImageIcon("image/ManagerUI/bangChiTiet.png"));
-        lblBackGroundBangChiTiet.setBounds(172, 10, 686, 363);
-        pnThongKeChiTiet.add(lblBackGroundBangChiTiet);
-
-        lblMon1 = new JLabel("0");
-        lblMon2 = new JLabel("0");
-        lblMon3 = new JLabel("0");
-        lblMon4 = new JLabel("0");
-        lblMon5 = new JLabel("0");
-        lblSoLuong1 = new JLabel("0", JLabel.CENTER);
-        lblSoLuong2 = new JLabel("0", JLabel.CENTER);
-        lblSoLuong3 = new JLabel("0", JLabel.CENTER);
-        lblSoLuong4 = new JLabel("0", JLabel.CENTER);
-        lblSoLuong5 = new JLabel("0", JLabel.CENTER);
-
-        x = 236;
-        y = 123;
-        lblMon1.setBounds(x, y, 493, 50);
-        lblMon2.setBounds(x, y += 50, 493, 50);
-        lblMon3.setBounds(x, y += 50, 493, 50);
-        lblMon4.setBounds(x, y += 50, 493, 50);
-        lblMon5.setBounds(x, y += 50, 493, 50);
-        x = 729;
-        y = 123;
-        lblSoLuong1.setBounds(x, y, 128, 50);
-        lblSoLuong2.setBounds(x, y += 50, 128, 50);
-        lblSoLuong3.setBounds(x, y += 50, 128, 50);
-        lblSoLuong4.setBounds(x, y += 50, 128, 50);
-        lblSoLuong5.setBounds(x, y += 50, 128, 50);
-
-        lblMon1.setForeground(Color.BLACK);
-        lblMon2.setForeground(Color.BLACK);
-        lblMon3.setForeground(Color.BLACK);
-        lblMon4.setForeground(Color.BLACK);
-        lblMon5.setForeground(Color.BLACK);
-        lblSoLuong1.setForeground(Color.BLACK);
-        lblSoLuong2.setForeground(Color.BLACK);
-        lblSoLuong3.setForeground(Color.BLACK);
-        lblSoLuong4.setForeground(Color.BLACK);
-        lblSoLuong5.setForeground(Color.BLACK);
-
-        Font fontChiTiet = new Font("Tahoma", Font.BOLD, 18);
-        lblMon1.setFont(fontChiTiet);
-        lblMon2.setFont(fontChiTiet);
-        lblMon3.setFont(fontChiTiet);
-        lblMon4.setFont(fontChiTiet);
-        lblMon5.setFont(fontChiTiet);
-        lblSoLuong1.setFont(fontChiTiet);
-        lblSoLuong2.setFont(fontChiTiet);
-        lblSoLuong3.setFont(fontChiTiet);
-        lblSoLuong4.setFont(fontChiTiet);
-        lblSoLuong5.setFont(fontChiTiet);
-
-        pnThongKeChiTiet.add(lblMon1);
-        pnThongKeChiTiet.add(lblMon2);
-        pnThongKeChiTiet.add(lblMon3);
-        pnThongKeChiTiet.add(lblMon4);
-        pnThongKeChiTiet.add(lblMon5);
-        pnThongKeChiTiet.add(lblSoLuong1);
-        pnThongKeChiTiet.add(lblSoLuong2);
-        pnThongKeChiTiet.add(lblSoLuong3);
-        pnThongKeChiTiet.add(lblSoLuong4);
-        pnThongKeChiTiet.add(lblSoLuong5);
-
-        this.add(pnMain, BorderLayout.CENTER);
+        lblPrice1.setText(String.valueOf(lstTopSp.get(0).getSoLuong()));
+        lblPrice2.setText(String.valueOf(lstTopSp.get(1).getSoLuong()));
+        lblPrice3.setText(String.valueOf(lstTopSp.get(2).getSoLuong()));
+        lblPrice4.setText(String.valueOf(lstTopSp.get(3).getSoLuong()));
+        lblPrice5.setText(String.valueOf(lstTopSp.get(4).getSoLuong()));
+        
+        lblQuy1.setText(hdBUS.getTotalByQuarter(year, 1).toString());
+        lblQuy2.setText(hdBUS.getTotalByQuarter(year, 2).toString());
+        lblQuy3.setText(hdBUS.getTotalByQuarter(year, 3).toString());
+        lblQuy4.setText(hdBUS.getTotalByQuarter(year, 4).toString());
+        
+        
     }
 
-    private void addEvents() {
-        btnView.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        cmbNam.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        btn_filter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblQuy1 = new javax.swing.JLabel();
+        lblQuy2 = new javax.swing.JLabel();
+        lblQuy3 = new javax.swing.JLabel();
+        lblQuy4 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lblSp1 = new javax.swing.JLabel();
+        lblPrice1 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        lblSp2 = new javax.swing.JLabel();
+        lblPrice2 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        lblSp3 = new javax.swing.JLabel();
+        lblPrice3 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        lblSp4 = new javax.swing.JLabel();
+        lblPrice4 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        lblSp5 = new javax.swing.JLabel();
+        lblPrice5 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+
+        setAlignmentX(0);
+        setAlignmentY(0);
+
+        jPanel1.setLayout(new java.awt.GridLayout(2, 5));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel1.setText("Quý");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel1);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel2.setText("Quý 1");
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel2);
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel3.setText("Quý 2");
+        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel3);
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel4.setText("Quý 3");
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel4);
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel5.setText("Quý 4");
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel5);
+
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel6.setText("Doanh thu");
+        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel6);
+
+        lblQuy1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuy1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblQuy1);
+
+        lblQuy2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuy2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblQuy2);
+
+        lblQuy3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuy3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblQuy3);
+
+        lblQuy4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuy4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblQuy4);
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel16.setText("SẢN PHẨM BÁN CHẠY ");
+
+        jPanel2.setLayout(null);
+
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel17.setText("Top");
+        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel17);
+        jLabel17.setBounds(0, 0, 80, 56);
+
+        jLabel18.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel18.setText("Tên sản phẩm");
+        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel18);
+        jLabel18.setBounds(78, 0, 480, 56);
+
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel19.setText("Ðã bán");
+        jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel19);
+        jLabel19.setBounds(557, 0, 100, 56);
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel20.setText("1");
+        jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel20);
+        jLabel20.setBounds(0, 56, 80, 56);
+
+        lblSp1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblSp1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblSp1);
+        lblSp1.setBounds(78, 56, 480, 56);
+
+        lblPrice1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblPrice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblPrice1);
+        lblPrice1.setBounds(557, 56, 100, 56);
+
+        jLabel23.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel23.setText("2");
+        jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel23);
+        jLabel23.setBounds(0, 112, 80, 56);
+
+        lblSp2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblSp2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblSp2);
+        lblSp2.setBounds(78, 112, 480, 56);
+
+        lblPrice2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblPrice2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblPrice2);
+        lblPrice2.setBounds(557, 112, 100, 56);
+
+        jLabel26.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel26.setText("3");
+        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel26);
+        jLabel26.setBounds(0, 168, 80, 56);
+
+        lblSp3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblSp3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblSp3);
+        lblSp3.setBounds(78, 168, 480, 56);
+
+        lblPrice3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblPrice3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblPrice3);
+        lblPrice3.setBounds(557, 168, 100, 56);
+
+        jLabel29.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel29.setText("4");
+        jLabel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel29);
+        jLabel29.setBounds(0, 224, 80, 56);
+
+        lblSp4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblSp4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblSp4);
+        lblSp4.setBounds(78, 224, 480, 56);
+
+        lblPrice4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblPrice4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblPrice4);
+        lblPrice4.setBounds(557, 224, 100, 56);
+
+        jLabel33.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel33.setText("5");
+        jLabel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel33);
+        jLabel33.setBounds(0, 280, 80, 56);
+
+        lblSp5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblSp5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblSp5);
+        lblSp5.setBounds(78, 280, 480, 56);
+
+        lblPrice5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblPrice5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(lblPrice5);
+        lblPrice5.setBounds(557, 280, 100, 56);
+
+        jLabel32.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel32.setText("DOANH THU NĂM 2022");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(323, 323, 323)
+                        .addComponent(jLabel16)))
+                .addGap(0, 195, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(352, 352, 352)
+                .addComponent(jLabel32)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblPrice1;
+    private javax.swing.JLabel lblPrice2;
+    private javax.swing.JLabel lblPrice3;
+    private javax.swing.JLabel lblPrice4;
+    private javax.swing.JLabel lblPrice5;
+    private javax.swing.JLabel lblQuy1;
+    private javax.swing.JLabel lblQuy2;
+    private javax.swing.JLabel lblQuy3;
+    private javax.swing.JLabel lblQuy4;
+    private javax.swing.JLabel lblSp1;
+    private javax.swing.JLabel lblSp2;
+    private javax.swing.JLabel lblSp3;
+    private javax.swing.JLabel lblSp4;
+    private javax.swing.JLabel lblSp5;
+    // End of variables declaration//GEN-END:variables
 }

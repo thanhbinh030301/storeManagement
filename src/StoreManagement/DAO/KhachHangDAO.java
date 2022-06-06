@@ -51,19 +51,44 @@ public class KhachHangDAO {
             return false;
         }
     }
+    public KhachHang getKH(String maKH) {
+        KhachHang kh = null;
+        try {
+            String sql = "SELECT * FROM khachhang WHERE MaKH=?";
+            PreparedStatement prep = MyConnect.getJDBCConection().prepareStatement(sql);
+            prep.setString(1, maKH);
+            ResultSet rs = prep.executeQuery();
+            while (rs.next()) {
+                kh = new KhachHang();
+                kh.setMaKH(rs.getString(1));
+                kh.setHoTen(rs.getString(2));
+                kh.setGioiTinh(rs.getString(3));
+                kh.setSoDT(rs.getString(4));
+                kh.setTongChiTieu(rs.getFloat(5));
+                kh.setTichDiem(rs.getFloat(6));
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+        return kh;
+    }
 
-//    public boolean deleteKhachHang(int maKH) {
-//        boolean result = false;
-//        try {
-//            String sql = "UPDATE khachhang SET TinhTrang=0 WHERE MaKH=?";
-//            PreparedStatement prep = MyConnect.conn.prepareStatement(sql);
-//            prep.setInt(1, maKH);
-//            result = prep.executeUpdate() > 0;
-//        } catch (SQLException ex) {
-//            return false;
-//        }
-//        return result;
-//    }
+
+    
+    public boolean updateKhachHang(String maKH, KhachHang kh) {
+        try {
+            String sql = "UPDATE khachhang SET HOTen=?, GioiTinh=?, SODT=? WHERE MaKH=?";
+            PreparedStatement prep = MyConnect.getJDBCConection().prepareStatement(sql);
+            prep.setString(1, kh.getHoTen());
+            prep.setString(2, kh.getGioiTinh());
+            prep.setString(3, kh.getSoDT());
+            prep.setString(4, maKH);
+            prep.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
 
 }
 

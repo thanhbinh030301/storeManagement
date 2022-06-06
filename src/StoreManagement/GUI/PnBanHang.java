@@ -20,19 +20,20 @@ import javax.swing.SpinnerNumberModel;
  */
 public class PnBanHang extends javax.swing.JPanel {
     
-    private SanPhamBUS spBUS = new SanPhamBUS();
+    static SanPhamBUS spBUS = new SanPhamBUS();
     private XuatHoaDon hoaDon = new XuatHoaDon();
-    DefaultTableModel dtmSanPham, dtmGioHang;
+    static DefaultTableModel dtmSanPham, dtmGioHang;
 
     public PnBanHang() {
         initComponents();
+        this.setBounds(0, 0, 1030, 844);
         dtmSanPham = (DefaultTableModel) tblSanPham.getModel();
         dtmGioHang = (DefaultTableModel) tblGioHang.getModel();
 
         loadDataTblSP();
         
     }
-    private void loadDataTblSP(){
+    static void loadDataTblSP(){
         dtmSanPham.setRowCount(0);
         
         ArrayList<SanPham> dssp = null;
@@ -78,9 +79,8 @@ public class PnBanHang extends javax.swing.JPanel {
         btnTimKiem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnXuatHd = new javax.swing.JButton();
-        btnResetSP = new javax.swing.JButton();
-        btnResetGH = new javax.swing.JButton();
 
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1030, 844));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
@@ -192,7 +192,7 @@ public class PnBanHang extends javax.swing.JPanel {
         });
 
         btnTimKiem.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnTimKiem.setText("TÌm kiếm");
+        btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimKiemActionPerformed(evt);
@@ -215,20 +215,6 @@ public class PnBanHang extends javax.swing.JPanel {
             }
         });
 
-        btnResetSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh-icon.png"))); // NOI18N
-        btnResetSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetSPActionPerformed(evt);
-            }
-        });
-
-        btnResetGH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Refresh-icon.png"))); // NOI18N
-        btnResetGH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetGHActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,14 +228,10 @@ public class PnBanHang extends javax.swing.JPanel {
                             .addComponent(scrTblSanPham)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnResetSP))
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(253, 253, 253)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnResetGH)))
+                        .addComponent(jLabel7)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,10 +296,8 @@ public class PnBanHang extends javax.swing.JPanel {
                             .addComponent(btnThem)
                             .addComponent(btnTimKiem)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(btnResetSP))
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(scrTblSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -330,8 +310,7 @@ public class PnBanHang extends javax.swing.JPanel {
                             .addComponent(btnXoa))
                         .addGap(195, 195, 195))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnResetGH)
-                        .addGap(13, 13, 13)
+                        .addGap(51, 51, 51)
                         .addComponent(scrTblGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(13, Short.MAX_VALUE))))
         );
@@ -342,7 +321,7 @@ public class PnBanHang extends javax.swing.JPanel {
         String name = txtTenSP.getText().toLowerCase();
         dtmSanPham.setRowCount(0);
         ArrayList<SanPham> dssp = null;
-        dssp = spBUS.getSPbyName(name);
+        dssp = spBUS.getListSPbyName(name);
 
         for (SanPham sp : dssp) {
             Vector vec = new Vector();
@@ -375,8 +354,7 @@ public class PnBanHang extends javax.swing.JPanel {
             tongTien += Float.parseFloat(tblGioHang.getValueAt(i, 4).toString());
             dsGioHang.add(vec);
         }
-        Home home = new Home();
-        XuatHoaDon hoaDon = new XuatHoaDon(dsGioHang, tongTien, home.nv );
+        XuatHoaDon hoaDon = new XuatHoaDon(dsGioHang, tongTien, Home.nv );
         hoaDon.setVisible(true); 
         if (hoaDon.checkBanHang) {
             dtmGioHang.setRowCount(0);
@@ -437,7 +415,7 @@ public class PnBanHang extends javax.swing.JPanel {
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
         int row = tblSanPham.getSelectedRow();
-         if (row > -1) {
+        if (row > -1) {
             String ma = tblSanPham.getValueAt(row, 0) + "";
             String ten = tblSanPham.getValueAt(row, 1) + "";
             Float donGia = Float.parseFloat(tblSanPham.getValueAt(row, 3).toString());
@@ -467,27 +445,8 @@ public class PnBanHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void btnResetSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetSPActionPerformed
-        // TODO add your handling code here:
-        loadDataTblSP();
-    }//GEN-LAST:event_btnResetSPActionPerformed
-
-    private void btnResetGHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetGHActionPerformed
-        // TODO add your handling code here:
-        for (int row = dtmGioHang.getRowCount() -1; row >= 0; row--) {
-            String ma = tblGioHang.getValueAt(row, 0).toString();
-            int soLuong = Integer.parseInt(tblGioHang.getValueAt(row, 2).toString());
-            spBUS.updateQuantitySP(ma, -soLuong);
-            dtmGioHang.removeRow(row);
-        }
-        loadDataTblSP();
-
-    }//GEN-LAST:event_btnResetGHActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnResetGH;
-    private javax.swing.JButton btnResetSP;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;

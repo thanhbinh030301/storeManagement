@@ -16,15 +16,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PnKhachHang extends javax.swing.JPanel {
 
-   DefaultTableModel dtmKhachHang;
-    private KhachHangBUS khBUS = new KhachHangBUS();
+    static DefaultTableModel dtmKhachHang;
+    static KhachHangBUS khBUS = new KhachHangBUS();
 
     public PnKhachHang() {
         initComponents();
+        this.setBounds(0, 0, 1030, 844);
+
         dtmKhachHang = (DefaultTableModel) tblKhachHang.getModel();
         loadDataTblKH();
     }
-    private void loadDataTblKH(){
+    static void loadDataTblKH(){
         dtmKhachHang.setRowCount(0);
         
         ArrayList<KhachHang> dskh = null;
@@ -57,11 +59,11 @@ public class PnKhachHang extends javax.swing.JPanel {
         cmbGioiTInh = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachHang = new MyCustom.MyTable();
-        btnThem = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         txtSdt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnTimKH = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         jLabel1.setText("Quản lý khách hàng");
@@ -118,13 +120,14 @@ public class PnKhachHang extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblKhachHang);
 
-        btnThem.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnThem.setText("Thêm");
-        btnThem.setToolTipText("");
-
-        btnXoa.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.setToolTipText("");
+        btnAdd.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnAdd.setText("Thêm");
+        btnAdd.setToolTipText("");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         txtSdt.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
@@ -134,6 +137,16 @@ public class PnKhachHang extends javax.swing.JPanel {
         btnTimKH.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnTimKH.setText("Tìm");
         btnTimKH.setToolTipText("");
+
+        btnUpdate.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnUpdate.setText("Lưu");
+        btnUpdate.setToolTipText("");
+        btnUpdate.setEnabled(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,13 +166,14 @@ public class PnKhachHang extends javax.swing.JPanel {
                         .addComponent(txtTen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                         .addComponent(txtMaKH, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(cmbGioiTInh, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtSdt, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(219, Short.MAX_VALUE))
@@ -195,8 +209,8 @@ public class PnKhachHang extends javax.swing.JPanel {
                     .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem)
-                    .addComponent(btnXoa))
+                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,14 +238,27 @@ public class PnKhachHang extends javax.swing.JPanel {
             txtMaKH.setText(ma);
             txtTen.setText(ten);
             txtSdt.setText(sdt);
+            btnUpdate.setEnabled(true);
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        DlgAddKH addKH = new DlgAddKH();
+        addKH.setVisible(true);
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        khBUS.updateKH(txtMaKH.getText(), txtTen.getText(),cmbGioiTInh.getSelectedItem().toString(), txtSdt.getText());
+        loadDataTblKH();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnTimKH;
-    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbGioiTInh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

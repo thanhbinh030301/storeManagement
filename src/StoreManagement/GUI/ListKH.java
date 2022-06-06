@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class ListKH extends javax.swing.JDialog {
 
     private KhachHangBUS khBUS = new KhachHangBUS();
-    public static KhachHang khachHangSelected = null;
+    public KhachHang khachHangSelected = null;
         
     DefaultTableModel dtmListKH;
      public ListKH() {
@@ -186,6 +186,7 @@ public class ListKH extends javax.swing.JDialog {
         DlgAddKH addKH = new DlgAddKH();
         addKH.setVisible(true);
         loadtblKH();
+        PnKhachHang.loadDataTblKH();
     }//GEN-LAST:event_btnAddKHActionPerformed
 
 

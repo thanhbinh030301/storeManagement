@@ -1,275 +1,412 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package StoreManagement.GUI;
-
-//import StoreManagement.BUS.PhanQuyenBUS;
-//import StoreManagement.DTO.PhanQuyen;
-
-
 import StoreManagement.BUS.NhanVienBUS;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import javax.swing.*;
 import StoreManagement.DTO.NhanVien;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
-public class Home extends JFrame {
-
-    public Home() {
-        this.setTitle("Phần mềm quản lý cửa hàng");
-        this.setSize(1280, 900);
-        Image icon = Toolkit.getDefaultToolkit().getImage("image/logo-icon.png");
-        this.setIconImage(icon);
-        addControls();
-        addEvents();
-    }
-
-    public void showWindow() {
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-    }
-
-    JPanel pnMenuLeft, pnCard, pnBanHang, pnSanPham, pnNhanVien, pnKhachHang, pnThongKe, pnHoaDon;
-    PnBanHang banHangPanel;
-    PnSanPham sanPhamPanel;
-    PnNhanVien nhanVienPanel;
-    PnKhachHang khachHangPanel;
-    PnThongKe thongKePanel;
-    PnHoaDon hoaDonPanel;
-
-    JLabel lblBanHang, lblNhapHang, lblSanPham, lblNhanVien, lblKhachHang, lblThongKe, lblHoaDon;
+/**
+ *
+ * @author thanh
+ */
+public class Home extends javax.swing.JFrame {
+    
+    String maNV = Login.tkLogin.getMaNhanVien();
+    public static NhanVien nv = null;
     final Color clLeftItem = new Color(63, 74, 89);
     final Color clLeftItemHover = new Color(225, 100, 100);
     final Color clLeftItemSelected = new Color(225, 100, 99);
-    ArrayList<JLabel> listMenuLeft;
-    CardLayout cardMenuLeftGroup = new CardLayout();
-    Login login = new Login();
-    public static NhanVien nv = null;
+    ArrayList<JLabel> listMenuLeft = new ArrayList<>();
+    ArrayList<JPanel> listPn = new ArrayList<>();
+    
+    private final NhanVienBUS nvBUS = new NhanVienBUS();
 
+    
+    PnBanHang pnBanHang;
+    PnHoaDon pnHoaDon;
+    PnSanPham pnSanPham;
+    PnNhanVien pnNhanVien;
+    PnKhachHang pnKhachHang;
+    PnThongKe pnThongKe;
 
-    private void addControls() {
-        int width = this.getWidth();
-        int height = this.getHeight();
-
-        Container con = getContentPane();
-
-        JPanel pnMain = new JPanel();
-        pnMain.setLayout(new BorderLayout());
+    private void itemClicked(JLabel lbl, JPanel pn){
+        for (JLabel lblDisable : listMenuLeft) {
+            lblDisable.setBackground(clLeftItem);
+        }
+        for (JPanel pnDisable : listPn){
+            pnDisable.setVisible(false);
+        }
+        lbl.setBackground(clLeftItemSelected);
+        pn.setVisible(true);
+    }
+    public Home() {
+        initComponents();
         
-        /*
-        ============================================================
-                                SIDE BAR MENU
-        ============================================================
-         */
-        pnMenuLeft = new JPanel();
-        pnMenuLeft.setPreferredSize(new Dimension(250, height));
-        pnMenuLeft.setBackground(clLeftItem);
-        pnMenuLeft.setLayout(new BoxLayout(pnMenuLeft, BoxLayout.Y_AXIS));
-
-        JLabel lblAvatar = new JLabel(new ImageIcon("image/ManagerUI/avatar.png"), JLabel.CENTER);
-        lblAvatar.setPreferredSize(new Dimension(250, 210));
-        
-        //hien thi nhan vien
-        NhanVienBUS nvBUS = new NhanVienBUS();
-        String maNV = login.tkLogin.getMaNhanVien();
         nv = nvBUS.getNhanVien(maNV);
+        lblIdNv.setText("ID: " + nv.getMaNV());
+        lblNameNv.setText("Name: " + nv.getTen());
         
-        JLabel lblMaNhanVien = new JLabel("ID: " + nv.getMaNV());
-        JLabel lblTenNhanVien = new JLabel("Tên: " + nv.getTen());
-        Font font = new Font("Arial", Font.BOLD, 20);
-        lblMaNhanVien.setFont(font);
-        lblTenNhanVien.setFont(font);
-        lblMaNhanVien.setForeground(clLeftItemSelected);
-        lblTenNhanVien.setForeground(clLeftItemSelected);
+        this.setTitle("Phần mềm quản lý cửa hàng");
+        Image icon = Toolkit.getDefaultToolkit().getImage("src/image/logo-icon.png");
+        this.setIconImage(icon);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         
+        lblBanHang.setBackground(clLeftItemSelected);
         
-        lblMaNhanVien.setPreferredSize(new Dimension(250, 40));
-        lblTenNhanVien.setPreferredSize(new Dimension(250, 40));
-
-        
-        pnMenuLeft.add(lblMaNhanVien);
-        pnMenuLeft.add(lblTenNhanVien);
-        pnMenuLeft.add(lblAvatar);
-        lblBanHang = new JLabel(new ImageIcon("image/ManagerUI/lblBanHang.png"));
-        lblNhapHang = new JLabel(new ImageIcon("image/ManagerUI/lblNhapHang.png"));
-        lblSanPham = new JLabel(new ImageIcon("image/ManagerUI/lblSanPham.png"));
-        lblNhanVien = new JLabel(new ImageIcon("image/ManagerUI/lblNhanVien.png"));
-        lblKhachHang = new JLabel(new ImageIcon("image/ManagerUI/lblKhachHang.png"));
-        lblThongKe = new JLabel(new ImageIcon("image/ManagerUI/lblThongKe.png"));
-        lblHoaDon = new JLabel(new ImageIcon("image/ManagerUI/lblHoaDon.png"));
-
-        listMenuLeft = new ArrayList<>();
         listMenuLeft.add(lblBanHang);
         listMenuLeft.add(lblHoaDon);
-        listMenuLeft.add(lblSanPham);
-        listMenuLeft.add(lblNhanVien);
         listMenuLeft.add(lblKhachHang);
-        listMenuLeft.add(lblNhapHang);
-        listMenuLeft.add(lblThongKe);
 
-        for (JLabel lbl : listMenuLeft) {
-            lbl.setVisible(false);
-            lbl.setPreferredSize(new Dimension(250, 65));
-            lbl.setOpaque(true);
-            lbl.setBackground(clLeftItem);
-            lbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            pnMenuLeft.add(lbl);
-        }
-
-        lblBanHang.setBackground(clLeftItemSelected);
-        lblBanHang.setVisible(true);
-        lblHoaDon.setVisible(true);
-
-        pnMain.add(pnMenuLeft, BorderLayout.WEST);
-
-        /*
-        ============================================================
-                                CARD PANEL           
-        ============================================================
-         */
-        pnCard = new JPanel(cardMenuLeftGroup);
-
-        pnBanHang = new JPanel();
-        pnSanPham = new JPanel();
-        pnNhanVien = new JPanel();
-        pnKhachHang = new JPanel();
-        pnThongKe = new JPanel();
-        pnHoaDon = new JPanel();
-
-        pnCard.add(pnBanHang, "1");
-        pnCard.add(pnHoaDon, "2");
-        pnCard.add(pnSanPham, "3");
-        pnCard.add(pnNhanVien, "4");
-        pnCard.add(pnKhachHang, "5");
-        pnCard.add(pnThongKe, "6");
+        pnBanHang = new PnBanHang();
+        pnKhachHang = new PnKhachHang();
+        pnHoaDon = new PnHoaDon();
         
-        //Panel bán hàng
-        banHangPanel = new PnBanHang();
-        pnBanHang.setLayout(new BorderLayout());
-        pnBanHang.add(banHangPanel, BorderLayout.CENTER);
-        //Panel hoa don
-        hoaDonPanel = new PnHoaDon();
-        pnHoaDon.setLayout(new BorderLayout());
-        pnHoaDon.add(hoaDonPanel, BorderLayout.CENTER);
-
-        //======XỬ LÝ PHÂN QUYỀN=======
-//        PhanQuyen quyen = PhanQuyenBUS.quyenTK;
+        listPn.add(pnBanHang);
+        listPn.add(pnHoaDon);
+        listPn.add(pnKhachHang);
+        
+        lblSanPham.setVisible(false);
+        lblNhanVien.setVisible(false);
+        lblThongKe.setVisible(false);
+        
+        pnMain.add(pnBanHang);
+        pnMain.add(pnHoaDon);
+        pnMain.add(pnKhachHang);
 
         if (Login.tkLogin.getCapBac()==2) {
-            sanPhamPanel = new PnSanPham();
-            pnSanPham.setLayout(new BorderLayout());
-            pnSanPham.add(sanPhamPanel, BorderLayout.CENTER);
             lblSanPham.setVisible(true);
-        }
-
-        if (Login.tkLogin.getCapBac()==2) {
-            nhanVienPanel = new PnNhanVien();
-            pnNhanVien.setLayout(new BorderLayout());
-            pnNhanVien.add(nhanVienPanel, BorderLayout.CENTER);
             lblNhanVien.setVisible(true);
-        }
-
-        if (Login.tkLogin.getCapBac()==2) {
-            khachHangPanel = new PnKhachHang();
-            pnKhachHang.setLayout(new BorderLayout());
-            pnKhachHang.add(khachHangPanel, BorderLayout.CENTER);
-            lblKhachHang.setVisible(true);
-        }
-
-        if (Login.tkLogin.getCapBac()==2) {
-            thongKePanel = new PnThongKe();
-            pnThongKe.setLayout(new BorderLayout());
-            pnThongKe.add(thongKePanel, BorderLayout.CENTER);
             lblThongKe.setVisible(true);
+        
+            listMenuLeft.add(lblSanPham);
+            listMenuLeft.add(lblNhanVien);
+            listMenuLeft.add(lblThongKe);
+
+
+            pnSanPham = new PnSanPham();
+            pnNhanVien = new PnNhanVien();
+            pnThongKe = new PnThongKe();
+
+
+
+            pnMain.add(pnSanPham);
+            pnMain.add(pnNhanVien);
+            pnMain.add(pnThongKe);
+
+
+            listPn.add(pnSanPham);
+            listPn.add(pnNhanVien);
+            listPn.add(pnThongKe);
         }
-        pnMain.add(pnCard);
-        /*
-        ============================================================
-                                CARD PANEL           
-        ============================================================
-         */
-        con.add(pnMain);
+  
     }
 
-    int xMouse, yMouse;
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    private void addEvents() {
-        this.addMouseMotionListener(new MouseMotionListener() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                moverFrame(e.getXOnScreen(), e.getYOnScreen());
+        pnMenu = new javax.swing.JPanel();
+        lblIdNv = new javax.swing.JLabel();
+        lblNameNv = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblBanHang = new javax.swing.JLabel();
+        lblHoaDon = new javax.swing.JLabel();
+        lblKhachHang = new javax.swing.JLabel();
+        lblSanPham = new javax.swing.JLabel();
+        lblNhanVien = new javax.swing.JLabel();
+        lblThongKe = new javax.swing.JLabel();
+        pnMain = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnMenu.setBackground(new java.awt.Color(63, 74, 89));
+        pnMenu.setPreferredSize(new java.awt.Dimension(250, 900));
+        pnMenu.setLayout(new javax.swing.BoxLayout(pnMenu, javax.swing.BoxLayout.Y_AXIS));
+
+        lblIdNv.setFont(new java.awt.Font("Arial", 1, 21)); // NOI18N
+        lblIdNv.setForeground(new java.awt.Color(255, 100, 100));
+        lblIdNv.setText("ID: NULL");
+        pnMenu.add(lblIdNv);
+
+        lblNameNv.setFont(new java.awt.Font("Arial", 1, 21)); // NOI18N
+        lblNameNv.setForeground(new java.awt.Color(255, 100, 100));
+        lblNameNv.setText("Name: NULL");
+        pnMenu.add(lblNameNv);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/avatar.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        pnMenu.add(jLabel1);
+
+        lblBanHang.setBackground(new java.awt.Color(63, 74, 89));
+        lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblBanHang.png"))); // NOI18N
+        lblBanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBanHang.setOpaque(true);
+        lblBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBanHangMouseClicked(evt);
             }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                xMouse = e.getX();
-                yMouse = e.getY();
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBanHangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBanHangMouseExited(evt);
             }
         });
+        pnMenu.add(lblBanHang);
 
-        for (JLabel lbl : listMenuLeft) {
-            lbl.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    for (JLabel lblDisable : listMenuLeft) {
-                        lblDisable.setBackground(clLeftItem);
-                    }
-                    lbl.setBackground(clLeftItemSelected);
+        lblHoaDon.setBackground(new java.awt.Color(63, 74, 89));
+        lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblHoaDon.png"))); // NOI18N
+        lblHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHoaDon.setOpaque(true);
+        lblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHoaDonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblHoaDonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblHoaDonMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblHoaDon);
 
-                    // Xử lý lật trang theo menu
-                    String cardName = "";
-                    if (lbl == lblBanHang) {
-                        cardName = "1";
-                    }else if (lbl == lblHoaDon) {
-                        cardName = "2";
-                    }else if (lbl == lblSanPham) {
-                        cardName = "3";
-                    } else if (lbl == lblNhanVien) {
-                        cardName = "4";
-                    } else if (lbl == lblKhachHang) {
-                        cardName = "5";
-                    } else {
-                        cardName = "6";
-                    }
-                    cardMenuLeftGroup.show(pnCard, cardName);
-                }
+        lblKhachHang.setBackground(new java.awt.Color(63, 74, 89));
+        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblKhachHang.png"))); // NOI18N
+        lblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblKhachHang.setOpaque(true);
+        lblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblKhachHangMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblKhachHangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblKhachHangMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblKhachHang);
 
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
+        lblSanPham.setBackground(new java.awt.Color(63, 74, 89));
+        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblSanPham.png"))); // NOI18N
+        lblSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSanPham.setOpaque(true);
+        lblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblSanPham);
 
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
+        lblNhanVien.setBackground(new java.awt.Color(63, 74, 89));
+        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblNhanVien.png"))); // NOI18N
+        lblNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblNhanVien.setOpaque(true);
+        lblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblNhanVien);
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (lbl.getBackground().equals(clLeftItem)) {
-                        lbl.setBackground(clLeftItemHover);
-                    }
-                }
+        lblThongKe.setBackground(new java.awt.Color(63, 74, 89));
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblThongKe.png"))); // NOI18N
+        lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThongKe.setOpaque(true);
+        lblThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblThongKe);
 
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    if (lbl.getBackground().equals(clLeftItemHover)) {
-                        lbl.setBackground(clLeftItem);
-                    }
-                }
-            });
+        pnMain.setPreferredSize(new java.awt.Dimension(1030, 844));
+        pnMain.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void lblBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblBanHang, pnBanHang);
+    }//GEN-LAST:event_lblBanHangMouseClicked
+
+    private void lblBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseEntered
+        // TODO add your handling code here:
+        if(lblBanHang.getBackground().equals(clLeftItem)){
+            lblBanHang.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblBanHangMouseEntered
+
+    private void lblBanHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseExited
+        // TODO add your handling code here:
+        if(lblBanHang.getBackground().equals(clLeftItemHover)){
+            lblBanHang.setBackground(clLeftItem);
         }
 
-    }
+    }//GEN-LAST:event_lblBanHangMouseExited
 
-    private void moverFrame(int x, int y) {
-        this.setLocation(x - xMouse, y - yMouse);
-    }
+    private void lblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoaDonMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblHoaDon, pnHoaDon);
+    }//GEN-LAST:event_lblHoaDonMouseClicked
 
-    private void thuNhoFrame() {
-        this.setState(Frame.ICONIFIED);
-    }
+    private void lblHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoaDonMouseEntered
+        // TODO add your handling code here:
+        if(lblHoaDon.getBackground().equals(clLeftItem)){
+            lblHoaDon.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblHoaDonMouseEntered
 
-    private void thoatChuongTrinh() {
-        this.dispose();
-        System.exit(0);
-    }
+    private void lblHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoaDonMouseExited
+        // TODO add your handling code here:
+        if(lblHoaDon.getBackground().equals(clLeftItemHover)){
+            lblHoaDon.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblHoaDonMouseExited
 
+    private void lblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblSanPham, pnSanPham);
+    }//GEN-LAST:event_lblSanPhamMouseClicked
+
+    private void lblSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseEntered
+        // TODO add your handling code here:
+        if(lblSanPham.getBackground().equals(clLeftItem)){
+            lblSanPham.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblSanPhamMouseEntered
+
+    private void lblSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseExited
+        // TODO add your handling code here:
+         if(lblSanPham.getBackground().equals(clLeftItemHover)){
+            lblSanPham.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblSanPhamMouseExited
+
+    private void lblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblNhanVien,pnNhanVien);
+    }//GEN-LAST:event_lblNhanVienMouseClicked
+
+    private void lblNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseEntered
+        // TODO add your handling code here:
+        if(lblNhanVien.getBackground().equals(clLeftItem)){
+            lblNhanVien.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblNhanVienMouseEntered
+
+    private void lblNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseExited
+        // TODO add your handling code here:
+        if(lblNhanVien.getBackground().equals(clLeftItemHover)){
+            lblNhanVien.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblNhanVienMouseExited
+
+    private void lblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblKhachHang, pnKhachHang);
+    }//GEN-LAST:event_lblKhachHangMouseClicked
+
+    private void lblKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMouseEntered
+        // TODO add your handling code here:
+        if(lblKhachHang.getBackground().equals(clLeftItem)){
+            lblKhachHang.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblKhachHangMouseEntered
+
+    private void lblKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMouseExited
+        // TODO add your handling code here:
+        if(lblKhachHang.getBackground().equals(clLeftItemHover)){
+            lblKhachHang.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblKhachHangMouseExited
+
+    private void lblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblThongKe, pnThongKe);
+
+    }//GEN-LAST:event_lblThongKeMouseClicked
+
+    private void lblThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseEntered
+        // TODO add your handling code here:
+        if(lblThongKe.getBackground().equals(clLeftItem)){
+            lblThongKe.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblThongKeMouseEntered
+
+    private void lblThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseExited
+        // TODO add your handling code here:
+        if(lblThongKe.getBackground().equals(clLeftItemHover)){
+            lblThongKe.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblThongKeMouseExited
+
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblBanHang;
+    private javax.swing.JLabel lblHoaDon;
+    private javax.swing.JLabel lblIdNv;
+    private javax.swing.JLabel lblKhachHang;
+    private javax.swing.JLabel lblNameNv;
+    private javax.swing.JLabel lblNhanVien;
+    private javax.swing.JLabel lblSanPham;
+    private javax.swing.JLabel lblThongKe;
+    private javax.swing.JPanel pnMain;
+    private javax.swing.JPanel pnMenu;
+    // End of variables declaration//GEN-END:variables
 }
