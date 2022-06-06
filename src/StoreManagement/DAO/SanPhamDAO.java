@@ -5,6 +5,9 @@
 package StoreManagement.DAO;
 
 import StoreManagement.DTO.SanPham;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 import java.util.ArrayList;
@@ -15,25 +18,82 @@ import java.util.ArrayList;
  */
 public class SanPhamDAO {
         
-    SanPham sp1 = new SanPham("1", "banh", 20, "cai", 3000);
-    SanPham sp2 = new SanPham("2", "keo", 10, "cai", 3000);
-    SanPham sp3 = new SanPham("3", "nuoc ngot", 30, "chai", 3000);
-    SanPham sp4 = new SanPham("4", "muoi", 30, "kg", 4000);
-    SanPham sp5 = new SanPham("5", "duong", 40, "kg", 3000);
-    SanPham sp6 = new SanPham("6", "rau", 50, "kg", 1000);
-    SanPham sp7 = new SanPham("7", "oi", 30, "kg", 3000);
-    SanPham sp8 = new SanPham("8", "man", 70, "kg", 2000);
-
     public ArrayList<SanPham> getListSanPham() {
-        ArrayList<SanPham> dssp = new ArrayList<>();
-        dssp.add(sp1);
-        dssp.add(sp2);
-        dssp.add(sp3);
-        dssp.add(sp4);
-        dssp.add(sp5);
-        dssp.add(sp6);
-        dssp.add(sp7);
-        dssp.add(sp8);
-        return dssp;
+        try {
+            String sql = "SELECT * FROM SanPham";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            ResultSet rs = pre.executeQuery();
+            ArrayList<SanPham> dssp = new ArrayList<>();
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setDonViTinh(rs.getString(3));
+                sp.setDonGia(rs.getFloat(4));
+                sp.setSoLuong(rs.getInt(5));
+
+                dssp.add(sp);
+            }
+            return dssp;
+        } catch (SQLException e) {
+        }
+
+        return null;
+    }
+
+    public SanPham getSanPham(String ma) {
+        try {
+            String sql = "SELECT * FROM SanPham WHERE MaSP=?";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, ma);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                SanPham sp = new SanPham();
+
+                sp.setMaSP(rs.getString(1));
+                sp.setTenSP(rs.getString(2));
+                sp.setDonViTinh(rs.getString(3));
+                sp.setDonGia(rs.getFloat(4));
+                sp.setSoLuong(rs.getInt(5));
+
+
+                return sp;
+            }
+        } catch (SQLException e) {
+        }
+
+        return null;
+    }
+    public boolean updateQuantitySP(String ma, int soLuongMat) {
+        SanPham sp = getSanPham(ma);
+        int soLuong = sp.getSoLuong();
+        sp.setSoLuong(soLuong - soLuongMat);
+        try {
+            String sql = "UPDATE SanPham SET SOLUONG=? WHERE MaSP=?";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setInt(1, sp.getSoLuong());
+            pre.setString(2, sp.getMaSP());
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+
+    public boolean themSanPham(SanPham sp) {
+        try {
+            String sql = "INSERT INTO SanPham(TenSP, DonViTinh, DonGia, SoLuong) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pre =MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, sp.getTenSP());
+            pre.setString(2, sp.getDonViTinh());
+            pre.setFloat(3, sp.getDonGia());
+            pre.setInt(4, sp.getSoLuong());
+
+            pre.execute();
+            return true;
+        } catch (SQLException e) {
+        }
+        return false;
     }
 }

@@ -45,8 +45,8 @@ public class NhanVien {
     public String getSoDT(){
         return soDT;
     }
-    public String setSoDT() {
-        return soDT;
+    public void setSoDT(String soDT) {
+        this.soDT = soDT;
     }
 
 }
