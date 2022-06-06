@@ -1,4 +1,4 @@
-﻿﻿﻿CREATE DATABASE storemanagementdb;
+﻿﻿CREATE DATABASE storemanagementdb;
 USE storemanagementdb;
 
 -- TAO BANG KHACH HANG
