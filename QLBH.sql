@@ -142,11 +142,11 @@ before INSERT ON cthd
 FOR EACH ROW
 BEGIN
     
-    SELECT SANPHAM.DONGIA INTO @DONGIA 
-    FROM CTHD JOIN SANPHAM ON CTHD.MASP = SANPHAM.MASP
-    WHERE SANPHAM.MASP = NEW.MASP;
+    SELECT   max(DONGIA) into @dongia
+    FROM SANPHAM
+    WHERE MASP = new.masp;
     SET NEW.DONGIA = @DONGIA;
-    SET NEW.THANHTIEN = NEW.DONGIA * NEW.SOLUONG;
+    SET NEW.THANHTIEN = @DONGIA * NEW.SOLUONG;
     
 END$$
 DELIMITER ;
@@ -263,8 +263,19 @@ insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'thanhtuan', '123
 insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'tructhanh', '12345', 1, 'NV05');
 
 
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV02');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH03','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH04','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH05','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH06','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH07','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH08','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH09','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH10','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH03','NV03');
 
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP001',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP002',2);
@@ -274,9 +285,65 @@ insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP005',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP006',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP007',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD002','SP008',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD003','SP009',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD003','SP010',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD003','SP011',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD003','SP012',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD004','SP013',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD004','SP014',1);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD004','SP015',3);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD004','SP016',4);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD005','SP017',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD005','SP018',6);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD005','SP019',5);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD005','SP020',1);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD006','SP021',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD006','SP022',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD006','SP026',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD006','SP024',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD007','SP025',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD007','SP013',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD007','SP022',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD007','SP047',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD008','SP011',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD008','SP006',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD008','SP012',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD008','SP030',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD009','SP031',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD009','SP033',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD009','SP040',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD009','SP014',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD010','SP026',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD010','SP039',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD010','SP040',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD010','SP041',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD011','SP015',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD011','SP024',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD011','SP046',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD011','SP048',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD012','SP015',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD012','SP024',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD012','SP046',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD012','SP048',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP025',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP013',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP022',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP047',2);
+
 select * from khachhang;
 select * from cthd;
 select * from hoadon;
-
-
+select * from nhanvien;
+select * from sanpham;
 
