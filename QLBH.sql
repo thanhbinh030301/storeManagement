@@ -1,4 +1,4 @@
-﻿﻿CREATE DATABASE storemanagementdb;
+﻿﻿﻿CREATE DATABASE storemanagementdb;
 USE storemanagementdb;
 
 -- TAO BANG KHACH HANG
@@ -9,6 +9,7 @@ CREATE TABLE KHACHHANG(
     SODT 		varchar(10),
 	TONGCHITIEU	decimal(15,2)  DEFAULT 0, 
 	TICHDIEM float DEFAULT 0,
+    TONTAI boolean default TRUE,
 	primary key(MAKH)
 );
 CREATE TABLE KHACHHANG_SEQ
@@ -30,6 +31,7 @@ CREATE TABLE NHANVIEN(
 	HOTEN	varchar(40),
     GIOITINH VARCHAR(3),
 	SODT	varchar(20),
+    TONTAI boolean default TRUE,
 	primary key(MANV)
 );
 CREATE TABLE NHANVIEN_SEQ
@@ -79,6 +81,7 @@ CREATE TABLE SANPHAM(
 	DONVITINH	varchar(20),
 	DONGIA	decimal(15,2)  DEFAULT 0,
 	SOLUONG INT,
+    TONTAI boolean default TRUE,
 	primary key(MASP)	
 );
 CREATE TABLE SANPHAM_SEQ
@@ -346,4 +349,6 @@ select * from cthd;
 select * from hoadon;
 select * from nhanvien;
 select * from sanpham;
+
+
 

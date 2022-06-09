@@ -51,8 +51,8 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         
         nv = nvBUS.getNhanVien(maNV);
-        lblIdNv.setText("ID: " + nv.getMaNV());
-        lblNameNv.setText("Name: " + nv.getTen());
+        
+        lblNameNv.setText("NV: " + nv.getTen());
         
         this.setTitle("Phần mềm quản lý cửa hàng");
         Image icon = Toolkit.getDefaultToolkit().getImage("src/image/logo-icon.png");
@@ -120,7 +120,6 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         pnMenu = new javax.swing.JPanel();
-        lblIdNv = new javax.swing.JLabel();
         lblNameNv = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblBanHang = new javax.swing.JLabel();
@@ -136,11 +135,6 @@ public class Home extends javax.swing.JFrame {
         pnMenu.setBackground(new java.awt.Color(63, 74, 89));
         pnMenu.setPreferredSize(new java.awt.Dimension(250, 900));
         pnMenu.setLayout(new javax.swing.BoxLayout(pnMenu, javax.swing.BoxLayout.Y_AXIS));
-
-        lblIdNv.setFont(new java.awt.Font("Arial", 1, 21)); // NOI18N
-        lblIdNv.setForeground(new java.awt.Color(255, 100, 100));
-        lblIdNv.setText("ID: NULL");
-        pnMenu.add(lblIdNv);
 
         lblNameNv.setFont(new java.awt.Font("Arial", 1, 21)); // NOI18N
         lblNameNv.setForeground(new java.awt.Color(255, 100, 100));
@@ -400,7 +394,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblBanHang;
     private javax.swing.JLabel lblHoaDon;
-    private javax.swing.JLabel lblIdNv;
     private javax.swing.JLabel lblKhachHang;
     private javax.swing.JLabel lblNameNv;
     private javax.swing.JLabel lblNhanVien;
