@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -106,6 +107,8 @@ public class Home extends javax.swing.JFrame {
             listPn.add(pnSanPham);
             listPn.add(pnNhanVien);
             listPn.add(pnThongKe);
+        }else{
+            lblLogout.setBounds(0, 340, 250, 70);
         }
   
     }
@@ -128,6 +131,8 @@ public class Home extends javax.swing.JFrame {
         lblSanPham = new javax.swing.JLabel();
         lblNhanVien = new javax.swing.JLabel();
         lblThongKe = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblLogout = new javax.swing.JLabel();
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,7 +146,7 @@ public class Home extends javax.swing.JFrame {
         lblNameNv.setText("Name: NULL");
         pnMenu.add(lblNameNv);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/avatar.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/avatar.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         pnMenu.add(jLabel1);
 
@@ -246,6 +251,23 @@ public class Home extends javax.swing.JFrame {
             }
         });
         pnMenu.add(lblThongKe);
+
+        jPanel1.setBackground(new java.awt.Color(63, 74, 89));
+        jPanel1.setLayout(null);
+
+        lblLogout.setBackground(new java.awt.Color(225, 100, 100));
+        lblLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblLogout.png"))); // NOI18N
+        lblLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLogout.setOpaque(true);
+        lblLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoutMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblLogout);
+        lblLogout.setBounds(0, 140, 250, 70);
+
+        pnMenu.add(jPanel1);
 
         pnMain.setPreferredSize(new java.awt.Dimension(1030, 844));
         pnMain.setLayout(new java.awt.CardLayout());
@@ -388,13 +410,25 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblThongKeMouseExited
 
+    private void lblLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoutMouseClicked
+        // TODO add your handling code here:
+        int g = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thoát?", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (g == JOptionPane.YES_OPTION) {
+            this.dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_lblLogoutMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBanHang;
     private javax.swing.JLabel lblHoaDon;
     private javax.swing.JLabel lblKhachHang;
+    private javax.swing.JLabel lblLogout;
     private javax.swing.JLabel lblNameNv;
     private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblSanPham;
