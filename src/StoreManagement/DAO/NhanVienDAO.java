@@ -17,7 +17,7 @@ import StoreManagement.DTO.NhanVien;
 public class NhanVienDAO {
     public ArrayList<NhanVien> getListNhanVien() {
         try {
-            String sql = "SELECT * FROM NhanVien";
+            String sql = "SELECT * FROM NhanVien where tontai = 1";
             PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             ArrayList<NhanVien> dssv = new ArrayList<>();
@@ -75,7 +75,7 @@ public class NhanVienDAO {
 
     public boolean deleteNhanVien(String maNV) {
         try {
-            String sql = "DELETE FROM nhanvien WHERE MaNV=?";
+            String sql = "UPDATE nhanvien SET TONTAI=0 WHERE MaNV=?";
             PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
             pre.setString(1, maNV);
             pre.executeUpdate();

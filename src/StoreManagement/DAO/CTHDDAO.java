@@ -74,12 +74,7 @@ public class CTHDDAO {
     }
     public ArrayList<SanPham> getTopSP() {
         try {
-            String sql = "SELECT MaSP, DaBan FROM (" +
-                    "SELECT MaSP, SUM(SoLuong) AS DaBan FROM " +
-                    "cthd GROUP BY MaSP" +
-                    ") temp " +
-                    "ORDER BY DaBan " +
-                    "DESC LIMIT 5";
+            String sql = "SELECT MaSP, DaBan FROM (SELECT MaSP, SUM(SoLuong) AS DaBan FROM cthd GROUP BY MaSP) temp ORDER BY DaBan DESC LIMIT 10";
             Statement st = MyConnect.getJDBCConection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             ArrayList<SanPham> dssp = new ArrayList<>();

@@ -4,12 +4,14 @@
  */
 package StoreManagement.DAO;
 
+import StoreManagement.BUS.NhanVienBUS;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import StoreManagement.DTO.HoaDon;
 import java.sql.PreparedStatement;
+import java.util.Vector;
 
 /**
  *
@@ -79,6 +81,27 @@ public class HoaDonDAO {
         } catch (SQLException ex) {
         }
         return (float) 0;
+    }
+    public ArrayList<Vector> getDoanhSoNhanVien (){
+        try{
+            String sql = "SELECT maNV, DoanhSo, soluong FROM (SELECT MaNV, sum(TONGTIEN) as Doanhso, count(makh) as SoLuong from hoadon group by manv) temp";
+            Statement st = MyConnect.getJDBCConection().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            NhanVienBUS nvBUS = new NhanVienBUS();
+            ArrayList<Vector> thongKeDoanhSo = new ArrayList();
+            while (rs.next()) {
+                Vector vec = new Vector();
+                vec.add(rs.getString(1));
+                vec.add(nvBUS.getNhanVien(rs.getString(1)).getTen());
+                vec.add(rs.getFloat(2));
+                vec.add(rs.getInt(3));
+                thongKeDoanhSo.add(vec);
+            }
+            return thongKeDoanhSo;
+        }catch(Exception e){
+            
+        }
+        return null;
     }
         
 }

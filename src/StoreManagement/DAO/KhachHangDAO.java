@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class KhachHangDAO {
     public ArrayList<KhachHang> getListKhachHang() {
         try {
-            String sql = "SELECT * FROM KHACHHANG";
+            String sql = "SELECT * FROM KHACHHANG WHERE TONTAI=1";
             PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             ArrayList<KhachHang> dskh = new ArrayList<>();
@@ -73,7 +73,17 @@ public class KhachHangDAO {
         return kh;
     }
 
-
+    public boolean deleteKhachHang(String maKH) {
+        try {
+            String sql = "UPDATE KHACHHANG SET TONTAI=0 WHERE MAKH=?";
+            PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
+            pre.setString(1, maKH);
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+        }
+        return false;
+    }
     
     public boolean updateKhachHang(String maKH, KhachHang kh) {
         try {

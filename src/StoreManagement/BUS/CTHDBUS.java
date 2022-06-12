@@ -15,7 +15,7 @@ import StoreManagement.DTO.SanPham;
  * @author thanh
  */
 public class CTHDBUS {
-     private ArrayList<CTHD> listCTHD;
+    private ArrayList<CTHD> listCTHD;
     private CTHDDAO cthdDAO = new CTHDDAO();
     private HoaDonBUS hdBUS = new HoaDonBUS();
 

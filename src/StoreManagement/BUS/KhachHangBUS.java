@@ -71,4 +71,20 @@ public class KhachHangBUS {
         }
         return dskh;
     }
+    public boolean deleteKhachHang(String maKh) {
+        try {
+            int g = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá?", "Thông báo", JOptionPane.YES_NO_OPTION);
+            if (g == JOptionPane.YES_OPTION) {
+                if (khDAO.deleteKhachHang(maKh)) {
+                    JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Chưa chọn khách hàng!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+
+        }
+        return false;
+    }
 }

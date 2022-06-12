@@ -6,8 +6,11 @@ package StoreManagement.GUI;
 
 import StoreManagement.BUS.CTHDBUS;
 import StoreManagement.BUS.HoaDonBUS;
+import StoreManagement.DAO.HoaDonDAO;
 import StoreManagement.DTO.SanPham;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,29 +20,46 @@ public class PnThongKe extends javax.swing.JPanel {
 
     CTHDBUS cthdBUS = new CTHDBUS();
     HoaDonBUS hdBUS = new HoaDonBUS();
+    HoaDonDAO hdDAO = new HoaDonDAO();
     int year = 2022;
-    ArrayList<SanPham> lstTopSp = cthdBUS.getTopSP();
-    
+   
+    DefaultTableModel dtmThongKeSP;
+    DefaultTableModel dtmDoanhSoNV;
     public PnThongKe() {
         initComponents();
-        lblSp1.setText(lstTopSp.get(0).getTenSP());
-        lblSp2.setText(lstTopSp.get(1).getTenSP());
-        lblSp3.setText(lstTopSp.get(2).getTenSP());
-        lblSp4.setText(lstTopSp.get(3).getTenSP());
-        lblSp5.setText(lstTopSp.get(4).getTenSP());
+        dtmThongKeSP = (DefaultTableModel) tblTopSP.getModel();
+        dtmDoanhSoNV = (DefaultTableModel) tblDoanhSoNV.getModel();
         
-        lblPrice1.setText(String.valueOf(lstTopSp.get(0).getSoLuong()));
-        lblPrice2.setText(String.valueOf(lstTopSp.get(1).getSoLuong()));
-        lblPrice3.setText(String.valueOf(lstTopSp.get(2).getSoLuong()));
-        lblPrice4.setText(String.valueOf(lstTopSp.get(3).getSoLuong()));
-        lblPrice5.setText(String.valueOf(lstTopSp.get(4).getSoLuong()));
+         
         
-        lblQuy1.setText(hdBUS.getTotalByQuarter(year, 1).toString());
-        lblQuy2.setText(hdBUS.getTotalByQuarter(year, 2).toString());
-        lblQuy3.setText(hdBUS.getTotalByQuarter(year, 3).toString());
-        lblQuy4.setText(hdBUS.getTotalByQuarter(year, 4).toString());
+        lblQuarter1.setText(hdBUS.getTotalByQuarter(year, 1).toString());
+        lblQuarter2.setText(hdBUS.getTotalByQuarter(year, 2).toString());
+        lblQuarter3.setText(hdBUS.getTotalByQuarter(year, 3).toString());
+        lblQuarter4.setText(hdBUS.getTotalByQuarter(year, 4).toString());
         
+        loadTblThongKeSp();
+        loadtblDoanhSoNV();
+
+    }
+    private void loadTblThongKeSp(){
+        ArrayList<SanPham> lstTopSp = cthdBUS.getTopSP();
+        int count = 1;
+         for (SanPham sp : lstTopSp){
+            Vector vec = new Vector();
+            vec.add(count);
+            vec.add(sp.getMaSP());
+            vec.add(sp.getTenSP());
+            vec.add(sp.getSoLuong());
+            count++;
+            dtmThongKeSP.addRow(vec);
+         }
+    }
+    private void loadtblDoanhSoNV(){
+        ArrayList<Vector> lstDoanhSoNV = hdDAO.getDoanhSoNhanVien();
         
+        for (Vector row : lstDoanhSoNV){;
+            dtmDoanhSoNV.addRow(row);
+        }
     }
 
     /**
@@ -51,266 +71,306 @@ public class PnThongKe extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lblQuy1 = new javax.swing.JLabel();
-        lblQuy2 = new javax.swing.JLabel();
-        lblQuy3 = new javax.swing.JLabel();
-        lblQuy4 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel15 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        lblQuarter1 = new javax.swing.JLabel();
+        lblQuarter2 = new javax.swing.JLabel();
+        lblQuarter3 = new javax.swing.JLabel();
+        lblQuarter4 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblTopSP = new MyCustom.MyTable();
         jPanel2 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        lblSp1 = new javax.swing.JLabel();
-        lblPrice1 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        lblSp2 = new javax.swing.JLabel();
-        lblPrice2 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        lblSp3 = new javax.swing.JLabel();
-        lblPrice3 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        lblSp4 = new javax.swing.JLabel();
-        lblPrice4 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        lblSp5 = new javax.swing.JLabel();
-        lblPrice5 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblDoanhSoNV = new MyCustom.MyTable();
 
         setAlignmentX(0);
         setAlignmentY(0);
 
-        jPanel1.setLayout(new java.awt.GridLayout(2, 5));
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel1.setText("Quý");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel1);
+        jPanel14.setLayout(new java.awt.GridLayout(2, 5));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel2.setText("Quý 1");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel2);
+        jLabel49.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel49.setText("Quý");
+        jLabel49.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(jLabel49);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel3.setText("Quý 2");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel3);
+        jLabel50.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel50.setText("Quý 1");
+        jLabel50.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(jLabel50);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel4.setText("Quý 3");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel4);
+        jLabel51.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel51.setText("Quý 2");
+        jLabel51.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(jLabel51);
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel5.setText("Quý 4");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel5);
+        jLabel52.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel52.setText("Quý 3");
+        jLabel52.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(jLabel52);
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel6.setText("Doanh thu");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel6);
+        jLabel53.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel53.setText("Quý 4");
+        jLabel53.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(jLabel53);
 
-        lblQuy1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblQuy1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblQuy1);
+        jLabel54.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        jLabel54.setText("Doanh thu");
+        jLabel54.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(jLabel54);
 
-        lblQuy2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblQuy2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblQuy2);
+        lblQuarter1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuarter1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(lblQuarter1);
 
-        lblQuy3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblQuy3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblQuy3);
+        lblQuarter2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuarter2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(lblQuarter2);
 
-        lblQuy4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblQuy4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblQuy4);
+        lblQuarter3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuarter3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(lblQuarter3);
 
-        jLabel16.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        jLabel16.setText("SẢN PHẨM BÁN CHẠY ");
+        lblQuarter4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
+        lblQuarter4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel14.add(lblQuarter4);
 
-        jPanel2.setLayout(null);
+        jLabel55.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel55.setText("SẢN PHẨM BÁN CHẠY ");
 
-        jLabel17.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel17.setText("Top");
-        jLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel17);
-        jLabel17.setBounds(0, 0, 80, 56);
+        jLabel56.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel56.setText("DOANH THU NĂM 2022");
 
-        jLabel18.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel18.setText("Tên sản phẩm");
-        jLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel18);
-        jLabel18.setBounds(78, 0, 480, 56);
+        tblTopSP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel19.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel19.setText("Ðã bán");
-        jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel19);
-        jLabel19.setBounds(557, 0, 100, 56);
+            },
+            new String [] {
+                "Top", "Mã sản phẩm", "Tên sản phẩm", "Số lượng đã bán"
+            }
+        ));
+        jScrollPane7.setViewportView(tblTopSP);
 
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel20.setText("1");
-        jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel20);
-        jLabel20.setBounds(0, 56, 80, 56);
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addGap(0, 371, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel55)
+                        .addGap(352, 352, 352))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel56)
+                        .addGap(334, 334, 334))))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(jLabel55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
+        );
 
-        lblSp1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblSp1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblSp1);
-        lblSp1.setBounds(78, 56, 480, 56);
+        jTabbedPane1.addTab("Tổng quát", jPanel15);
 
-        lblPrice1.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblPrice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblPrice1);
-        lblPrice1.setBounds(557, 56, 100, 56);
+        jLabel57.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel57.setText("DOANH SỐ BÀN HÀNG NHÂN VIÊN");
 
-        jLabel23.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel23.setText("2");
-        jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel23);
-        jLabel23.setBounds(0, 112, 80, 56);
+        tblDoanhSoNV.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        lblSp2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblSp2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblSp2);
-        lblSp2.setBounds(78, 112, 480, 56);
+            },
+            new String [] {
+                "Mã NV", "Tên NV", "Doanh số", "Số lượng đơn hàng"
+            }
+        ));
+        jScrollPane8.setViewportView(tblDoanhSoNV);
 
-        lblPrice2.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblPrice2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblPrice2);
-        lblPrice2.setBounds(557, 112, 100, 56);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(281, 281, 281)
+                .addComponent(jLabel57)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel57)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
+        );
 
-        jLabel26.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel26.setText("3");
-        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel26);
-        jLabel26.setBounds(0, 168, 80, 56);
-
-        lblSp3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblSp3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblSp3);
-        lblSp3.setBounds(78, 168, 480, 56);
-
-        lblPrice3.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblPrice3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblPrice3);
-        lblPrice3.setBounds(557, 168, 100, 56);
-
-        jLabel29.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel29.setText("4");
-        jLabel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel29);
-        jLabel29.setBounds(0, 224, 80, 56);
-
-        lblSp4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblSp4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblSp4);
-        lblSp4.setBounds(78, 224, 480, 56);
-
-        lblPrice4.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblPrice4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblPrice4);
-        lblPrice4.setBounds(557, 224, 100, 56);
-
-        jLabel33.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        jLabel33.setText("5");
-        jLabel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(jLabel33);
-        jLabel33.setBounds(0, 280, 80, 56);
-
-        lblSp5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblSp5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblSp5);
-        lblSp5.setBounds(78, 280, 480, 56);
-
-        lblPrice5.setFont(new java.awt.Font("Arial", 1, 22)); // NOI18N
-        lblPrice5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(lblPrice5);
-        lblPrice5.setBounds(557, 280, 100, 56);
-
-        jLabel32.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        jLabel32.setText("DOANH THU NĂM 2022");
+        jTabbedPane1.addTab("Thống kê nhân viên", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(323, 323, 323)
-                        .addComponent(jLabel16)))
-                .addGap(0, 195, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(352, 352, 352)
-                .addComponent(jLabel32)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1030, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel16)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblPrice1;
-    private javax.swing.JLabel lblPrice2;
-    private javax.swing.JLabel lblPrice3;
-    private javax.swing.JLabel lblPrice4;
-    private javax.swing.JLabel lblPrice5;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblQuarter1;
+    private javax.swing.JLabel lblQuarter2;
+    private javax.swing.JLabel lblQuarter3;
+    private javax.swing.JLabel lblQuarter4;
     private javax.swing.JLabel lblQuy1;
+    private javax.swing.JLabel lblQuy10;
+    private javax.swing.JLabel lblQuy11;
+    private javax.swing.JLabel lblQuy12;
+    private javax.swing.JLabel lblQuy13;
+    private javax.swing.JLabel lblQuy14;
+    private javax.swing.JLabel lblQuy15;
+    private javax.swing.JLabel lblQuy16;
+    private javax.swing.JLabel lblQuy17;
+    private javax.swing.JLabel lblQuy18;
+    private javax.swing.JLabel lblQuy19;
     private javax.swing.JLabel lblQuy2;
+    private javax.swing.JLabel lblQuy20;
+    private javax.swing.JLabel lblQuy21;
+    private javax.swing.JLabel lblQuy22;
+    private javax.swing.JLabel lblQuy23;
+    private javax.swing.JLabel lblQuy24;
     private javax.swing.JLabel lblQuy3;
     private javax.swing.JLabel lblQuy4;
-    private javax.swing.JLabel lblSp1;
-    private javax.swing.JLabel lblSp2;
-    private javax.swing.JLabel lblSp3;
-    private javax.swing.JLabel lblSp4;
-    private javax.swing.JLabel lblSp5;
+    private javax.swing.JLabel lblQuy5;
+    private javax.swing.JLabel lblQuy6;
+    private javax.swing.JLabel lblQuy7;
+    private javax.swing.JLabel lblQuy8;
+    private javax.swing.JLabel lblQuy9;
+    private MyCustom.MyTable myTable1;
+    private MyCustom.MyTable myTable2;
+    private MyCustom.MyTable myTable3;
+    private MyCustom.MyTable myTable4;
+    private MyCustom.MyTable myTable5;
+    private MyCustom.MyTable myTable6;
+    private MyCustom.MyTable tblDoanhSoNV;
+    private MyCustom.MyTable tblTopSP;
     // End of variables declaration//GEN-END:variables
 }

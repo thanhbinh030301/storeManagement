@@ -21,7 +21,7 @@ public class SanPhamDAO {
         
     public ArrayList<SanPham> getListSanPham() {
         try {
-            String sql = "SELECT * FROM SanPham";
+            String sql = "SELECT * FROM SanPham where tontai = 1";
             PreparedStatement pre = MyConnect.getJDBCConection().prepareStatement(sql);
             ResultSet rs = pre.executeQuery();
             ArrayList<SanPham> dssp = new ArrayList<>();
@@ -99,7 +99,7 @@ public class SanPhamDAO {
     }
     public boolean deleteSanPham(String maSP) {
         try {
-            String sql = "DELETE FROM SanPham WHERE MaSP= '" + maSP + "'";
+            String sql = "update sanpham set tontai=0 WHERE MaSP= '" + maSP + "'";
             Statement st = MyConnect.getJDBCConection().createStatement();
             st.execute(sql);
             return true;

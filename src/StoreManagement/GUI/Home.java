@@ -108,7 +108,7 @@ public class Home extends javax.swing.JFrame {
             listPn.add(pnNhanVien);
             listPn.add(pnThongKe);
         }else{
-            lblLogout.setBounds(0, 340, 250, 70);
+            lblLogout.setBounds(0, 360, 250, 70);
         }
   
     }
@@ -265,7 +265,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jPanel1.add(lblLogout);
-        lblLogout.setBounds(0, 140, 250, 70);
+        lblLogout.setBounds(0, 170, 250, 70);
 
         pnMenu.add(jPanel1);
 
