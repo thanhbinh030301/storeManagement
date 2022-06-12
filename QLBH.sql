@@ -15,7 +15,7 @@ CREATE TABLE KHACHHANG(
 CREATE TABLE KHACHHANG_SEQ
 (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+);	
 DELIMITER $$
 CREATE TRIGGER tg_khachhang_insert
 BEFORE INSERT ON KHACHHANG
@@ -240,24 +240,24 @@ insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước rửa ch
 
 -- select * from SANPHAM;
 
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyen Van Thanh', 'Nam','0952116854');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Ngoc Han','Nu','0554662358');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Ngoc Linh','Nu','0781054669');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Minh Long','Nam','0500474447');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Le Nhat Minh','Nam','0546854225');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Le Hoai Thuong','Nu','0457456589');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyen Van Tam','Nam','0456158256');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Phan Thi Thanh','Nu','0568004056');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Le Ha Vinh','Nam','0451258156');
-insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Ha Duy Lap','Nam','0458147145');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyễn Văn Thành', 'Nam','0952116854');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Trần Ngọc Hân','Nữ','0554662358');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Tran Ngoc Linh','Nữ','0781054669');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Trần Minh Long','Nam','0500474447');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Lê Nhật Minh','Nam','0546854225');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Lê Hoài Thương','Nữ','0457456589');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyễn Văn Tâm','Nam','0456158256');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Phan Thị Thanh','Nữ','0568004056');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Lê Hà Vinh','Nam','0451258156');
+insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Hà Duy Lập','Nam','0458147145');
 
 select * from NHANVIEN;
 
-insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyen Nhu Nhut','927345678','Nu');
-insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Le Thi Phi Yen','987567390','Nu');
-insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyen Van Bao','997047382','Nam');
-insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Ngo Thanh Tuan','913758498','Nam');
-insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyen Thi Truc Thanh','918590387','Nu');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyễn Như Nhật','927345678','Nữ');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Lê Thị Phi Yến','987567390','Nữ');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyễn Văn Bảo','997047382','Nam');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Ngô Thanh Tuấn','913758498','Nam');
+insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyễn Thị Trúc Thanh','918590387','Nữ');
 
 insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'admin', 'admin', 2, 'NV01');
 insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'phiyen', '12345', 1, 'NV02');
@@ -344,11 +344,6 @@ insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP013',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP022',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP047',2);
 
-select * from khachhang;
-select * from cthd;
-select * from hoadon;
-select * from nhanvien;
-select * from sanpham;
 
 
 
