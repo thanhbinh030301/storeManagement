@@ -82,9 +82,10 @@ public class HoaDonDAO {
         }
         return (float) 0;
     }
-    public ArrayList<Vector> getDoanhSoNhanVien (){
+    public ArrayList<Vector> getDoanhSoNhanVien (int month){
         try{
-            String sql = "SELECT maNV, DoanhSo, soluong FROM (SELECT MaNV, sum(TONGTIEN) as Doanhso, count(makh) as SoLuong from hoadon group by manv) temp";
+            String sql = 
+            "SELECT maNV, DoanhSo, soluong FROM (SELECT MaNV, sum(TONGTIEN) as Doanhso, count(makh) as SoLuong from hoadon where month(NGAYLAP)= "+month+" group by manv) temp";
             Statement st = MyConnect.getJDBCConection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             NhanVienBUS nvBUS = new NhanVienBUS();
