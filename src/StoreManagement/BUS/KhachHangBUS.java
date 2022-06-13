@@ -31,6 +31,14 @@ public class KhachHangBUS {
             JOptionPane.showMessageDialog(null, "Hãy chọn giới tính", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if (soDT.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!soDT.matches("^0[0-9]{9}$")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         return khDAO.addKH(hoTen, soDT, gioiTinh);
     }
     public KhachHang getKH(String maKH){
@@ -49,6 +57,11 @@ public class KhachHangBUS {
             JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if (!soDT.matches("^0[0-9]{9}$")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
         KhachHang kh = new KhachHang();
         kh.setHoTen(ten);
         kh.setGioiTinh(gioiTinh);

@@ -38,6 +38,10 @@ public class NhanVienBUS {
             JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if (!soDT.matches("^0[0-9]{9}$")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         return nvDAO.addNhanVien(hoTen, gioiTinh, soDT);
     }
      
@@ -52,6 +56,10 @@ public class NhanVienBUS {
         }
         if (soDT.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (!soDT.matches("^0[0-9]{9}$")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         NhanVien nv = new NhanVien();
