@@ -53,7 +53,7 @@ public class Home extends javax.swing.JFrame {
         
         nv = nvBUS.getNhanVien(maNV);
         
-        lblNameNv.setText("NV: " + nv.getTen());
+        lblNameNv.setText("<html>" + nv.getTen() + "</html>");
         
         this.setTitle("Phần mềm quản lý cửa hàng");
         Image icon = Toolkit.getDefaultToolkit().getImage("src/image/logo-icon.png");
@@ -107,8 +107,6 @@ public class Home extends javax.swing.JFrame {
             listPn.add(pnSanPham);
             listPn.add(pnNhanVien);
             listPn.add(pnThongKe);
-        }else{
-            lblLogout.setBounds(0, 360, 250, 70);
         }
   
     }
@@ -124,14 +122,13 @@ public class Home extends javax.swing.JFrame {
 
         pnMenu = new javax.swing.JPanel();
         lblNameNv = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lblBanHang = new javax.swing.JLabel();
         lblHoaDon = new javax.swing.JLabel();
         lblKhachHang = new javax.swing.JLabel();
         lblSanPham = new javax.swing.JLabel();
         lblNhanVien = new javax.swing.JLabel();
         lblThongKe = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         lblLogout = new javax.swing.JLabel();
         pnMain = new javax.swing.JPanel();
 
@@ -139,16 +136,16 @@ public class Home extends javax.swing.JFrame {
 
         pnMenu.setBackground(new java.awt.Color(63, 74, 89));
         pnMenu.setPreferredSize(new java.awt.Dimension(250, 900));
-        pnMenu.setLayout(new javax.swing.BoxLayout(pnMenu, javax.swing.BoxLayout.Y_AXIS));
+        pnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNameNv.setFont(new java.awt.Font("Arial", 1, 21)); // NOI18N
+        lblNameNv.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         lblNameNv.setForeground(new java.awt.Color(255, 100, 100));
-        lblNameNv.setText("Name: NULL");
-        pnMenu.add(lblNameNv);
+        lblNameNv.setText("NULL");
+        lblNameNv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        pnMenu.add(lblNameNv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/avatar.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        pnMenu.add(jLabel1);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/avatar.png"))); // NOI18N
+        pnMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         lblBanHang.setBackground(new java.awt.Color(63, 74, 89));
         lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblBanHang.png"))); // NOI18N
@@ -165,7 +162,7 @@ public class Home extends javax.swing.JFrame {
                 lblBanHangMouseExited(evt);
             }
         });
-        pnMenu.add(lblBanHang);
+        pnMenu.add(lblBanHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, -1));
 
         lblHoaDon.setBackground(new java.awt.Color(63, 74, 89));
         lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblHoaDon.png"))); // NOI18N
@@ -182,7 +179,7 @@ public class Home extends javax.swing.JFrame {
                 lblHoaDonMouseExited(evt);
             }
         });
-        pnMenu.add(lblHoaDon);
+        pnMenu.add(lblHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, -1, -1));
 
         lblKhachHang.setBackground(new java.awt.Color(63, 74, 89));
         lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblKhachHang.png"))); // NOI18N
@@ -199,7 +196,7 @@ public class Home extends javax.swing.JFrame {
                 lblKhachHangMouseExited(evt);
             }
         });
-        pnMenu.add(lblKhachHang);
+        pnMenu.add(lblKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, -1, -1));
 
         lblSanPham.setBackground(new java.awt.Color(63, 74, 89));
         lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblSanPham.png"))); // NOI18N
@@ -216,7 +213,7 @@ public class Home extends javax.swing.JFrame {
                 lblSanPhamMouseExited(evt);
             }
         });
-        pnMenu.add(lblSanPham);
+        pnMenu.add(lblSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, -1, -1));
 
         lblNhanVien.setBackground(new java.awt.Color(63, 74, 89));
         lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblNhanVien.png"))); // NOI18N
@@ -233,7 +230,7 @@ public class Home extends javax.swing.JFrame {
                 lblNhanVienMouseExited(evt);
             }
         });
-        pnMenu.add(lblNhanVien);
+        pnMenu.add(lblNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, -1, -1));
 
         lblThongKe.setBackground(new java.awt.Color(63, 74, 89));
         lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblThongKe.png"))); // NOI18N
@@ -250,10 +247,7 @@ public class Home extends javax.swing.JFrame {
                 lblThongKeMouseExited(evt);
             }
         });
-        pnMenu.add(lblThongKe);
-
-        jPanel1.setBackground(new java.awt.Color(63, 74, 89));
-        jPanel1.setLayout(null);
+        pnMenu.add(lblThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, -1, -1));
 
         lblLogout.setBackground(new java.awt.Color(225, 100, 100));
         lblLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblLogout.png"))); // NOI18N
@@ -264,10 +258,7 @@ public class Home extends javax.swing.JFrame {
                 lblLogoutMouseClicked(evt);
             }
         });
-        jPanel1.add(lblLogout);
-        lblLogout.setBounds(0, 170, 250, 70);
-
-        pnMenu.add(jPanel1);
+        pnMenu.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 830, -1, 70));
 
         pnMain.setPreferredSize(new java.awt.Dimension(1030, 844));
         pnMain.setLayout(new java.awt.CardLayout());
@@ -423,8 +414,7 @@ public class Home extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBanHang;
     private javax.swing.JLabel lblHoaDon;
     private javax.swing.JLabel lblKhachHang;

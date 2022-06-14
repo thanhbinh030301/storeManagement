@@ -11,6 +11,7 @@ public class DlgCapTK extends javax.swing.JDialog {
         this.setModal(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        txtName.setText(PnNhanVien.nvSelected.getTen());
     }
 
     @SuppressWarnings("unchecked")

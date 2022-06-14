@@ -42,7 +42,9 @@ public class PnThongKe extends javax.swing.JPanel {
 
     }
     private void loadTblThongKeSp(){
-        ArrayList<SanPham> lstTopSp = cthdBUS.getTopSP();
+        dtmThongKeSP.setRowCount(0);
+        int month = Integer.parseInt(cmbMonthTopSP.getSelectedItem().toString());
+        ArrayList<SanPham> lstTopSp = cthdBUS.getTopSP(month);
         int count = 1;
          for (SanPham sp : lstTopSp){
             Vector vec = new Vector();
@@ -55,9 +57,11 @@ public class PnThongKe extends javax.swing.JPanel {
          }
     }
     private void loadtblDoanhSoNV(){
-        ArrayList<Vector> lstDoanhSoNV = hdDAO.getDoanhSoNhanVien();
+        dtmDoanhSoNV.setRowCount(0);
+        int month = Integer.parseInt(cmbMonthNV.getSelectedItem().toString());
+        ArrayList<Vector> lstDoanhSoNV = hdDAO.getDoanhSoNhanVien(month);
         
-        for (Vector row : lstDoanhSoNV){;
+        for (Vector row : lstDoanhSoNV){
             dtmDoanhSoNV.addRow(row);
         }
     }
@@ -88,10 +92,14 @@ public class PnThongKe extends javax.swing.JPanel {
         jLabel56 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblTopSP = new MyCustom.MyTable();
+        jLabel58 = new javax.swing.JLabel();
+        cmbMonthTopSP = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tblDoanhSoNV = new MyCustom.MyTable();
+        jLabel1 = new javax.swing.JLabel();
+        cmbMonthNV = new javax.swing.JComboBox<>();
 
         setAlignmentX(0);
         setAlignmentY(0);
@@ -162,10 +170,39 @@ public class PnThongKe extends javax.swing.JPanel {
         ));
         jScrollPane7.setViewportView(tblTopSP);
 
+        jLabel58.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel58.setText("Tháng");
+
+        cmbMonthTopSP.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        cmbMonthTopSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cmbMonthTopSP.setSelectedIndex(5);
+        cmbMonthTopSP.setToolTipText("");
+        cmbMonthTopSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMonthTopSPActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addGap(0, 371, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel58)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbMonthTopSP, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                            .addComponent(jLabel55)
+                            .addGap(352, 352, 352))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                            .addComponent(jLabel56)
+                            .addGap(334, 334, 334)))))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
@@ -173,26 +210,21 @@ public class PnThongKe extends javax.swing.JPanel {
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(223, 223, 223)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addGap(0, 371, Short.MAX_VALUE)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel55)
-                        .addGap(352, 352, 352))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel56)
-                        .addGap(334, 334, 334))))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel55)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel58)
+                    .addComponent(cmbMonthTopSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,27 +246,50 @@ public class PnThongKe extends javax.swing.JPanel {
         ));
         jScrollPane8.setViewportView(tblDoanhSoNV);
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel1.setText("Tháng");
+
+        cmbMonthNV.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        cmbMonthNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cmbMonthNV.setSelectedIndex(5);
+        cmbMonthNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMonthNVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(281, 281, 281)
-                .addComponent(jLabel57)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addComponent(jLabel57))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(413, 413, 413)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbMonthNV, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
+                .addGap(0, 145, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
+                .addGap(119, 119, 119))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jLabel57)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbMonthNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê nhân viên", jPanel2);
@@ -253,53 +308,23 @@ public class PnThongKe extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmbMonthTopSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMonthTopSPActionPerformed
+        // TODO add your handling code here:
+        loadTblThongKeSp();
+
+    }//GEN-LAST:event_cmbMonthTopSPActionPerformed
+
+    private void cmbMonthNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMonthNVActionPerformed
+        // TODO add your handling code here:
+        loadtblDoanhSoNV();
+    }//GEN-LAST:event_cmbMonthNVActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbMonthNV;
+    private javax.swing.JComboBox<String> cmbMonthTopSP;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
@@ -308,31 +333,10 @@ public class PnThongKe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -340,36 +344,6 @@ public class PnThongKe extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuarter2;
     private javax.swing.JLabel lblQuarter3;
     private javax.swing.JLabel lblQuarter4;
-    private javax.swing.JLabel lblQuy1;
-    private javax.swing.JLabel lblQuy10;
-    private javax.swing.JLabel lblQuy11;
-    private javax.swing.JLabel lblQuy12;
-    private javax.swing.JLabel lblQuy13;
-    private javax.swing.JLabel lblQuy14;
-    private javax.swing.JLabel lblQuy15;
-    private javax.swing.JLabel lblQuy16;
-    private javax.swing.JLabel lblQuy17;
-    private javax.swing.JLabel lblQuy18;
-    private javax.swing.JLabel lblQuy19;
-    private javax.swing.JLabel lblQuy2;
-    private javax.swing.JLabel lblQuy20;
-    private javax.swing.JLabel lblQuy21;
-    private javax.swing.JLabel lblQuy22;
-    private javax.swing.JLabel lblQuy23;
-    private javax.swing.JLabel lblQuy24;
-    private javax.swing.JLabel lblQuy3;
-    private javax.swing.JLabel lblQuy4;
-    private javax.swing.JLabel lblQuy5;
-    private javax.swing.JLabel lblQuy6;
-    private javax.swing.JLabel lblQuy7;
-    private javax.swing.JLabel lblQuy8;
-    private javax.swing.JLabel lblQuy9;
-    private MyCustom.MyTable myTable1;
-    private MyCustom.MyTable myTable2;
-    private MyCustom.MyTable myTable3;
-    private MyCustom.MyTable myTable4;
-    private MyCustom.MyTable myTable5;
-    private MyCustom.MyTable myTable6;
     private MyCustom.MyTable tblDoanhSoNV;
     private MyCustom.MyTable tblTopSP;
     // End of variables declaration//GEN-END:variables

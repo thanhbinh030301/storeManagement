@@ -40,7 +40,7 @@ public class CTHDBUS {
 
         cthdDAO.addCTHD(cthd);
     }
-     public ArrayList<SanPham> getTopSP(){
-         return cthdDAO.getTopSP();
+     public ArrayList<SanPham> getTopSP(int month){
+         return cthdDAO.getTopSP(month);
      }
 }
