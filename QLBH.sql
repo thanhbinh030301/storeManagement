@@ -1,6 +1,5 @@
 ﻿﻿﻿CREATE DATABASE storemanagementdb;
 USE storemanagementdb;
-
 -- TAO BANG KHACH HANG
 CREATE TABLE KHACHHANG(
 	MAKH	char(4) not null DEFAULT '0' ,	
@@ -235,10 +234,6 @@ insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước rửa ch
 insert into SANPHAM (TENSP, DONVITINH, DONGIA, SOLUONG) values('Nước rửa chén Sunlight thiên nhiên túi 725ml','tui',25000,500);
 
 
--- delete from SANPHAM where MASP >5;
-
-
--- select * from SANPHAM;
 
 insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Nguyễn Văn Thành', 'Nam','0952116854');
 insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Trần Ngọc Hân','Nữ','0554662358');
@@ -251,7 +246,6 @@ insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Phan Thị Thanh','Nữ','0
 insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Lê Hà Vinh','Nam','0451258156');
 insert into KHACHHANG (HOTEN, GIOITINH,SODT) values('Hà Duy Lập','Nam','0458147145');
 
-select * from NHANVIEN;
 
 insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Nguyễn Như Nhật','927345678','Nữ');
 insert into NHANVIEN (HOTEN,SODT,GIOITINH) values('Lê Thị Phi Yến','987567390','Nữ');
@@ -266,19 +260,19 @@ insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'thanhtuan', '123
 insert into TAIKHOAN (TENDANGNHAP,MATKHAU,CAPBAC,MANV) values( 'tructhanh', '12345', 1, 'NV05');
 
 
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV01');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH02','NV02');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH03','NV03');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH04','NV04');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH05','NV05');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH06','NV01');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH07','NV02');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH08','NV03');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH09','NV04');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH10','NV05');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH01','NV01');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH02','NV02');
-insert into HOADON (NGAYLAP,MAKH,MANV) values(CURDATE(),'KH03','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-01-10','KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-02-10','KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-03-10','KH03','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-04-10','KH04','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-05-10','KH05','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-06-10','KH06','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-07-10','KH07','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-08-10','KH08','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-09-10','KH09','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-10-10','KH10','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-11-10','KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-12-10','KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-01-10','KH03','NV03');
 
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP001',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP002',2);
@@ -344,6 +338,7 @@ insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP013',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP022',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP047',2);
 
+select * from hoadon
 
 
 
