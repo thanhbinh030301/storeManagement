@@ -131,7 +131,7 @@ public class XuatHoaDon extends JDialog {
         hd += "</div>";
         hd += "<div style='text-align:center;'>==========================================</div><br/>";
         txtHoaDon.setText(hd);
-
+        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), thanhTien, tichDiem);
     }
 
     @SuppressWarnings("unchecked")
@@ -343,7 +343,6 @@ public class XuatHoaDon extends JDialog {
             int soLuong = Integer.parseInt(vec.get(2).toString());
             cthdBUS.addCTHD(maSP, soLuong);
         }
-        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), thanhTien, tichDiem);
 
         PnHoaDon.loadDataTblHD();
         PnKhachHang.loadDataTblKH();
