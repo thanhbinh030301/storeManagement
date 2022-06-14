@@ -72,11 +72,11 @@ public class CTHDDAO {
             return false;
         }
     }
-    public ArrayList<SanPham> getTopSP(int month) {
+    public ArrayList<SanPham> getTopSP(int month, int year) {
         try {
             String sql = 
             "SELECT MaSP, DaBan FROM (SELECT MaSP, SUM(SoLuong) AS DaBan FROM cthd, hoadon where hoadon.mahd = cthd.MAHD and month(ngaylap) = "
-                    + month +" GROUP BY MaSP) temp ORDER BY DaBan DESC LIMIT 15";
+                    + month + " and year(ngaylap) = "+ year + " GROUP BY MaSP) temp ORDER BY DaBan DESC LIMIT 15";
             Statement st = MyConnect.getJDBCConection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             ArrayList<SanPham> dssp = new ArrayList<>();

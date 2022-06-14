@@ -46,11 +46,7 @@ public class TaiKhoanBUS {
     public String getUserById(String maNv){
         return tkDAO.getUserById(maNv);
     }
-    public boolean updatePass(String maNv, String oldPass, String newPass1, String newPass2){
-        if(!tkDAO.checkPass(maNv, oldPass)){
-            JOptionPane.showMessageDialog(null, "Mật khẩu cũ không đúng", "Thông báo", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+    public boolean updatePass(String maNv, String newPass1, String newPass2){
         if(newPass1.equals("")){
             JOptionPane.showMessageDialog(null, "Mật khẩu không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
             return false;

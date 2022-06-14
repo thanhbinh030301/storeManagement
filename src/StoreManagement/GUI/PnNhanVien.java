@@ -182,7 +182,7 @@ public class PnNhanVien extends javax.swing.JPanel {
         });
 
         btnUpdateTk.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        btnUpdateTk.setText("Đổi mật khẩu");
+        btnUpdateTk.setText("Cấp lại mật khẩu");
         btnUpdateTk.setToolTipText("");
         btnUpdateTk.setEnabled(false);
         btnUpdateTk.addActionListener(new java.awt.event.ActionListener() {

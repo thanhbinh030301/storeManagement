@@ -37,8 +37,8 @@ public class XuatHoaDon extends JDialog {
 
     private ArrayList<Vector> dsGioHang;
     private float tongTien;
-    private float tichDiem;
-    private float thanhTien;
+    private float tichDiem = 0;
+    private float thanhTien = tongTien;
     private String nameNV;
     ListKH lstKH = new ListKH();
     public static boolean checkBanHang = false;
@@ -49,21 +49,19 @@ public class XuatHoaDon extends JDialog {
         this.tongTien = tongTien;
         this.dsGioHang = dsGioHang;
         this.nameNV = nhanVien.getTen();
-        DecimalFormat dcf = new DecimalFormat("###,###");
+        DecimalFormat dcf = new DecimalFormat("###,### VND");
         txtTongTien.setText(dcf.format(tongTien));
-        txtHoaDon.setContentType("text/html");
-        String hdString="<div style='text-align:center;'>"
-                + "<h1>Quét mã để thanh toán</h1>";
-                hdString+="<img style='text-align:center;' src='https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png'></img></div>";
-        txtHoaDon.setText(hdString);
+        
     }
-
+    private void loadQr(){
+        
+    }
     private void xuLyHienThiHoaDon() {
-        if(this.tongTien-this.tichDiem < 0){
-            this.thanhTien = 0;
-            this.tichDiem = this.tongTien;
+        if(tongTien - tichDiem < 0){
+            thanhTien = 0;
+            tichDiem = tongTien;
         }else{
-            this.thanhTien = this.tongTien - this.tichDiem;
+            thanhTien = tongTien - tichDiem;
         }
         txtHoaDon.setContentType("text/html");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -113,27 +111,27 @@ public class XuatHoaDon extends JDialog {
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Tổng cộng</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(this.tongTien) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(tongTien) + "</td>";
         hd += "</tr>";
         hd += "<tr>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Khuyến mãi</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(this.tichDiem) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(tichDiem) + "</td>";
         hd += "</tr>";
         hd += "<tr>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Thành tiền</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(this.thanhTien) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(thanhTien) + "</td>";
         hd += "</tr>";
         hd += "</table>";
         hd += "</div>";
         hd += "<div style='text-align:center;'>==========================================</div><br/>";
         txtHoaDon.setText(hd);
-        txtTongTien.setText(dcf.format(tongTien));
+
     }
 
     @SuppressWarnings("unchecked")
@@ -157,6 +155,8 @@ public class XuatHoaDon extends JDialog {
         txtTichDiem = new javax.swing.JTextField();
         chkTichDiem = new javax.swing.JCheckBox();
         btnSelectKH = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cmbPurchaseStyle = new javax.swing.JComboBox<>();
 
         jLabel5.setText("jLabel5");
 
@@ -200,14 +200,18 @@ public class XuatHoaDon extends JDialog {
 
         txtTongTien.setEditable(false);
         txtTongTien.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTongTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongTienActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Tích điểm");
+        jLabel6.setText("Sử dụng điểm");
 
         txtTichDiem.setEditable(false);
         txtTichDiem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        chkTichDiem.setEnabled(false);
         chkTichDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkTichDiemActionPerformed(evt);
@@ -219,6 +223,17 @@ public class XuatHoaDon extends JDialog {
         btnSelectKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectKHActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Thanh toán");
+
+        cmbPurchaseStyle.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        cmbPurchaseStyle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiền mặt", "Ví điện tử" }));
+        cmbPurchaseStyle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPurchaseStyleActionPerformed(evt);
             }
         });
 
@@ -235,12 +250,14 @@ public class XuatHoaDon extends JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addComponent(txtTenKhach)
-                    .addComponent(txtTichDiem))
+                    .addComponent(txtTichDiem)
+                    .addComponent(cmbPurchaseStyle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkTichDiem)
@@ -267,7 +284,11 @@ public class XuatHoaDon extends JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbPurchaseStyle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,18 +308,26 @@ public class XuatHoaDon extends JDialog {
             DecimalFormat dcf = new DecimalFormat("###,### VND");
             txtTichDiem.setText(dcf.format(lstKH.khachHangSelected.getTichDiem()));
         }
-        if(lstKH.khachHangSelected!=null){
-            chkTichDiem.setEnabled(true);
-        }
     }//GEN-LAST:event_btnSelectKHActionPerformed
 
     private void chkTichDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTichDiemActionPerformed
         // TODO add your handling code here:
+        DecimalFormat dcf = new DecimalFormat("###,### VND");
         if(chkTichDiem.isSelected()){
             this.tichDiem = lstKH.khachHangSelected.getTichDiem();
+            if(tongTien - tichDiem < 0){
+                thanhTien = 0;
+                tichDiem = tongTien;
+            }else{
+                thanhTien = tongTien - tichDiem;
+            }
+            this.thanhTien = this.tongTien - this.tichDiem;
+            
         }else{
              this.tichDiem = 0;
+             this.thanhTien = this.tongTien;
         }
+        txtTongTien.setText(dcf.format(thanhTien));
     }//GEN-LAST:event_chkTichDiemActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -307,27 +336,46 @@ public class XuatHoaDon extends JDialog {
             JOptionPane.showMessageDialog(null, "Chọn khách hàng","Thông báo", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        xuLyHienThiHoaDon();
         
-        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), this.thanhTien, this.tichDiem);
+        xuLyHienThiHoaDon();
         for (Vector vec : dsGioHang) {
             String maSP = vec.get(0).toString();
             int soLuong = Integer.parseInt(vec.get(2).toString());
             cthdBUS.addCTHD(maSP, soLuong);
         }
+        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), thanhTien, tichDiem);
+
         PnHoaDon.loadDataTblHD();
         PnKhachHang.loadDataTblKH();
         checkBanHang = true;
         btnPrint.setEnabled(true);
         btnThanhToan.setEnabled(false);
         chkTichDiem.setEnabled(false);
-
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void txtTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongTienActionPerformed
+
+    private void cmbPurchaseStyleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPurchaseStyleActionPerformed
+        // TODO add your handling code here:
+
+        txtHoaDon.setContentType("text/html");
+
+        if(cmbPurchaseStyle.getSelectedIndex()==0){
+            txtHoaDon.setText("");
+        }else{
+            String hdString="<div style='text-align:center;'>"
+                + "<h1>Quét mã để thanh toán</h1>";
+                hdString+="<img style='text-align:center;' src='https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png'></img></div>";
+            txtHoaDon.setText(hdString);
+        }
+    }//GEN-LAST:event_cmbPurchaseStyleActionPerformed
 
 
 
@@ -337,11 +385,13 @@ public class XuatHoaDon extends JDialog {
     private javax.swing.JButton btnSelectKH;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JCheckBox chkTichDiem;
+    private javax.swing.JComboBox<String> cmbPurchaseStyle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

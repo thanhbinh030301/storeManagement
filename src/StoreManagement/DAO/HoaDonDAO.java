@@ -40,7 +40,9 @@ public class HoaDonDAO {
     }
     public boolean addHD(HoaDon hd, float tichDiem) {
         try {
-            String sqlKH = "UPDATE KhachHang SET TongChiTieu=TongChiTieu+" + hd.getTongTien() + ",TICHDIEM = TICHDIEM-"+ tichDiem+"WHERE MaKH=" + "'" + hd.getMaKH() + "'";
+            String sqlKH = 
+                    "UPDATE KhachHang SET TongChiTieu=TongChiTieu+" + hd.getTongTien() + ", TICHDIEM = TICHDIEM+"
+                    + (0-tichDiem+hd.getTongTien()*0.1)+" WHERE MaKH=" + "'" + hd.getMaKH() + "'";
             Statement st = MyConnect.getJDBCConection().createStatement();
             st.executeUpdate(sqlKH);
             String sql = "INSERT INTO hoadon(NgayLap, MaKH, MaNV, TongTien) VALUES(?, ?, ?, ?)";
@@ -82,10 +84,11 @@ public class HoaDonDAO {
         }
         return (float) 0;
     }
-    public ArrayList<Vector> getDoanhSoNhanVien (int month){
+    public ArrayList<Vector> getDoanhSoNhanVien (int month, int year){
         try{
             String sql = 
-            "SELECT maNV, DoanhSo, soluong FROM (SELECT MaNV, sum(TONGTIEN) as Doanhso, count(makh) as SoLuong from hoadon where month(NGAYLAP)= "+month+" group by manv) temp";
+            "SELECT maNV, DoanhSo, soluong FROM (SELECT MaNV, sum(TONGTIEN) as Doanhso, count(makh) as SoLuong from hoadon "
+                    + "where month(NGAYLAP)= "+month+" and year(NGAYLAP)= "+year+" group by manv) temp";
             Statement st = MyConnect.getJDBCConection().createStatement();
             ResultSet rs = st.executeQuery(sql);
             NhanVienBUS nvBUS = new NhanVienBUS();
