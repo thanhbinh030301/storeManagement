@@ -118,9 +118,9 @@ public class PnBanHang extends javax.swing.JPanel {
         scrTblSanPham.setViewportView(tblSanPham);
         tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(80);
         tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(260);
-        tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(90);
+        tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(100);
         tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(120);
-        tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(70);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         jLabel2.setText("Chi tiết sản phẩm");

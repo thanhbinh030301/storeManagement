@@ -176,7 +176,7 @@
                 <Column editable="false" title="C&#xf2;n l&#x1ea1;i" type="java.lang.Integer"/>
               </Table>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(260);&#xa;tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(90);&#xa;tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(120);&#xa;tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(80);">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(260);&#xa;tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(100);&#xa;tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(120);&#xa;tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(70);">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>

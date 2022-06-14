@@ -102,7 +102,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblHoaDonMouseClicked"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(270);&#xa;tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(120);&#xa;tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(80);&#xa;tblHoaDon.getColumnModel().getColumn(4).setPreferredWidth(80);"/>
+            <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(100);&#xa;tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(250);&#xa;tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(250);&#xa;tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(150);&#xa;tblHoaDon.getColumnModel().getColumn(4).setPreferredWidth(150);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -139,9 +139,6 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(72);&#xa;tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(282);&#xa;tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(82);&#xa;tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(85);&#xa;tblHoaDon.getColumnModel().getColumn(4).setPreferredWidth(138);"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

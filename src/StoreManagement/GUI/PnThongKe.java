@@ -184,6 +184,10 @@ public class PnThongKe extends javax.swing.JPanel {
             }
         ));
         jScrollPane7.setViewportView(tblTopSP);
+        tblTopSP.getColumnModel().getColumn(0).setPreferredWidth(120);
+        tblTopSP.getColumnModel().getColumn(1).setPreferredWidth(180);
+        tblTopSP.getColumnModel().getColumn(2).setPreferredWidth(400);
+        tblTopSP.getColumnModel().getColumn(3).setPreferredWidth(200);
 
         jLabel58.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel58.setText("Tháng");
@@ -235,12 +239,6 @@ public class PnThongKe extends javax.swing.JPanel {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addComponent(jLabel58)
                         .addGap(18, 18, 18)
@@ -256,7 +254,12 @@ public class PnThongKe extends javax.swing.JPanel {
                         .addGap(394, 394, 394)
                         .addComponent(jLabel60)
                         .addGap(18, 18, 18)
-                        .addComponent(cmbYearTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbYearTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -286,7 +289,7 @@ public class PnThongKe extends javax.swing.JPanel {
         jTabbedPane1.addTab("Tổng quát", jPanel15);
 
         jLabel57.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        jLabel57.setText("DOANH SỐ BÀN HÀNG NHÂN VIÊN");
+        jLabel57.setText("DOANH SỐ BÁN HÀNG NHÂN VIÊN");
 
         tblDoanhSoNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -341,11 +344,11 @@ public class PnThongKe extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbYearNv, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbMonthNV, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 149, Short.MAX_VALUE)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(115, 115, 115))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,9 +363,9 @@ public class PnThongKe extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel62)
                     .addComponent(cmbYearNv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê nhân viên", jPanel2);

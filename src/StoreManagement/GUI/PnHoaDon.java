@@ -119,11 +119,11 @@ public class PnHoaDon extends javax.swing.JPanel {
             }
         });
         scrTblSanPham.setViewportView(tblHoaDon);
-        tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(80);
-        tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(270);
-        tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(80);
-        tblHoaDon.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(250);
+        tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(250);
+        tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tblHoaDon.getColumnModel().getColumn(4).setPreferredWidth(150);
 
         tblCTHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,11 +150,6 @@ public class PnHoaDon extends javax.swing.JPanel {
         });
         tblCTHD.getTableHeader().setReorderingAllowed(false);
         scrTblSanPham1.setViewportView(tblCTHD);
-        tblHoaDon.getColumnModel().getColumn(0).setPreferredWidth(72);
-        tblHoaDon.getColumnModel().getColumn(1).setPreferredWidth(282);
-        tblHoaDon.getColumnModel().getColumn(2).setPreferredWidth(82);
-        tblHoaDon.getColumnModel().getColumn(3).setPreferredWidth(85);
-        tblHoaDon.getColumnModel().getColumn(4).setPreferredWidth(138);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         jLabel7.setText("Chi tiết hóa đơn");
