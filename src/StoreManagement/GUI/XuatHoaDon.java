@@ -59,9 +59,9 @@ public class XuatHoaDon extends JDialog {
     }
 
     private void xuLyHienThiHoaDon() {
-        if(tongTien-tichDiem < 0){
+        if(this.tongTien-this.tichDiem < 0){
             this.thanhTien = 0;
-            this.tichDiem = tongTien;
+            this.tichDiem = this.tongTien;
         }else{
             this.thanhTien = this.tongTien - this.tichDiem;
         }
@@ -113,21 +113,21 @@ public class XuatHoaDon extends JDialog {
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Tổng cộng</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(tongTien) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(this.tongTien) + "</td>";
         hd += "</tr>";
         hd += "<tr>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Khuyến mãi</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(tichDiem) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(this.tichDiem) + "</td>";
         hd += "</tr>";
         hd += "<tr>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:left;'>" + "</td>";
         hd += "<td style='text-align:center;'>" + "</td>";
         hd += "<td style='text-align:center;font-weight:bold'>Thành tiền</td>";
-        hd += "<td style='text-align:center;'>" + dcf.format(thanhTien) + "</td>";
+        hd += "<td style='text-align:center;'>" + dcf.format(this.thanhTien) + "</td>";
         hd += "</tr>";
         hd += "</table>";
         hd += "</div>";
@@ -207,6 +207,7 @@ public class XuatHoaDon extends JDialog {
         txtTichDiem.setEditable(false);
         txtTichDiem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        chkTichDiem.setEnabled(false);
         chkTichDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkTichDiemActionPerformed(evt);
@@ -286,6 +287,9 @@ public class XuatHoaDon extends JDialog {
             DecimalFormat dcf = new DecimalFormat("###,### VND");
             txtTichDiem.setText(dcf.format(lstKH.khachHangSelected.getTichDiem()));
         }
+        if(lstKH.khachHangSelected!=null){
+            chkTichDiem.setEnabled(true);
+        }
     }//GEN-LAST:event_btnSelectKHActionPerformed
 
     private void chkTichDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkTichDiemActionPerformed
@@ -304,8 +308,8 @@ public class XuatHoaDon extends JDialog {
             return;
         }
         xuLyHienThiHoaDon();
-
-        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), thanhTien, tichDiem);
+        
+        hoaDonBUS.luuHoaDon(lstKH.khachHangSelected.getMaKH(), Home.nv.getMaNV(), this.thanhTien, this.tichDiem);
         for (Vector vec : dsGioHang) {
             String maSP = vec.get(0).toString();
             int soLuong = Integer.parseInt(vec.get(2).toString());

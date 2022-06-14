@@ -73,4 +73,29 @@ public class TaiKhoanDAO {
         }
         return "";
     }
+    public boolean checkPass(String maNV, String oldPass) {
+        try {
+            String sql = "SELECT matkhau FROM TaiKhoan WHERE MaNV= '" + maNV +"'";
+            Statement st = MyConnect.getJDBCConection().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+               if(oldPass.equals(rs.getString(1))){
+                   return true;
+               }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+    public boolean updatePass(String maNV, String newPass){
+        try {
+            String sql = "Update TaiKhoan set matkhau = '" + newPass+"' WHERE MaNV= '" + maNV +"'";
+            Statement st = MyConnect.getJDBCConection().createStatement();
+            st.execute(sql);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

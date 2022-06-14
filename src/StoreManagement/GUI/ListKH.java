@@ -103,6 +103,11 @@ public class ListKH extends javax.swing.JDialog {
         label1.setText("Tìm khách hàng");
 
         txtNameKH.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtNameKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameKHActionPerformed(evt);
+            }
+        });
 
         btnSelectKH.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnSelectKH.setText("Chọn");
@@ -188,6 +193,26 @@ public class ListKH extends javax.swing.JDialog {
         loadtblKH();
         PnKhachHang.loadDataTblKH();
     }//GEN-LAST:event_btnAddKHActionPerformed
+
+    private void txtNameKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameKHActionPerformed
+        // TODO add your handling code here:
+        
+        String name = txtNameKH.getText().toLowerCase();
+        dtmListKH.setRowCount(0);
+        ArrayList<KhachHang> dskh = null;
+        dskh = khBUS.getListKHbyName(name);
+
+        for (KhachHang kh : dskh) {
+            Vector vec = new Vector();
+            vec.add(kh.getMaKH());
+            vec.add(kh.getHoTen());
+            vec.add(kh.getGioiTinh());
+            vec.add(kh.getSoDT());
+            vec.add(kh.getTongChiTieu());
+            vec.add(kh.getTichDiem());
+            dtmListKH.addRow(vec);
+        }
+    }//GEN-LAST:event_txtNameKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

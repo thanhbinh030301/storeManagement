@@ -93,7 +93,7 @@
               <Color blue="59" green="4a" red="3f" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblBanHang.png"/>
+              <Image iconType="3" name="/image/lblBanHang.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -117,7 +117,7 @@
               <Color blue="59" green="4a" red="3f" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblHoaDon.png"/>
+              <Image iconType="3" name="/image/lblHoaDon.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -141,7 +141,7 @@
               <Color blue="59" green="4a" red="3f" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblKhachHang.png"/>
+              <Image iconType="3" name="/image/lblKhachHang.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -165,7 +165,7 @@
               <Color blue="59" green="4a" red="3f" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblSanPham.png"/>
+              <Image iconType="3" name="/image/lblSanPham.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -189,7 +189,7 @@
               <Color blue="59" green="4a" red="3f" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblNhanVien.png"/>
+              <Image iconType="3" name="/image/lblNhanVien.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -213,7 +213,7 @@
               <Color blue="59" green="4a" red="3f" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblThongKe.png"/>
+              <Image iconType="3" name="/image/lblThongKe.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -237,7 +237,7 @@
               <Color blue="64" green="64" red="e1" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/ManagerUI/lblLogout.png"/>
+              <Image iconType="3" name="/image/lblLogout.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>

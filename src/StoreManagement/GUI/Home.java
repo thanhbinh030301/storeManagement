@@ -148,7 +148,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         lblBanHang.setBackground(new java.awt.Color(63, 74, 89));
-        lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblBanHang.png"))); // NOI18N
+        lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblBanHang.png"))); // NOI18N
         lblBanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBanHang.setOpaque(true);
         lblBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,7 +165,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(lblBanHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, -1));
 
         lblHoaDon.setBackground(new java.awt.Color(63, 74, 89));
-        lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblHoaDon.png"))); // NOI18N
+        lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblHoaDon.png"))); // NOI18N
         lblHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHoaDon.setOpaque(true);
         lblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -182,7 +182,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(lblHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, -1, -1));
 
         lblKhachHang.setBackground(new java.awt.Color(63, 74, 89));
-        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblKhachHang.png"))); // NOI18N
+        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblKhachHang.png"))); // NOI18N
         lblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblKhachHang.setOpaque(true);
         lblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -199,7 +199,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(lblKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, -1, -1));
 
         lblSanPham.setBackground(new java.awt.Color(63, 74, 89));
-        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblSanPham.png"))); // NOI18N
+        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblSanPham.png"))); // NOI18N
         lblSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblSanPham.setOpaque(true);
         lblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,7 +216,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(lblSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, -1, -1));
 
         lblNhanVien.setBackground(new java.awt.Color(63, 74, 89));
-        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblNhanVien.png"))); // NOI18N
+        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblNhanVien.png"))); // NOI18N
         lblNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblNhanVien.setOpaque(true);
         lblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -233,7 +233,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(lblNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, -1, -1));
 
         lblThongKe.setBackground(new java.awt.Color(63, 74, 89));
-        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblThongKe.png"))); // NOI18N
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblThongKe.png"))); // NOI18N
         lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblThongKe.setOpaque(true);
         lblThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -250,7 +250,7 @@ public class Home extends javax.swing.JFrame {
         pnMenu.add(lblThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, -1, -1));
 
         lblLogout.setBackground(new java.awt.Color(225, 100, 100));
-        lblLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ManagerUI/lblLogout.png"))); // NOI18N
+        lblLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblLogout.png"))); // NOI18N
         lblLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblLogout.setOpaque(true);
         lblLogout.addMouseListener(new java.awt.event.MouseAdapter() {
