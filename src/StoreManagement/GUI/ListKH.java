@@ -206,7 +206,6 @@ public class ListKH extends javax.swing.JDialog {
             Vector vec = new Vector();
             vec.add(kh.getMaKH());
             vec.add(kh.getHoTen());
-            vec.add(kh.getGioiTinh());
             vec.add(kh.getSoDT());
             vec.add(kh.getTongChiTieu());
             vec.add(kh.getTichDiem());
