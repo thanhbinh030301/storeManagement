@@ -1,4 +1,4 @@
-﻿﻿﻿CREATE DATABASE storemanagementdb;
+﻿﻿﻿﻿﻿CREATE DATABASE storemanagementdb;
 USE storemanagementdb;
 -- TAO BANG KHACH HANG
 CREATE TABLE KHACHHANG(
@@ -175,7 +175,7 @@ after update ON hoadon
 FOR EACH ROW
 BEGIN
 	SELECT SUM(TONGTIEN) INTO @TONGCHITIEU FROM HOADON where MAKH =new.MAKH ORDER BY MAKH;
-	update khachhang set TONGCHITIEU = @TONGCHITIEU, TICHDIEM = @TONGCHITIEU*0.1
+	update khachhang set TONGCHITIEU = @TONGCHITIEU
     WHERE KHACHHANG.MAKH = NEW.MAKH;
 END$$
 DELIMITER ;
@@ -338,7 +338,6 @@ insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP013',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP022',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP047',2);
 
-select * from hoadon
 
 
 
