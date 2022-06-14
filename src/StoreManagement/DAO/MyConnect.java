@@ -21,7 +21,7 @@ public class MyConnect {
     public static Connection getJDBCConection() {
         final String url = "jdbc:mysql://localhost:3306/storemanagementdb";
         final String user = "root";
-        final String password = "332001";
+        final String password = "12345";
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
