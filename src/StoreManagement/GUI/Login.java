@@ -46,7 +46,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("ĐĂNG NHẬP");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
-        jLabel2.setText("Mã nhân viên");
+        jLabel2.setText("Tên tài khoản");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         jLabel3.setText("Mật khẩu");

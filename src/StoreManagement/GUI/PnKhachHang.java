@@ -73,7 +73,7 @@ public class PnKhachHang extends javax.swing.JPanel {
         jLabel2.setText("Mã khách hàng");
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        jLabel3.setText("Tên");
+        jLabel3.setText("Họ tên");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel4.setText("Giới tính");
