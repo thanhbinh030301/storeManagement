@@ -266,13 +266,13 @@ insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-03-10','KH03','NV03');
 insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-04-10','KH04','NV04');
 insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-05-10','KH05','NV05');
 insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-06-10','KH06','NV01');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-07-10','KH07','NV02');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-08-10','KH08','NV03');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-09-10','KH09','NV04');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-10-10','KH10','NV05');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-11-10','KH01','NV01');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-12-10','KH02','NV02');
-insert into HOADON (NGAYLAP,MAKH,MANV) values('2022-01-10','KH03','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-01-10','KH07','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-02-10','KH08','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-03-10','KH09','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-4-10','KH10','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-5-10','KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-6-10','KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2021-7-10','KH03','NV03');
 
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP001',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD001','SP002',2);
@@ -339,5 +339,85 @@ insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP022',2);
 insert into CTHD (MAHD, MASP, SOLUONG) values('HD013','SP047',2);
 
 
+-- -- -- -- 
 
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-01-10','KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-02-10','KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-03-10','KH03','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-04-10','KH04','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-05-10','KH05','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-06-10','KH06','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-01-10','KH07','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-02-10','KH08','NV03');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-03-10','KH09','NV04');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-4-10','KH10','NV05');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-5-10','KH01','NV01');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-6-10','KH02','NV02');
+insert into HOADON (NGAYLAP,MAKH,MANV) values('2020-7-10','KH03','NV03');
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD014','SP001',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD014','SP002',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD014','SP004',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD015','SP005',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD015','SP006',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD015','SP007',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD015','SP008',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD016','SP009',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD016','SP010',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD016','SP011',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD016','SP012',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD017','SP013',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD017','SP014',1);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD017','SP015',3);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD017','SP016',4);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD018','SP017',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD018','SP018',6);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD018','SP019',5);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD018','SP020',1);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD019','SP021',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD019','SP022',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD019','SP026',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD019','SP024',2);
+
+
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD020','SP011',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD020','SP006',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD020','SP012',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD020','SP030',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD021','SP031',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD021','SP033',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD021','SP040',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD021','SP014',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD022','SP026',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD022','SP039',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD022','SP040',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD022','SP041',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD023','SP015',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD023','SP024',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD023','SP046',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD023','SP048',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD024','SP015',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD024','SP024',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD024','SP046',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD024','SP048',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD025','SP025',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD025','SP013',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD025','SP022',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD025','SP047',2);
+
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD026','SP025',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD026','SP013',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD026','SP022',2);
+insert into CTHD (MAHD, MASP, SOLUONG) values('HD026','SP047',2);
 
