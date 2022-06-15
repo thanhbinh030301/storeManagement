@@ -96,7 +96,7 @@ public class PnKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên", "Giới tính", "Số điện thoại", "Tổng chi tiêu", "Khuyến mãi"
+                "Mã khách hàng", "Tên", "Giới tính", "Số điện thoại", "Tổng chi tiêu", "Tích điểm"
             }
         ) {
             Class[] types = new Class [] {

@@ -139,6 +139,9 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblCTHD.getColumnModel().getColumn(0).setPreferredWidth(100);&#xa;tblCTHD.getColumnModel().getColumn(1).setPreferredWidth(400);&#xa;tblCTHD.getColumnModel().getColumn(2).setPreferredWidth(120);&#xa;tblCTHD.getColumnModel().getColumn(3).setPreferredWidth(120);&#xa;tblCTHD.getColumnModel().getColumn(4).setPreferredWidth(120);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

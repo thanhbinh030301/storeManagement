@@ -150,6 +150,11 @@ public class PnHoaDon extends javax.swing.JPanel {
         });
         tblCTHD.getTableHeader().setReorderingAllowed(false);
         scrTblSanPham1.setViewportView(tblCTHD);
+        tblCTHD.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblCTHD.getColumnModel().getColumn(1).setPreferredWidth(400);
+        tblCTHD.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tblCTHD.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tblCTHD.getColumnModel().getColumn(4).setPreferredWidth(120);
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         jLabel7.setText("Chi tiết hóa đơn");
