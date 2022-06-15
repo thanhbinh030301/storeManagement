@@ -1,0 +1,3 @@
+Apache NetBeans 13: https://netbeans.apache.org/download/nb13/nb13.html
+MySQL và MySQL Workbench 8.0 CE: https://dev.mysql.com/downloads/workbench/
+JDBC Jconnector 8.0.29: https://dev.mysql.com/downloads/connector/j/ 
