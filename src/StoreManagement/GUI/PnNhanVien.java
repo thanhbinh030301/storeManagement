@@ -157,12 +157,12 @@ public class PnNhanVien extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); 
         jLabel5.setText("Số điện thoại");
 
-        txtSDT.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        txtSDT.setFont(new java.awt.Font("Arial", 0, 20)); 
 
-        btnUpdate.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("Arial", 0, 20));
         btnUpdate.setText("Lưu");
         btnUpdate.setToolTipText("");
         btnUpdate.setEnabled(false);
@@ -172,7 +172,7 @@ public class PnNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("Arial", 0, 20));
         btnDelete.setText("Xóa");
         btnDelete.setToolTipText("");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +181,7 @@ public class PnNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnUpdateTk.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        btnUpdateTk.setFont(new java.awt.Font("Arial", 0, 20));
         btnUpdateTk.setText("Cấp lại mật khẩu");
         btnUpdateTk.setToolTipText("");
         btnUpdateTk.setEnabled(false);
