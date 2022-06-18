@@ -157,12 +157,12 @@ public class PnNhanVien extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         jLabel5.setText("Số điện thoại");
 
-        txtSDT.setFont(new java.awt.Font("Arial", 0, 20)); 
+        txtSDT.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
 
-        btnUpdate.setFont(new java.awt.Font("Arial", 0, 20));
+        btnUpdate.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnUpdate.setText("Lưu");
         btnUpdate.setToolTipText("");
         btnUpdate.setEnabled(false);
@@ -172,7 +172,7 @@ public class PnNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Arial", 0, 20));
+        btnDelete.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnDelete.setText("Xóa");
         btnDelete.setToolTipText("");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +181,7 @@ public class PnNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnUpdateTk.setFont(new java.awt.Font("Arial", 0, 20));
+        btnUpdateTk.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
         btnUpdateTk.setText("Cấp lại mật khẩu");
         btnUpdateTk.setToolTipText("");
         btnUpdateTk.setEnabled(false);
@@ -219,13 +219,14 @@ public class PnNhanVien extends javax.swing.JPanel {
                                             .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
                                         .addComponent(txtTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(392, 392, 392)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 244, Short.MAX_VALUE)))
+                        .addGap(0, 226, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(221, 221, 221)
@@ -261,14 +262,14 @@ public class PnNhanVien extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cmbGioiTInh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddNv)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete)
                     .addComponent(btnAddTk)
+                    .addComponent(btnAddNv)
                     .addComponent(btnUpdateTk))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
