@@ -1,268 +1,429 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package StoreManagement.GUI;
+import StoreManagement.BUS.NhanVienBUS;
+import StoreManagement.DTO.NhanVien;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
-  </Properties>
-  <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
-  </SyntheticProperties>
-  <AuxValues>
-    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
-    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
-    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
-    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
-    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-  </AuxValues>
+/**
+ *
+ * @author thanh
+ */
+public class Home extends javax.swing.JFrame {
+    
+    String maNV = Login.tkLogin.getMaNhanVien();
+    public static NhanVien nv = null;
+    final Color clLeftItem = new Color(63, 74, 89);
+    final Color clLeftItemHover = new Color(225, 100, 100);
+    final Color clLeftItemSelected = new Color(225, 100, 99);
+    ArrayList<JLabel> listMenuLeft = new ArrayList<>();
+    ArrayList<JPanel> listPn = new ArrayList<>();
+    
+    private final NhanVienBUS nvBUS = new NhanVienBUS();
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="pnMenu" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnMain" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnMenu" min="-2" max="-2" attributes="0"/>
-                  <Component id="pnMain" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-  </Layout>
-  <SubComponents>
-    <Container class="javax.swing.JPanel" name="pnMenu">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="59" green="4a" red="3f" type="rgb"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[250, 900]"/>
-        </Property>
-      </Properties>
+    
+    PnBanHang pnBanHang;
+    PnHoaDon pnHoaDon;
+    PnSanPham pnSanPham;
+    PnNhanVien pnNhanVien;
+    PnKhachHang pnKhachHang;
+    PnThongKe pnThongKe;
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblNameNv">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="28" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="64" green="64" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="NULL"/>
-            <Property name="horizontalTextPosition" type="int" value="2"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="10" width="210" height="70"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/avatar.png"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="90" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblBanHang">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="59" green="4a" red="3f" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblBanHang.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBanHangMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBanHangMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBanHangMouseExited"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="320" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblHoaDon">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="59" green="4a" red="3f" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblHoaDon.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHoaDonMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHoaDonMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHoaDonMouseExited"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="390" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblKhachHang">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="59" green="4a" red="3f" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblKhachHang.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblKhachHangMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblKhachHangMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblKhachHangMouseExited"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="450" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblSanPham">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="59" green="4a" red="3f" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblSanPham.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSanPhamMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSanPhamMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblSanPhamMouseExited"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="510" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblNhanVien">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="59" green="4a" red="3f" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblNhanVien.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNhanVienMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNhanVienMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNhanVienMouseExited"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="580" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblThongKe">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="59" green="4a" red="3f" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblThongKe.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThongKeMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThongKeMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblThongKeMouseExited"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="650" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblLogout">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="64" green="64" red="e1" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/image/lblLogout.png"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-            <Property name="opaque" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLogoutMouseClicked"/>
-          </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="830" width="-1" height="70"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="pnMain">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1030, 844]"/>
-        </Property>
-      </Properties>
+    private void itemClicked(JLabel lbl, JPanel pn){
+        for (JLabel lblDisable : listMenuLeft) {
+            lblDisable.setBackground(clLeftItem);
+        }
+        for (JPanel pnDisable : listPn){
+            pnDisable.setVisible(false);
+        }
+        lbl.setBackground(clLeftItemSelected);
+        pn.setVisible(true);
+    }
+    public Home() {
+        initComponents();
+        
+        nv = nvBUS.getNhanVien(maNV);
+        
+        lblNameNv.setText("<html>" + nv.getTen() + "</html>");
+        
+        this.setTitle("Phần mềm quản lý cửa hàng");
+        Image icon = Toolkit.getDefaultToolkit().getImage("src/image/logo-icon.png");
+        this.setIconImage(icon);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        
+        lblBanHang.setBackground(clLeftItemSelected);
+        
+        listMenuLeft.add(lblBanHang);
+        listMenuLeft.add(lblHoaDon);
+        listMenuLeft.add(lblKhachHang);
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
-    </Container>
-  </SubComponents>
-</Form>
+        pnBanHang = new PnBanHang();
+        pnKhachHang = new PnKhachHang();
+        pnHoaDon = new PnHoaDon();
+        
+        listPn.add(pnBanHang);
+        listPn.add(pnHoaDon);
+        listPn.add(pnKhachHang);
+        
+        lblSanPham.setVisible(false);
+        lblNhanVien.setVisible(false);
+        lblThongKe.setVisible(false);
+        
+        pnMain.add(pnBanHang);
+        pnMain.add(pnHoaDon);
+        pnMain.add(pnKhachHang);
+
+        if (Login.tkLogin.getCapBac()==2) {
+            lblSanPham.setVisible(true);
+            lblNhanVien.setVisible(true);
+            lblThongKe.setVisible(true);
+        
+            listMenuLeft.add(lblSanPham);
+            listMenuLeft.add(lblNhanVien);
+            listMenuLeft.add(lblThongKe);
+
+
+            pnSanPham = new PnSanPham();
+            pnNhanVien = new PnNhanVien();
+            pnThongKe = new PnThongKe();
+
+
+
+            pnMain.add(pnSanPham);
+            pnMain.add(pnNhanVien);
+            pnMain.add(pnThongKe);
+
+
+            listPn.add(pnSanPham);
+            listPn.add(pnNhanVien);
+            listPn.add(pnThongKe);
+        }
+  
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        pnMenu = new javax.swing.JPanel();
+        lblNameNv = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblBanHang = new javax.swing.JLabel();
+        lblHoaDon = new javax.swing.JLabel();
+        lblKhachHang = new javax.swing.JLabel();
+        lblSanPham = new javax.swing.JLabel();
+        lblNhanVien = new javax.swing.JLabel();
+        lblThongKe = new javax.swing.JLabel();
+        lblLogout = new javax.swing.JLabel();
+        pnMain = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnMenu.setBackground(new java.awt.Color(63, 74, 89));
+        pnMenu.setPreferredSize(new java.awt.Dimension(250, 900));
+        pnMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNameNv.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        lblNameNv.setForeground(new java.awt.Color(255, 100, 100));
+        lblNameNv.setText("NULL");
+        lblNameNv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        pnMenu.add(lblNameNv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 70));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/avatar.png"))); // NOI18N
+        pnMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        lblBanHang.setBackground(new java.awt.Color(63, 74, 89));
+        lblBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblBanHang.png"))); // NOI18N
+        lblBanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBanHang.setOpaque(true);
+        lblBanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBanHangMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBanHangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBanHangMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblBanHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, -1));
+
+        lblHoaDon.setBackground(new java.awt.Color(63, 74, 89));
+        lblHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblHoaDon.png"))); // NOI18N
+        lblHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHoaDon.setOpaque(true);
+        lblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHoaDonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblHoaDonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblHoaDonMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, -1, -1));
+
+        lblKhachHang.setBackground(new java.awt.Color(63, 74, 89));
+        lblKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblKhachHang.png"))); // NOI18N
+        lblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblKhachHang.setOpaque(true);
+        lblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblKhachHangMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblKhachHangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblKhachHangMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, -1, -1));
+
+        lblSanPham.setBackground(new java.awt.Color(63, 74, 89));
+        lblSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblSanPham.png"))); // NOI18N
+        lblSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblSanPham.setOpaque(true);
+        lblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, -1, -1));
+
+        lblNhanVien.setBackground(new java.awt.Color(63, 74, 89));
+        lblNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblNhanVien.png"))); // NOI18N
+        lblNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblNhanVien.setOpaque(true);
+        lblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblNhanVienMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, -1, -1));
+
+        lblThongKe.setBackground(new java.awt.Color(63, 74, 89));
+        lblThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblThongKe.png"))); // NOI18N
+        lblThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblThongKe.setOpaque(true);
+        lblThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblThongKeMouseExited(evt);
+            }
+        });
+        pnMenu.add(lblThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, -1, -1));
+
+        lblLogout.setBackground(new java.awt.Color(225, 100, 100));
+        lblLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/lblLogout.png"))); // NOI18N
+        lblLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLogout.setOpaque(true);
+        lblLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoutMouseClicked(evt);
+            }
+        });
+        pnMenu.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 830, -1, 70));
+
+        pnMain.setPreferredSize(new java.awt.Dimension(1030, 844));
+        pnMain.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void lblBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblBanHang, pnBanHang);
+    }//GEN-LAST:event_lblBanHangMouseClicked
+
+    private void lblBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseEntered
+        // TODO add your handling code here:
+        if(lblBanHang.getBackground().equals(clLeftItem)){
+            lblBanHang.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblBanHangMouseEntered
+
+    private void lblBanHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseExited
+        // TODO add your handling code here:
+        if(lblBanHang.getBackground().equals(clLeftItemHover)){
+            lblBanHang.setBackground(clLeftItem);
+        }
+
+    }//GEN-LAST:event_lblBanHangMouseExited
+
+    private void lblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoaDonMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblHoaDon, pnHoaDon);
+    }//GEN-LAST:event_lblHoaDonMouseClicked
+
+    private void lblHoaDonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoaDonMouseEntered
+        // TODO add your handling code here:
+        if(lblHoaDon.getBackground().equals(clLeftItem)){
+            lblHoaDon.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblHoaDonMouseEntered
+
+    private void lblHoaDonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHoaDonMouseExited
+        // TODO add your handling code here:
+        if(lblHoaDon.getBackground().equals(clLeftItemHover)){
+            lblHoaDon.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblHoaDonMouseExited
+
+    private void lblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblSanPham, pnSanPham);
+    }//GEN-LAST:event_lblSanPhamMouseClicked
+
+    private void lblSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseEntered
+        // TODO add your handling code here:
+        if(lblSanPham.getBackground().equals(clLeftItem)){
+            lblSanPham.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblSanPhamMouseEntered
+
+    private void lblSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseExited
+        // TODO add your handling code here:
+         if(lblSanPham.getBackground().equals(clLeftItemHover)){
+            lblSanPham.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblSanPhamMouseExited
+
+    private void lblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblNhanVien,pnNhanVien);
+    }//GEN-LAST:event_lblNhanVienMouseClicked
+
+    private void lblNhanVienMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseEntered
+        // TODO add your handling code here:
+        if(lblNhanVien.getBackground().equals(clLeftItem)){
+            lblNhanVien.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblNhanVienMouseEntered
+
+    private void lblNhanVienMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMouseExited
+        // TODO add your handling code here:
+        if(lblNhanVien.getBackground().equals(clLeftItemHover)){
+            lblNhanVien.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblNhanVienMouseExited
+
+    private void lblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblKhachHang, pnKhachHang);
+    }//GEN-LAST:event_lblKhachHangMouseClicked
+
+    private void lblKhachHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMouseEntered
+        // TODO add your handling code here:
+        if(lblKhachHang.getBackground().equals(clLeftItem)){
+            lblKhachHang.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblKhachHangMouseEntered
+
+    private void lblKhachHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMouseExited
+        // TODO add your handling code here:
+        if(lblKhachHang.getBackground().equals(clLeftItemHover)){
+            lblKhachHang.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblKhachHangMouseExited
+
+    private void lblThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseClicked
+        // TODO add your handling code here:
+        itemClicked(lblThongKe, pnThongKe);
+
+    }//GEN-LAST:event_lblThongKeMouseClicked
+
+    private void lblThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseEntered
+        // TODO add your handling code here:
+        if(lblThongKe.getBackground().equals(clLeftItem)){
+            lblThongKe.setBackground(clLeftItemHover);
+        }
+    }//GEN-LAST:event_lblThongKeMouseEntered
+
+    private void lblThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMouseExited
+        // TODO add your handling code here:
+        if(lblThongKe.getBackground().equals(clLeftItemHover)){
+            lblThongKe.setBackground(clLeftItem);
+        }
+    }//GEN-LAST:event_lblThongKeMouseExited
+
+    private void lblLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoutMouseClicked
+        // TODO add your handling code here:
+        int g = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thoát?", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if (g == JOptionPane.YES_OPTION) {
+            this.dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_lblLogoutMouseClicked
+
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblBanHang;
+    private javax.swing.JLabel lblHoaDon;
+    private javax.swing.JLabel lblKhachHang;
+    private javax.swing.JLabel lblLogout;
+    private javax.swing.JLabel lblNameNv;
+    private javax.swing.JLabel lblNhanVien;
+    private javax.swing.JLabel lblSanPham;
+    private javax.swing.JLabel lblThongKe;
+    private javax.swing.JPanel pnMain;
+    private javax.swing.JPanel pnMenu;
+    // End of variables declaration//GEN-END:variables
+}
